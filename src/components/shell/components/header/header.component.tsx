@@ -1,8 +1,12 @@
+"use client";
+
 import type { ReactNode } from "react";
 
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 import clsx from "clsx";
+
+import { ActionIcon } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -14,17 +18,34 @@ type Props = {
   className?: string;
 };
 
-export default async function HeaderComponent({
-  className,
-}: Props): Promise<ReactNode> {
-  const t = await getTranslations("App");
+export default function HeaderComponent({ className }: Props): ReactNode {
+  const t = useTranslations("App");
 
   return (
     <header className={clsx(styles.header, className)}>
-      <Link href="/">
-        <IconComponent collection="tabler" name="building-factory" />
-        {t("companyName")}
+      <Link className={styles.name} href="/">
+        {t("name")}
       </Link>
+      <div className={styles.actions}>
+        <ActionIcon
+          variant="subtle"
+          color="dark"
+          size="lg"
+          aria-label="Change Language"
+        >
+          <IconComponent collection="tabler" name="language" />
+        </ActionIcon>
+        <ActionIcon
+          component={Link}
+          href="/notifications"
+          variant="subtle"
+          color="dark"
+          size="lg"
+          aria-label="Change Language"
+        >
+          <IconComponent name="bell-linear" />
+        </ActionIcon>
+      </div>
     </header>
   );
 }
