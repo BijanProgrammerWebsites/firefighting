@@ -1,4 +1,7 @@
 {
+  "App": {
+    "companyName": "نام پالایشگاه"
+  },
   "Shell": {
     "Dashboard": "داشبورد",
     "Defects": "نواقص",

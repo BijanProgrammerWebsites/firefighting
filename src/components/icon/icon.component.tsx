@@ -7,7 +7,7 @@ import clsx from "clsx";
 import styles from "./icon.module.css";
 
 type Props = Omit<IconProps, "icon" | "ssr" | "color"> & {
-  collection?: "solar";
+  collection?: "solar" | "tabler";
   name: string;
 };
 

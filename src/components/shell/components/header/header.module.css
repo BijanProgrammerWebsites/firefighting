@@ -1,2 +1,25 @@
 .header {
+  /* background-color: var(--mantine-primary-color-filled); */
+
+  /* color: var(--mantine-primary-color-contrast); */
+
+  margin-block: 1rem;
+
+  a {
+    color: inherit;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-weight: 900;
+
+    text-decoration: none;
+
+    svg {
+      margin-block-start: -0.5em;
+
+      font-size: 2em;
+    }
+  }
 }
