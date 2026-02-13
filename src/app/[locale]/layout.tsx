@@ -14,8 +14,6 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 
-import ShellComponent from "@/components/shell/shell.component";
-
 import "./globals.css";
 import "@mantine/charts/styles.css";
 import "@mantine/core/styles.css";
@@ -67,9 +65,7 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider>
           <DirectionProvider>
-            <MantineProvider theme={theme}>
-              <ShellComponent>{children}</ShellComponent>
-            </MantineProvider>
+            <MantineProvider theme={theme}>{children}</MantineProvider>
           </DirectionProvider>
         </NextIntlClientProvider>
       </body>

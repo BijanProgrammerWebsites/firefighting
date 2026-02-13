@@ -2,8 +2,8 @@ import type { PropsWithChildren, ReactNode } from "react";
 
 import { Container } from "@mantine/core";
 
-import HeaderComponent from "@/components/shell/components/header/header.component";
-import NavbarComponent from "@/components/shell/components/navbar/navbar.component";
+import HeaderComponent from "@/android/components/shell/components/header/header.component";
+import NavbarComponent from "@/android/components/shell/components/navbar/navbar.component";
 
 import styles from "./shell.module.css";
 

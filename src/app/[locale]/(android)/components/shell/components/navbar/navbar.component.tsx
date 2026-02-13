@@ -9,7 +9,8 @@ import { getTranslations } from "next-intl/server";
 import clsx from "clsx";
 
 import IconComponent from "@/components/icon/icon.component";
-import NavLinkComponent from "@/components/nav-link/nav-link.component";
+
+import NavLinkComponent from "@/android/components/nav-link/nav-link.component";
 
 import styles from "./navbar.module.css";
 

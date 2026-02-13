@@ -23,7 +23,7 @@ export default function HeaderComponent({ className }: Props): ReactNode {
 
   return (
     <header className={clsx(styles.header, className)}>
-      <Link className={styles.name} href="/">
+      <Link className={styles.name} href="/public">
         {t("name")}
       </Link>
       <div className={styles.actions}>
