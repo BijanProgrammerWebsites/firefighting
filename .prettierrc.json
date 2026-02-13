@@ -23,8 +23,7 @@
     "^@/entities",
     "^@/guards",
     "^@/hooks",
-    "^@/hooks",
-    "^@/icons",
+    "^@/i18n",
     "^@/icons",
     "^@/mutations",
     "^@/providers",
@@ -34,6 +33,8 @@
     "^@/sections",
     "^@/types",
     "^@/utils",
+    "^@/android",
+    "^@/admin",
     "^@/styles",
     "^(\\.|\\.\\.)/(.(?!.(css|scss)))*$",
     "\\.(css|scss)$"

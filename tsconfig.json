@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/android/*": ["./src/app/[locale]/(android)/*"],
+      "@/admin/*": ["./src/app/[locale]/admin/*"]
     }
   },
   "include": [

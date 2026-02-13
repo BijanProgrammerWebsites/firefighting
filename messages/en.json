@@ -1,5 +1,31 @@
 {
-  "HomePage": {
-    "title": "Hello, friend!"
+  "App": {
+    "name": "Refinery Management"
+  },
+  "Shell": {
+    "dashboard": "Dashboard",
+    "defects": "Defects",
+    "inspections": "Inspections",
+    "report": "Report",
+    "settings": "Settings",
+    "notifications": "Notifications"
+  },
+  "DashboardPage": {
+    "title": "Dashboard"
+  },
+  "DefectsPage": {
+    "title": "Defects"
+  },
+  "InspectionsPage": {
+    "title": "Inspections"
+  },
+  "NotificationsPage": {
+    "title": "Notifications"
+  },
+  "ReportPage": {
+    "title": "Report"
+  },
+  "SettingsPage": {
+    "title": "Settings"
   }
 }

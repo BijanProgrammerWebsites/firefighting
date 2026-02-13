@@ -1,5 +1,55 @@
 {
-  "HomePage": {
-    "title": "سلام، رفیق!"
+  "App": {
+    "name": "مدیریت پالایشگاه"
+  },
+  "Shell": {
+    "adminGeneral": "تنظیمات عمومی",
+    "adminStandards": "تنظیمات استانداردها",
+    "adminAssets": "تنظیمات تجهیزات",
+    "adminUsers": "تنظیمات کاربران",
+    "adminLogs": "لاگ‌ها",
+    "adminTemplates": "تنظیمات انواع تجهیزات",
+    "dashboard": "داشبورد",
+    "defects": "نواقص",
+    "inspections": "بازرسی",
+    "notifications": "اعلانات",
+    "report": "گزارش",
+    "settings": "تنظیمات"
+  },
+  "AdminGeneralPage": {
+    "title": "تنظیمات عمومی"
+  },
+  "AdminStandardsPage": {
+    "title": "تنظیمات استانداردها"
+  },
+  "AdminAssetsPage": {
+    "title": "تنظیمات تجهیزات"
+  },
+  "AdminUsersPage": {
+    "title": "تنظیمات کاربران"
+  },
+  "AdminLogsPage": {
+    "title": "لاگ‌ها"
+  },
+  "AdminTemplatesPage": {
+    "title": "تنظیمات انواع تجهیزات"
+  },
+  "DashboardPage": {
+    "title": "داشبورد"
+  },
+  "DefectsPage": {
+    "title": "نواقص"
+  },
+  "InspectionsPage": {
+    "title": "بازرسی"
+  },
+  "NotificationsPage": {
+    "title": "اعلانات"
+  },
+  "ReportPage": {
+    "title": "گزارش"
+  },
+  "SettingsPage": {
+    "title": "تنظیمات"
   }
 }
