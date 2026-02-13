@@ -3,6 +3,8 @@ import { PropsWithChildren, ReactNode } from "react";
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 
+import { NextIntlClientProvider } from "next-intl";
+
 import {
   ColorSchemeScript,
   DirectionProvider,
@@ -26,16 +28,24 @@ export const metadata: Metadata = {
   description: "Firefighting",
 };
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren<{
+  params: Promise<{ locale: string }>;
+}>;
 
-export default function RootLayout({ children }: Props): ReactNode {
+export default async function RootLayout({
+  children,
+  params,
+}: Props): Promise<ReactNode> {
+  const { locale } = await params;
+
   const theme = createTheme({
     fontFamily: vazirmatn.style.fontFamily,
   });
+
   return (
     <html
-      lang="en"
-      dir="rtl"
+      lang={locale}
+      dir={locale === "fa" ? "rtl" : "ltr"}
       {...mantineHtmlProps}
       className={vazirmatn.variable}
     >
@@ -44,9 +54,11 @@ export default function RootLayout({ children }: Props): ReactNode {
         <ColorSchemeScript />
       </head>
       <body>
-        <DirectionProvider>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
-        </DirectionProvider>
+        <NextIntlClientProvider>
+          <DirectionProvider>
+            <MantineProvider theme={theme}>{children}</MantineProvider>
+          </DirectionProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

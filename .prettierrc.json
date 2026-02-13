@@ -4,6 +4,7 @@
     "^(vite|@vitejs)(/(.*))?$",
     "^(react|react-dom)(/(.*))?$",
     "^next(/(.*))?$",
+    "^next-intl(/(.*))?$",
     "^nuqs(/(.*))?$",
     "^@tanstack(/(.*))?$",
     "^@dnd-kit(/(.*))?$",
