@@ -3,6 +3,8 @@ import { PropsWithChildren, ReactNode } from "react";
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 
+import { NextIntlClientProvider } from "next-intl";
+
 import {
   ColorSchemeScript,
   DirectionProvider,
@@ -44,9 +46,11 @@ export default function RootLayout({ children }: Props): ReactNode {
         <ColorSchemeScript />
       </head>
       <body>
-        <DirectionProvider>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
-        </DirectionProvider>
+        <NextIntlClientProvider>
+          <DirectionProvider>
+            <MantineProvider theme={theme}>{children}</MantineProvider>
+          </DirectionProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
