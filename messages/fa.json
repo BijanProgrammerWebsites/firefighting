@@ -1,4 +1,12 @@
 {
+  "Shell": {
+    "Dashboard": "داشبورد",
+    "Defects": "نواقص",
+    "Inspections": "بازرسی",
+    "Report": "گزارش",
+    "Settings": "تنظیمات",
+    "Notifications": "اعلانات"
+  },
   "HomePage": {
     "title": "سلام، رفیق!"
   }

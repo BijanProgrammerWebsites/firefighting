@@ -1,4 +1,12 @@
 {
+  "Shell": {
+    "Dashboard": "Dashboard",
+    "Defects": "Defects",
+    "Inspections": "Inspections",
+    "Report": "Report",
+    "Settings": "Settings",
+    "Notifications": "Notifications"
+  },
   "HomePage": {
     "title": "Hello, friend!"
   }
