@@ -10,6 +10,9 @@
     "report": "گزارش",
     "settings": "تنظیمات"
   },
+  "AdminGeneralPage": {
+    "title": "تنظیمات عمومی"
+  },
   "DashboardPage": {
     "title": "داشبورد"
   },
