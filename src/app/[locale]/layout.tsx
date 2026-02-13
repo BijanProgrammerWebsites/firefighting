@@ -28,16 +28,24 @@ export const metadata: Metadata = {
   description: "Firefighting",
 };
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren<{
+  params: Promise<{ locale: "fa" | "en" }>;
+}>;
 
-export default function RootLayout({ children }: Props): ReactNode {
+export default async function RootLayout({
+  children,
+  params,
+}: Props): Promise<ReactNode> {
+  const { locale } = await params;
+
   const theme = createTheme({
     fontFamily: vazirmatn.style.fontFamily,
   });
+
   return (
     <html
-      lang="en"
-      dir="rtl"
+      lang={locale}
+      dir={locale === "fa" ? "rtl" : "ltr"}
       {...mantineHtmlProps}
       className={vazirmatn.variable}
     >
