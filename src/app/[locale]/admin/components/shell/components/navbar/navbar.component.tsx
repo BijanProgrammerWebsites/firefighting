@@ -1,12 +1,6 @@
-import {
-  type ComponentProps,
-  type HTMLElementType,
-  type ReactNode,
-} from "react";
+import { type ReactNode } from "react";
 
-import { getTranslations } from "next-intl/server";
-
-import clsx from "clsx";
+import { useTranslations } from "next-intl";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -17,66 +11,61 @@ import styles from "./navbar.module.css";
 type Item = {
   href: string;
   title: string;
+  description?: string;
   icon: ReactNode;
   disabled?: boolean;
 };
 
-type Props = ComponentProps<HTMLElementType>;
-
-export default async function NavbarComponent({
-  className,
-}: Props): Promise<ReactNode> {
-  const t = await getTranslations("Shell");
+export default function NavbarComponent(): ReactNode {
+  const t = useTranslations("Shell");
 
   const items: Item[] = [
     {
-      href: "/",
-      title: t("dashboard"),
-      icon: <IconComponent name="home-angle-2-linear" />,
+      href: "/admin",
+      title: t("adminGeneral"),
+      icon: <IconComponent collection="tabler" name="building-factory" />,
     },
     {
-      href: "/defects",
-      title: t("defects"),
-      icon: <IconComponent name="shield-warning-linear" />,
+      href: "/admin/users",
+      title: t("adminUsers"),
+      icon: <IconComponent name="users-group-rounded-linear" />,
     },
     {
-      href: "/inspections",
-      title: t("inspections"),
-      icon: <IconComponent name="magnifer-bug-linear" />,
+      href: "/admin/standards",
+      title: t("adminStandards"),
+      icon: <IconComponent collection="tabler" name="template" />,
     },
     {
-      href: "/report",
-      title: t("report"),
-      icon: <IconComponent name="diagram-up-linear" />,
+      href: "/admin/templates",
+      title: t("adminTemplates"),
+      icon: <IconComponent collection="tabler" name="layers-intersect" />,
     },
     {
-      href: "/settings",
-      title: t("settings"),
-      icon: <IconComponent name="settings-linear" />,
+      href: "/admin/assets",
+      title: t("adminAssets"),
+      icon: <IconComponent name="box-minimalistic-linear" />,
+    },
+    {
+      href: "/admin/logs",
+      title: t("adminLogs"),
+      icon: <IconComponent collection="tabler" name="notes" />,
     },
   ];
 
   return (
-    <nav className={clsx(styles.navbar, className)}>
-      <ul>
-        {items
-          .filter((item) => !item.disabled)
-          .map((item, index) => (
-            <li key={item.title}>
-              <NavLinkComponent
-                activeClassName={styles.active}
-                href={item.href}
-              >
-                {index === 2 ? (
-                  <span className={styles.circle}>{item.icon}</span>
-                ) : (
-                  item.icon
-                )}
-                {item.title}
-              </NavLinkComponent>
-            </li>
-          ))}
-      </ul>
-    </nav>
+    <div className={styles.navbar}>
+      {items
+        .filter((item) => !item.disabled)
+        .map((item) => (
+          <li key={item.title}>
+            <NavLinkComponent
+              href={item.href}
+              label={item.title}
+              description={item.description}
+              leftSection={item.icon}
+            />
+          </li>
+        ))}
+    </div>
   );
 }

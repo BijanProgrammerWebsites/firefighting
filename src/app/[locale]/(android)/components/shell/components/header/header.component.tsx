@@ -41,7 +41,7 @@ export default function HeaderComponent({ className }: Props): ReactNode {
           variant="subtle"
           color="dark"
           size="lg"
-          aria-label="Change Language"
+          aria-label="Notifications"
         >
           <IconComponent name="bell-linear" />
         </ActionIcon>

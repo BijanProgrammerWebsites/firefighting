@@ -3,6 +3,12 @@
     "name": "مدیریت پالایشگاه"
   },
   "Shell": {
+    "adminGeneral": "تنظیمات عمومی",
+    "adminStandards": "تنظیمات استانداردها",
+    "adminAssets": "تنظیمات تجهیزات",
+    "adminUsers": "تنظیمات کاربران",
+    "adminLogs": "لاگ‌ها",
+    "adminTemplates": "تنظیمات انواع تجهیزات",
     "dashboard": "داشبورد",
     "defects": "نواقص",
     "inspections": "بازرسی",
@@ -12,6 +18,21 @@
   },
   "AdminGeneralPage": {
     "title": "تنظیمات عمومی"
+  },
+  "AdminStandardsPage": {
+    "title": "تنظیمات استانداردها"
+  },
+  "AdminAssetsPage": {
+    "title": "تنظیمات تجهیزات"
+  },
+  "AdminUsersPage": {
+    "title": "تنظیمات کاربران"
+  },
+  "AdminLogsPage": {
+    "title": "لاگ‌ها"
+  },
+  "AdminTemplatesPage": {
+    "title": "تنظیمات انواع تجهیزات"
   },
   "DashboardPage": {
     "title": "داشبورد"
