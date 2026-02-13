@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 type Props = PropsWithChildren<{
-  params: Promise<{ locale: "fa" | "en" }>;
+  params: Promise<{ locale: string }>;
 }>;
 
 export default async function RootLayout({
