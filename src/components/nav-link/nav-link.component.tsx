@@ -18,8 +18,8 @@ export default function NavLinkComponent({
   href,
   ...otherProps
 }: Props): ReactNode {
-  const selectedLayoutSegment = useSelectedLayoutSegment();
-  const pathname = selectedLayoutSegment ? `/${selectedLayoutSegment}` : "/";
+  const segment = useSelectedLayoutSegment();
+  const pathname = segment && segment !== "(dashboard)" ? `/${segment}` : "/";
   const isActive = pathname === href;
 
   return (

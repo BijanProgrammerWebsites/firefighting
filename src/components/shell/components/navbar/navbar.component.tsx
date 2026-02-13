@@ -30,27 +30,27 @@ export default async function NavbarComponent({
   const items: Item[] = [
     {
       href: "/",
-      title: t("Dashboard"),
-      icon: <IconComponent name="home-angle-2-bold" />,
+      title: t("dashboard"),
+      icon: <IconComponent name="home-angle-2-linear" />,
     },
     {
       href: "/defects",
-      title: t("Defects"),
+      title: t("defects"),
       icon: <IconComponent name="shield-warning-linear" />,
     },
     {
       href: "/inspections",
-      title: t("Inspections"),
+      title: t("inspections"),
       icon: <IconComponent name="magnifer-bug-linear" />,
     },
     {
       href: "/report",
-      title: t("Report"),
+      title: t("report"),
       icon: <IconComponent name="diagram-up-linear" />,
     },
     {
       href: "/settings",
-      title: t("Settings"),
+      title: t("settings"),
       icon: <IconComponent name="settings-linear" />,
     },
   ];

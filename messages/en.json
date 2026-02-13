@@ -10,7 +10,22 @@
     "settings": "Settings",
     "notifications": "Notifications"
   },
-  "HomePage": {
-    "title": "Hello, friend!"
+  "DashboardPage": {
+    "title": "Dashboard"
+  },
+  "DefectsPage": {
+    "title": "Defects"
+  },
+  "InspectionsPage": {
+    "title": "Inspections"
+  },
+  "NotificationsPage": {
+    "title": "Notifications"
+  },
+  "ReportPage": {
+    "title": "Report"
+  },
+  "SettingsPage": {
+    "title": "Settings"
   }
 }

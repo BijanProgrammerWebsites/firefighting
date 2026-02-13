@@ -3,14 +3,29 @@
     "companyName": "نام پالایشگاه"
   },
   "Shell": {
-    "Dashboard": "داشبورد",
-    "Defects": "نواقص",
-    "Inspections": "بازرسی",
-    "Report": "گزارش",
-    "Settings": "تنظیمات",
-    "Notifications": "اعلانات"
+    "dashboard": "داشبورد",
+    "defects": "نواقص",
+    "inspections": "بازرسی",
+    "notifications": "اعلانات",
+    "report": "گزارش",
+    "settings": "تنظیمات"
   },
-  "HomePage": {
-    "title": "سلام، رفیق!"
+  "DashboardPage": {
+    "title": "داشبورد"
+  },
+  "DefectsPage": {
+    "title": "نواقص"
+  },
+  "InspectionsPage": {
+    "title": "بازرسی"
+  },
+  "NotificationsPage": {
+    "title": "اعلانات"
+  },
+  "ReportPage": {
+    "title": "گزارش"
+  },
+  "SettingsPage": {
+    "title": "تنظیمات"
   }
 }
