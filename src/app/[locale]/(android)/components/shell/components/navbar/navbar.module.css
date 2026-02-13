@@ -29,7 +29,7 @@
 
     list-style: none;
 
-      margin: 0;
+    margin: 0;
     padding: 0.5rem 1rem 1rem;
 
     > li {
@@ -40,8 +40,8 @@
         justify-items: center;
         gap: 0.5rem;
 
-          text-decoration: none;
-          
+        text-decoration: none;
+
         svg {
           font-size: 1.5rem;
         }
