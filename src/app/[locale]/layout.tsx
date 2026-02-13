@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 
 import { NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import {
   ColorSchemeScript,
@@ -25,10 +26,18 @@ const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
 });
 
-export const metadata: Metadata = {
-  title: "Firefighting",
-  description: "Firefighting",
-};
+const metadata: Metadata = {};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "App" });
+
+  return {
+    ...metadata,
+    title: t("name"),
+    description: t("name"),
+  };
+}
 
 type Props = PropsWithChildren<{
   params: Promise<{ locale: string }>;
