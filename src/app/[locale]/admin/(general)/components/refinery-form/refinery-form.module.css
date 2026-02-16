@@ -1,0 +1,11 @@
+.refinery-form {
+  display: grid;
+  gap: 1rem;
+
+  .header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: end;
+    gap: 1rem;
+  }
+}

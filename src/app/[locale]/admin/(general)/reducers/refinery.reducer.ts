@@ -1,6 +1,6 @@
-import Refinery from "@/admin/(general)/types/refinery.type";
+import RefineryType from "@/admin/(general)/types/refinery.type";
 
-type ActionType =
+export type RefineryActionType =
   | { type: "set_name"; payload: string }
   | { type: "set_logo"; payload: string }
   | { type: "added_site"; payload: string }
@@ -13,7 +13,10 @@ type ActionType =
   | { type: "updated_unit"; payload: { id: string; name: string } }
   | { type: "deleted_unit"; payload: string };
 
-function RefineryReducer(state: Refinery, action: ActionType): Refinery {
+function RefineryReducer(
+  state: RefineryType,
+  action: RefineryActionType,
+): RefineryType {
   switch (action.type) {
     case "set_name":
       return { ...state, name: action.payload };
@@ -49,6 +52,23 @@ function RefineryReducer(state: Refinery, action: ActionType): Refinery {
     // ---------- Zone Actions ----------
     case "added_zone": {
       const { siteId, name } = action.payload;
+      console.log(
+        {
+          ...state,
+          sites: state.sites.map((site) =>
+            site.id === siteId
+              ? {
+                  ...site,
+                  zones: [
+                    ...site.zones,
+                    { id: crypto.randomUUID(), name, units: [] },
+                  ],
+                }
+              : site,
+          ),
+        },
+        state,
+      );
       return {
         ...state,
         sites: state.sites.map((site) =>

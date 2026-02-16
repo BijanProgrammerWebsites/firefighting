@@ -1,4 +1,4 @@
-import Zone from "@/admin/(general)/types/zone.type";
+import ZoneType from "@/admin/(general)/types/zone.type";
 
-type Site = { id: string; name: string; zones: Zone[] };
-export default Site;
+type SiteType = { id: string; name: string; zones: ZoneType[] };
+export default SiteType;

@@ -1,9 +1,9 @@
-import Site from "@/admin/(general)/types/site.type";
+import SiteType from "@/admin/(general)/types/site.type";
 
-type Refinery = {
+type RefineryType = {
   name: string;
   logo: string;
-  sites: Site[];
+  sites: SiteType[];
 };
 
-export default Refinery;
+export default RefineryType;

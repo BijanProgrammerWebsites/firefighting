@@ -1,9 +1,9 @@
-import Unit from "@/admin/(general)/types/unit.type";
+import UnitType from "@/admin/(general)/types/unit.type";
 
-type Zone = {
+type ZoneType = {
   id: string;
   name: string;
-  units: Unit[];
+  units: UnitType[];
 };
 
-export default Zone;
+export default ZoneType;

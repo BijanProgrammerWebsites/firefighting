@@ -1,0 +1,26 @@
+.list-box {
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  max-block-size: 20rem;
+
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+
+  border: 1px hsl(0deg 0% 80%) solid;
+  border-radius: 8px;
+
+  .list-box-message {
+    display: grid;
+    place-items: center;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
