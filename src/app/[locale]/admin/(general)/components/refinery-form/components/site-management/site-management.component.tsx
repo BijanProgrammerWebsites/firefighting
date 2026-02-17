@@ -4,7 +4,7 @@ import { ReactNode, use } from "react";
 import { useTranslations } from "next-intl";
 
 import { ListBoxComponent } from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/list-box.component";
-import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refineryGeneralFormContext";
+import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 
 import styles from "./site-management.module.css";
 

@@ -7,7 +7,7 @@ import { TextInput } from "@mantine/core";
 
 import LogoUploaderComponent from "@/admin/(general)/components/refinery-form/components/logo-uploader/logo-uploader.component";
 import SiteManagementComponent from "@/admin/(general)/components/refinery-form/components/site-management/site-management.component";
-import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refineryGeneralFormContext";
+import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 
 import styles from "./refinery-form.module.css";
 
