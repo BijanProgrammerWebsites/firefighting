@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
 
-import { getTranslations } from "next-intl/server";
-
-import styles from "./page.module.css";
+import RefineryGeneralFormComponent from "@/admin/(general)/components/refinery-form/refinery-general-form.component";
+import RefineryGeneralFormProvider from "@/admin/(general)/providers/refinery-general-form-provider";
 
 export default async function GeneralPage(): Promise<ReactNode> {
-  const t = await getTranslations("AdminGeneralPage");
-
-  return <div className={styles.general}>{t("title")}</div>;
+  return (
+    <RefineryGeneralFormProvider>
+      <RefineryGeneralFormComponent />
+    </RefineryGeneralFormProvider>
+  );
 }

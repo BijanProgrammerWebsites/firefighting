@@ -1,0 +1,27 @@
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-block: 0.2rem;
+  padding-inline: 0.5rem;
+
+  .list-item-buttons {
+    opacity: 0;
+
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  &:hover {
+    background-color: hsl(0deg 0% 0% / 5%);
+
+    .list-item-buttons {
+      opacity: 1;
+    }
+  }
+}
+
+.selected {
+  background-color: hsl(0deg 0% 0% / 3%);
+}
