@@ -2,15 +2,15 @@
 import { PropsWithChildren, ReactNode, useReducer, useState } from "react";
 
 import {
-  RefineryContext,
+  RefineryGeneralFormContext,
   SelectedRefineryItemType,
-} from "@/admin/(general)/contexts/refinery.context";
+} from "@/admin/(general)/contexts/refineryGeneralFormContext";
 import { INITIAL_STATE } from "@/admin/(general)/mock/refinery-mock-data";
 import RefineryReducer from "@/admin/(general)/reducers/refinery.reducer";
 
 type Props = PropsWithChildren;
 
-const RefineryProvider = ({ children }: Props): ReactNode => {
+const RefineryGeneralFormProvider = ({ children }: Props): ReactNode => {
   const [state, dispatch] = useReducer(RefineryReducer, INITIAL_STATE);
   const [selectedRefineryItemId, setSelectedRefineryItemId] =
     useState<SelectedRefineryItemType>({
@@ -20,7 +20,7 @@ const RefineryProvider = ({ children }: Props): ReactNode => {
     });
 
   return (
-    <RefineryContext
+    <RefineryGeneralFormContext
       value={{
         state,
         dispatch,
@@ -29,7 +29,7 @@ const RefineryProvider = ({ children }: Props): ReactNode => {
       }}
     >
       {children}
-    </RefineryContext>
+    </RefineryGeneralFormContext>
   );
 };
-export default RefineryProvider;
+export default RefineryGeneralFormProvider;

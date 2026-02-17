@@ -17,7 +17,17 @@
     "settings": "تنظیمات"
   },
   "AdminGeneralPage": {
-    "title": "تنظیمات عمومی"
+    "title": "تنظیمات عمومی",
+    "refineryName": "نام پالایشگاه",
+    "sites": "سایت‌ها",
+    "zones": "زون‌ها",
+    "units": "واحدها",
+    "selectSite": "لطفا یک سایت انتخاب کنید",
+    "selectZone": "لطفا یک زون انتخاب کنید",
+    "noZones": "هیچ زونی وجود ندارد",
+    "noUnits": "هیچ واحدی وجود ندارد",
+    "uploadLogo": "بارگذاری لوگو",
+    "reset": "بازنشانی"
   },
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها"

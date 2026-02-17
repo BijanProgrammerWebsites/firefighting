@@ -1,14 +1,17 @@
 "use client";
 import { ReactNode, use, useRef, useState } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Avatar, Button, FileButton } from "@mantine/core";
 
-import { RefineryContext } from "@/admin/(general)/contexts/refinery.context";
+import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refineryGeneralFormContext";
 
 import styles from "./logo-uploader.module.css";
 
 export default function LogoUploaderComponent(): ReactNode {
-  const { dispatch } = use(RefineryContext);
+  const t = useTranslations("AdminGeneralPage");
+  const { dispatch } = use(RefineryGeneralFormContext);
   const [file, setFile] = useState<File | null>(null);
   const resetRef = useRef<() => void>(null);
 
@@ -40,10 +43,10 @@ export default function LogoUploaderComponent(): ReactNode {
           onChange={handleSetFile}
           accept="image/png,image/jpeg"
         >
-          {(props) => <Button {...props}>بارگذاری لوگو</Button>}
+          {(props) => <Button {...props}>{t("uploadLogo")}</Button>}
         </FileButton>
         <Button disabled={!file} color="red" onClick={clearFile}>
-          بازنشانی
+          {t("reset")}
         </Button>
       </div>
     </div>

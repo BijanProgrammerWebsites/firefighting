@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 
-import RefineryFormComponent from "@/admin/(general)/components/refinery-form/refinery-form.component";
-import RefineryProvider from "@/admin/(general)/providers/refinery.provider";
+import RefineryGeneralFormComponent from "@/admin/(general)/components/refinery-form/refinery-general-form.component";
+import RefineryGeneralFormProvider from "@/admin/(general)/providers/refineryGeneralFormProvider";
 
 export default async function GeneralPage(): Promise<ReactNode> {
   return (
-    <RefineryProvider>
-      <RefineryFormComponent />
-    </RefineryProvider>
+    <RefineryGeneralFormProvider>
+      <RefineryGeneralFormComponent />
+    </RefineryGeneralFormProvider>
   );
 }

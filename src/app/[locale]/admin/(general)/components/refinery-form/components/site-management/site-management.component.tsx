@@ -1,14 +1,17 @@
 "use client";
 import { ReactNode, use } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { ListBoxComponent } from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/list-box.component";
-import { RefineryContext } from "@/admin/(general)/contexts/refinery.context";
+import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refineryGeneralFormContext";
 
 import styles from "./site-management.module.css";
 
 export default function SiteManagementComponent(): ReactNode {
+  const t = useTranslations("AdminGeneralPage");
   const { state, dispatch, selectedRefineryItemId, setSelectedRefineryItemId } =
-    use(RefineryContext);
+    use(RefineryGeneralFormContext);
 
   const { selectedSiteId, selectedZoneId, selectedUnitId } =
     selectedRefineryItemId;
@@ -22,22 +25,22 @@ export default function SiteManagementComponent(): ReactNode {
   const units = selectedZone?.units ?? [];
 
   const zoneMessage = !selectedSiteId
-    ? "لطفا یک سایت انتخاب کنید"
+    ? t("selectSite")
     : zones.length === 0
-      ? "هیچ زونی وجود ندارد"
+      ? t("noZones")
       : undefined;
 
   const unitMessage = !selectedZoneId
-    ? "لطفا یک زون انتخاب کنید"
+    ? t("selectZone")
     : units.length === 0
-      ? "هیچ واحدی وجود ندارد"
+      ? t("noUnits")
       : undefined;
 
   return (
     <div className={styles["site-management"]}>
       <ListBoxComponent
         items={sites}
-        title="سایت‌ها"
+        title={t("sites")}
         onAdd={(name) => {
           dispatch({ type: "added_site", payload: name });
         }}
@@ -61,7 +64,7 @@ export default function SiteManagementComponent(): ReactNode {
         items={zones}
         messages={zoneMessage}
         addIconDisable={!selectedSiteId}
-        title="زون‌ها"
+        title={t("zones")}
         onAdd={(name) => {
           dispatch({
             type: "added_zone",
@@ -88,7 +91,7 @@ export default function SiteManagementComponent(): ReactNode {
         items={units}
         messages={unitMessage}
         addIconDisable={!selectedZoneId}
-        title="واحدها"
+        title={t("units")}
         onAdd={(name) => {
           dispatch({
             type: "added_unit",

@@ -16,7 +16,7 @@ type ContextType = {
   selectedRefineryItemId: SelectedRefineryItemType;
   setSelectedRefineryItemId: Dispatch<SetStateAction<SelectedRefineryItemType>>;
 };
-export const RefineryContext = createContext<ContextType>({
+export const RefineryGeneralFormContext = createContext<ContextType>({
   state: { name: "", logo: "", sites: [] },
   dispatch: () => {},
   selectedRefineryItemId: {
