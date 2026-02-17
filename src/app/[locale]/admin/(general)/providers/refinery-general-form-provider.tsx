@@ -4,7 +4,7 @@ import { PropsWithChildren, ReactNode, useReducer, useState } from "react";
 import {
   RefineryGeneralFormContext,
   SelectedRefineryItemType,
-} from "@/admin/(general)/contexts/refineryGeneralFormContext";
+} from "@/admin/(general)/contexts/refinery-general-form-context";
 import { INITIAL_STATE } from "@/admin/(general)/mock/refinery-mock-data";
 import RefineryReducer from "@/admin/(general)/reducers/refinery.reducer";
 

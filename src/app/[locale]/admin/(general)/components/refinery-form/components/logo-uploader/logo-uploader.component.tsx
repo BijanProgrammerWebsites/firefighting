@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 
 import { Avatar, Button, FileButton } from "@mantine/core";
 
-import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refineryGeneralFormContext";
+import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 
 import styles from "./logo-uploader.module.css";
 
