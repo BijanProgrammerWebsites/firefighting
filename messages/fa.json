@@ -36,7 +36,20 @@
     "title": "تنظیمات تجهیزات"
   },
   "AdminUsersPage": {
-    "title": "تنظیمات کاربران"
+    "title": "تنظیمات کاربران",
+
+    "id": "شناسه",
+    "firstName": "نام",
+    "lastName": "نام خانوادگی",
+    "accessLevel": "سطح دسترسی",
+    "department": "دپارتمان",
+    "position": "سمت",
+    "email": "ایمیل",
+    "phone": "تلفن",
+
+    "manager": "مدیر",
+    "inspector": "بازرس",
+    "ordinary": "عادی"
   },
   "AdminLogsPage": {
     "title": "لاگ‌ها"
