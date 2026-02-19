@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 
-import { getTranslations } from "next-intl/server";
+import UserTableComponent from "@/admin/users/components/user-table/user-table.component";
+import RefineryUserProvider from "@/admin/users/providers/refinery-user-provider";
 
-import styles from "./page.module.css";
-
-export default async function UsersPage(): Promise<ReactNode> {
-  const t = await getTranslations("AdminUsersPage");
-
-  return <div className={styles.users}>{t("title")}</div>;
+export default function UsersPage(): ReactNode {
+  return (
+    <RefineryUserProvider>
+      <UserTableComponent />
+    </RefineryUserProvider>
+  );
 }
