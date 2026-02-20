@@ -36,7 +36,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...metadata,
-    title: t("name"),
+    title: {
+      template: `%s | ${t("name")}`,
+      default: t("name"),
+    },
     description: t("name"),
   };
 }
@@ -63,7 +66,6 @@ export default async function RootLayout({
       className={vazirmatn.variable}
     >
       <head>
-        <title>Firefighting</title>
         <ColorSchemeScript />
       </head>
       <body>

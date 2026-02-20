@@ -6,7 +6,11 @@ import { Text, Title } from "@mantine/core";
 
 import SignInFormComponent from "@/auth/sign-in/components/sign-in-form/sign-in-form.component";
 
+import { generateDynamicMetadata } from "@/utils/metadata.utils";
+
 import styles from "./page.module.css";
+
+export const generateMetadata = generateDynamicMetadata("SignInPage");
 
 export default async function Page(): Promise<ReactNode> {
   const t = await getTranslations("SignInPage");
