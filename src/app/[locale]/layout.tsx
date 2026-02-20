@@ -14,6 +14,10 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 
+import ToastComponent from "@/components/toast/toast.component";
+
+import QueryProvider from "@/providers/query.provider";
+
 import "./globals.css";
 import "@mantine/charts/styles.css";
 import "@mantine/core/styles.css";
@@ -65,7 +69,12 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider>
           <DirectionProvider>
-            <MantineProvider theme={theme}>{children}</MantineProvider>
+            <MantineProvider theme={theme}>
+              <QueryProvider>
+                {children}
+                <ToastComponent />
+              </QueryProvider>
+            </MantineProvider>
           </DirectionProvider>
         </NextIntlClientProvider>
       </body>

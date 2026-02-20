@@ -16,6 +16,15 @@
     "report": "گزارش",
     "settings": "تنظیمات"
   },
+  "SignInPage": {
+    "title": "خوش آمدید!",
+    "subtitle": "لطفاً اطلاعات خود را وارد کنید.",
+    "username": "نام کاربری",
+    "password": "کلمه عبور",
+    "submit": "ورود",
+    "usernameIsRequired": "نام کاربری الزامی است.",
+    "passwordIsRequired": "کلمه عبور الزامی است."
+  },
   "AdminGeneralPage": {
     "title": "تنظیمات عمومی"
   },

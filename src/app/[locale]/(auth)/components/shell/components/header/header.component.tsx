@@ -1,8 +1,12 @@
+"use client";
+
 import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { ActionIcon, Box, Burger } from "@mantine/core";
+import clsx from "clsx";
+
+import { ActionIcon } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -11,17 +15,15 @@ import { Link } from "@/i18n/navigation";
 import styles from "./header.module.css";
 
 type Props = {
-  opened: boolean;
-  toggle: () => void;
+  className?: string;
 };
 
-export default function HeaderComponent({ opened, toggle }: Props): ReactNode {
+export default function HeaderComponent({ className }: Props): ReactNode {
   const t = useTranslations("App");
 
   return (
-    <Box className={styles.header} p="md">
-      <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-      <Link className={styles.name} href="/admin">
+    <header className={clsx(styles.header, className)}>
+      <Link className={styles.name} href="/">
         {t("name")}
       </Link>
       <div className={styles.actions}>
@@ -34,6 +36,6 @@ export default function HeaderComponent({ opened, toggle }: Props): ReactNode {
           <IconComponent collection="tabler" name="language" />
         </ActionIcon>
       </div>
-    </Box>
+    </header>
   );
 }
