@@ -6,6 +6,7 @@ import { Vazirmatn } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
+import "@mantine/charts/styles.css";
 import {
   ColorSchemeScript,
   DirectionProvider,
@@ -13,16 +14,15 @@ import {
   createTheme,
   mantineHtmlProps,
 } from "@mantine/core";
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+import "@mantine/notifications/styles.css";
 
 import ToastComponent from "@/components/toast/toast.component";
 
 import QueryProvider from "@/providers/query.provider";
 
 import "./globals.css";
-import "@mantine/charts/styles.css";
-import "@mantine/core/styles.css";
-import "@mantine/dates/styles.css";
-import "@mantine/notifications/styles.css";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",

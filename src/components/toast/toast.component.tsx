@@ -2,9 +2,9 @@
 
 import type { ReactNode } from "react";
 
-import { Slide, ToastContainer } from "react-toastify";
-
 import { useDirection } from "@mantine/core";
+
+import { Slide, ToastContainer } from "react-toastify";
 
 export default function ToastComponent(): ReactNode {
   const { dir } = useDirection();

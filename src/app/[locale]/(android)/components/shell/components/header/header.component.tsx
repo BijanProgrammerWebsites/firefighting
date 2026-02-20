@@ -4,9 +4,9 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import clsx from "clsx";
-
 import { ActionIcon } from "@mantine/core";
+
+import clsx from "clsx";
 
 import IconComponent from "@/components/icon/icon.component";
 

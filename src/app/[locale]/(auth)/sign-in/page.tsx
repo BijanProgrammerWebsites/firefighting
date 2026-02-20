@@ -2,8 +2,9 @@ import { type ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
-import SignInFormComponent from "@/auth/sign-in/components/sign-in-form/sign-in-form.component";
 import { Text, Title } from "@mantine/core";
+
+import SignInFormComponent from "@/auth/sign-in/components/sign-in-form/sign-in-form.component";
 
 import styles from "./page.module.css";
 

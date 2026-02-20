@@ -1,7 +1,8 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
-import HeaderComponent from "@/auth/components/shell/components/header/header.component";
 import { Container } from "@mantine/core";
+
+import HeaderComponent from "@/auth/components/shell/components/header/header.component";
 
 import styles from "./shell.module.css";
 
