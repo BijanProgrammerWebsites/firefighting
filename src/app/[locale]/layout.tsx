@@ -6,6 +6,7 @@ import { Vazirmatn } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
+import "@mantine/charts/styles.css";
 import {
   ColorSchemeScript,
   DirectionProvider,
@@ -13,12 +14,15 @@ import {
   createTheme,
   mantineHtmlProps,
 } from "@mantine/core";
-
-import "./globals.css";
-import "@mantine/charts/styles.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
+
+import ToastComponent from "@/components/toast/toast.component";
+
+import QueryProvider from "@/providers/query.provider";
+
+import "./globals.css";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
@@ -32,7 +36,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...metadata,
-    title: t("name"),
+    title: {
+      template: `%s | ${t("name")}`,
+      default: t("name"),
+    },
     description: t("name"),
   };
 }
@@ -59,13 +66,17 @@ export default async function RootLayout({
       className={vazirmatn.variable}
     >
       <head>
-        <title>Firefighting</title>
         <ColorSchemeScript />
       </head>
       <body>
         <NextIntlClientProvider>
           <DirectionProvider>
-            <MantineProvider theme={theme}>{children}</MantineProvider>
+            <MantineProvider theme={theme}>
+              <QueryProvider>
+                {children}
+                <ToastComponent />
+              </QueryProvider>
+            </MantineProvider>
           </DirectionProvider>
         </NextIntlClientProvider>
       </body>

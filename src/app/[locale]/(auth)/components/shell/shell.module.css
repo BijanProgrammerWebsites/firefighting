@@ -1,0 +1,16 @@
+.shell {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+
+  min-block-size: 100dvh;
+
+  .header {
+    position: sticky;
+    inset-block-start: 0;
+  }
+
+  > main {
+    overflow: auto;
+  }
+}

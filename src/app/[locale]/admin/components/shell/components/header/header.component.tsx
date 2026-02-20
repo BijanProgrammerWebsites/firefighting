@@ -2,9 +2,10 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { ActionIcon, Box, Burger } from "@mantine/core";
+import { Box, Burger } from "@mantine/core";
 
-import IconComponent from "@/components/icon/icon.component";
+import SignOutButtonComponent from "@/components/sign-out-button/sign-out-button.component";
+import ToggleLocaleComponent from "@/components/toggle-locale/toggle-locale.component";
 
 import { Link } from "@/i18n/navigation";
 
@@ -21,18 +22,12 @@ export default function HeaderComponent({ opened, toggle }: Props): ReactNode {
   return (
     <Box className={styles.header} p="md">
       <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-      <Link className={styles.name} href="/public">
+      <Link className={styles.name} href="/admin">
         {t("name")}
       </Link>
       <div className={styles.actions}>
-        <ActionIcon
-          variant="subtle"
-          color="dark"
-          size="lg"
-          aria-label="Change Language"
-        >
-          <IconComponent collection="tabler" name="language" />
-        </ActionIcon>
+        <ToggleLocaleComponent />
+        <SignOutButtonComponent />
       </div>
     </Box>
   );
