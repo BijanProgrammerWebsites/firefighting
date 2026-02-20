@@ -14,7 +14,8 @@
     "inspections": "بازرسی",
     "notifications": "اعلانات",
     "report": "گزارش",
-    "settings": "تنظیمات"
+    "settings": "تنظیمات",
+    "toggleLocale": "تغییر زبان سایت"
   },
   "SignInPage": {
     "title": "خوش آمدید!",

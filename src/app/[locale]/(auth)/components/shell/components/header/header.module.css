@@ -25,9 +25,5 @@
   .actions {
     display: flex;
     align-items: center;
-
-    svg {
-      font-size: 1.5em;
-    }
   }
 }
