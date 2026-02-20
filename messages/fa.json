@@ -15,7 +15,8 @@
     "notifications": "اعلانات",
     "report": "گزارش",
     "settings": "تنظیمات",
-    "toggleLocale": "تغییر زبان سایت"
+    "toggleLocale": "تغییر زبان سایت",
+    "signOut": "خروج"
   },
   "SignInPage": {
     "title": "خوش آمدید!",

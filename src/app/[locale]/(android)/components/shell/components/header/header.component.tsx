@@ -9,6 +9,7 @@ import { ActionIcon } from "@mantine/core";
 import clsx from "clsx";
 
 import IconComponent from "@/components/icon/icon.component";
+import SignOutButtonComponent from "@/components/sign-out-button/sign-out-button.component";
 import ToggleLocaleComponent from "@/components/toggle-locale/toggle-locale.component";
 
 import { Link } from "@/i18n/navigation";
@@ -28,7 +29,6 @@ export default function HeaderComponent({ className }: Props): ReactNode {
         {t("name")}
       </Link>
       <div className={styles.actions}>
-        <ToggleLocaleComponent />
         <ActionIcon
           component={Link}
           href="/notifications"
@@ -39,6 +39,8 @@ export default function HeaderComponent({ className }: Props): ReactNode {
         >
           <IconComponent name="bell-linear" size="lg" />
         </ActionIcon>
+        <ToggleLocaleComponent />
+        <SignOutButtonComponent />
       </div>
     </header>
   );

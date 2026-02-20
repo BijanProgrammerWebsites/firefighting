@@ -25,7 +25,6 @@
   .actions {
     display: flex;
     align-items: center;
-
-    margin-inline-start: auto;
+    gap: 0.5rem;
   }
 }
