@@ -39,17 +39,12 @@
     "title": "تنظیمات کاربران",
 
     "id": "شناسه",
-    "firstName": "نام",
-    "lastName": "نام خانوادگی",
-    "accessLevel": "سطح دسترسی",
-    "department": "دپارتمان",
-    "position": "سمت",
-    "email": "ایمیل",
-    "phone": "تلفن",
-
+    "username": "نام کاربری",
+    "password": "رمزعبور",
+    "role": "سطح دسترسی",
     "manager": "مدیر",
     "inspector": "بازرس",
-    "ordinary": "عادی"
+    "viewer": "عادی"
   },
   "AdminLogsPage": {
     "title": "لاگ‌ها"

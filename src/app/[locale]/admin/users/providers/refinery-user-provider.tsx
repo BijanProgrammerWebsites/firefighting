@@ -1,9 +1,9 @@
 "use client";
-import { PropsWithChildren, ReactNode, useReducer, useState } from "react";
+import { PropsWithChildren, ReactNode, useState } from "react";
 
-import { AccessLevelType } from "@/admin/users/components/types/access-level.type";
 import { RefineryUserContext } from "@/admin/users/contexts/refinery-user-context";
 import { EMPLOYEE_MOCK_DATA } from "@/admin/users/mock/user.mock";
+import { AccessLevelType } from "@/admin/users/types/access-level.type";
 
 type Props = PropsWithChildren;
 
@@ -17,7 +17,7 @@ const RefineryUserProvider = ({ children }: Props): ReactNode => {
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
         user.id.toString() === userId
-          ? { ...user, accessLevel: newAccessLevel }
+          ? { ...user, role: newAccessLevel }
           : user,
       ),
     );

@@ -4,9 +4,9 @@ import { useTranslations } from "next-intl";
 
 import { Select, Table } from "@mantine/core";
 
-import { AccessLevelType } from "@/admin/users/components/types/access-level.type";
-import { UserType } from "@/admin/users/components/types/user.type";
 import { RefineryUserContext } from "@/admin/users/contexts/refinery-user-context";
+import { AccessLevelType } from "@/admin/users/types/access-level.type";
+import { UserType } from "@/admin/users/types/user.type";
 
 type Props = {
   users: UserType[];
@@ -20,20 +20,17 @@ export default function UserTableRowsComponent({ users }: Props): ReactNode {
     }
   };
   return users.map((user: UserType) => (
-    <Table.Tr key={user.firstName}>
-      <Table.Td>{user.firstName}</Table.Td>
-      <Table.Td>{user.lastName}</Table.Td>
-      <Table.Td>{user.position}</Table.Td>
-      <Table.Td>{user.email}</Table.Td>
-      <Table.Td>{user.phone}</Table.Td>
-      <Table.Td>{user.department}</Table.Td>
+    <Table.Tr key={user.username}>
+      <Table.Td>{user.username}</Table.Td>
+      <Table.Td>{user.password}</Table.Td>
+
       <Table.Td>
         <Select
-          defaultValue={user.accessLevel}
+          defaultValue={user.role}
           data={[
             { value: "manager", label: t("manager") },
             { value: "inspector", label: t("inspector") },
-            { value: "ordinary", label: t("ordinary") },
+            { value: "viewer", label: t("viewer") },
           ]}
           onChange={(e) => handleChangeAccessLevel(user.id, e)}
         />
