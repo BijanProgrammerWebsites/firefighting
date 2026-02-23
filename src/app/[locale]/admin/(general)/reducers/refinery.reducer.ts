@@ -52,23 +52,7 @@ function RefineryReducer(
     // ---------- Zone Actions ----------
     case "added_zone": {
       const { siteId, name } = action.payload;
-      console.log(
-        {
-          ...state,
-          sites: state.sites.map((site) =>
-            site.id === siteId
-              ? {
-                  ...site,
-                  zones: [
-                    ...site.zones,
-                    { id: crypto.randomUUID(), name, units: [] },
-                  ],
-                }
-              : site,
-          ),
-        },
-        state,
-      );
+
       return {
         ...state,
         sites: state.sites.map((site) =>

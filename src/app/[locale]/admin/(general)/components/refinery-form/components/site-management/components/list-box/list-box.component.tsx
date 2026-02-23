@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 
-import { ActionIcon, Divider } from "@mantine/core";
+import { ActionIcon, Divider, List, Text } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -51,15 +51,13 @@ export function ListBoxComponent({
     setAddMode(false);
   };
 
-  const messageBox = (
-    <div className={styles["list-box-message"]}>{messages}</div>
-  );
+  const messageBox = <div className={styles["message"]}>{messages}</div>;
   const detailBox = (
-    <ul>
+    <List className={styles["detail"]}>
       {addMode && (
         <TextFormComponent
-          onChangeValue={handleAddItem}
-          onCancelValueChange={handleCancelAddIconClick}
+          onSubmit={handleAddItem}
+          onCancel={handleCancelAddIconClick}
         />
       )}
       {items.map((item) => (
@@ -72,25 +70,20 @@ export function ListBoxComponent({
           selected={item.id === selectedItemId}
         />
       ))}
-    </ul>
+    </List>
   );
 
   return (
     <div className={styles["list-box"]}>
       <div className={styles.header}>
-        <p>{title}</p>
+        <Text>{title}</Text>
         <ActionIcon
           variant="outline"
           size="xs"
           disabled={addIconDisable}
           onClick={handleAddIconClick}
         >
-          <IconComponent
-            collection="tabler"
-            name="plus"
-            width={16}
-            height={16}
-          />
+          <IconComponent collection="tabler" name="plus" />
         </ActionIcon>
       </div>
       <Divider />

@@ -1,22 +1,29 @@
 import type { ReactNode } from "react";
 
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Dialog, Divider } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
-import styles from "./remove-item.module.css";
+import styles from "./remove-item-dialog.module.css";
 
 type Props = {
+  opened: boolean;
   onSuccess: () => void;
   onCancel: () => void;
 };
-export default function RemoveItemComponent({
+export default function RemoveItemDialogComponent({
+  opened,
   onSuccess,
   onCancel,
 }: Props): ReactNode {
   return (
-    <div className={styles["remove-item"]}>
+    <Dialog
+      opened={opened}
+      className={styles["remove-item"]}
+      position={{ top: 20, left: "45%" }}
+    >
       آیا از حذف این مورد اطمینان دارید؟
+      <Divider />
       <ActionIcon
         type="submit"
         variant="filled"
@@ -24,12 +31,7 @@ export default function RemoveItemComponent({
         size="xs"
         onClick={onSuccess}
       >
-        <IconComponent
-          collection="tabler"
-          name="check"
-          width={16}
-          height={16}
-        />
+        <IconComponent collection="tabler" name="check" />
       </ActionIcon>
       <ActionIcon
         type="reset"
@@ -38,13 +40,8 @@ export default function RemoveItemComponent({
         size="xs"
         onClick={onCancel}
       >
-        <IconComponent
-          collection="tabler"
-          name="playstation-x"
-          width={16}
-          height={16}
-        />
+        <IconComponent collection="tabler" name="x" />
       </ActionIcon>
-    </div>
+    </Dialog>
   );
 }

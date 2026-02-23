@@ -6,7 +6,7 @@ import { ActionIcon } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
-import RemoveItemComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/remove-item/remove-item.component";
+import RemoveItemDialogComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/remove-item/remove-item-dialog.component";
 import TextFormComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/text-form/text-form.component";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
 
@@ -28,18 +28,12 @@ export default function ListItemComponent({
 }: Props): ReactNode {
   const [mode, setMode] = useState<"edit" | "remove" | "none">("none");
 
-  const handleEditMode = (): void => {
-    setMode("edit");
-  };
   const handleRemoveMode = (): void => {
     setMode("remove");
   };
 
   const handleOnTextFormValueChange = (value: string): void => {
     onEdit({ id: item.id, name: value });
-    setMode("none");
-  };
-  const handleOnCancelTextFormValueChange = (): void => {
     setMode("none");
   };
 
@@ -59,29 +53,22 @@ export default function ListItemComponent({
       className={clsx(styles["list-item"], selected && styles.selected)}
       onClick={handleSelectItem}
     >
-      {mode === "edit" ? (
+      {mode !== "edit" && item.name}
+      {mode === "edit" && (
         <TextFormComponent
           defaultValue={item.name}
-          onChangeValue={handleOnTextFormValueChange}
-          onCancelValueChange={handleOnCancelTextFormValueChange}
+          onSubmit={handleOnTextFormValueChange}
+          onCancel={() => setMode("none")}
         />
-      ) : mode === "remove" ? (
-        <RemoveItemComponent
-          onSuccess={handleRemoveItem}
-          onCancel={handleCancelRemoveItem}
-        />
-      ) : (
-        item.name
       )}
       {mode === "none" && (
-        <div className={styles["list-item-buttons"]}>
-          <ActionIcon variant="outline" size="sm" onClick={handleEditMode}>
-            <IconComponent
-              collection="tabler"
-              name="edit"
-              width={14}
-              height={14}
-            />
+        <div className={styles["buttons"]}>
+          <ActionIcon
+            variant="outline"
+            size="sm"
+            onClick={() => setMode("edit")}
+          >
+            <IconComponent collection="tabler" name="edit" />
           </ActionIcon>
           <ActionIcon
             color="red"
@@ -89,15 +76,15 @@ export default function ListItemComponent({
             size="sm"
             onClick={handleRemoveMode}
           >
-            <IconComponent
-              collection="tabler"
-              name="trash"
-              width={14}
-              height={14}
-            />
+            <IconComponent collection="tabler" name="trash" />
           </ActionIcon>
         </div>
       )}
+      <RemoveItemDialogComponent
+        opened={mode === "remove"}
+        onSuccess={handleRemoveItem}
+        onCancel={handleCancelRemoveItem}
+      />
     </div>
   );
 }
