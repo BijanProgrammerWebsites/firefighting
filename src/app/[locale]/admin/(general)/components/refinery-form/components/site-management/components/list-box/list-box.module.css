@@ -7,13 +7,16 @@
 
   max-block-size: 20rem;
 
-  padding-block: 0.5rem;
-  padding-inline: 1rem;
+  padding: 0.5rem 1rem;
 
-  border: 1px hsl(0deg 0% 80%) solid;
-  border-radius: 8px;
+  border: 1px var(--mantine-color-gray-4) solid;
+  border-radius: 0.5rem;
 
-  .list-box-message {
+  .detail {
+    padding-inline-start: 0;
+  }
+
+  .message {
     display: grid;
     place-items: center;
   }

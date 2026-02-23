@@ -1,6 +1,7 @@
-import type { FormEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { ActionIcon, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -8,53 +9,45 @@ import styles from "./text-form.module.css";
 
 type Props = {
   defaultValue?: string;
-  onChangeValue: (value: string) => void;
-  onCancelValueChange: () => void;
+  onSubmit: (value: string) => void;
+  onCancel: () => void;
 };
 export default function TextFormComponent({
   defaultValue,
-  onChangeValue,
-  onCancelValueChange,
+  onSubmit,
+  onCancel,
 }: Props): ReactNode {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    e.stopPropagation();
-    const formData = new FormData(e.currentTarget);
-    const newValue = formData.get("name")?.toString().trim();
-
-    if (newValue) {
-      onChangeValue(newValue);
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      name: defaultValue,
+    },
+  });
+  const handleSubmit = (values: { name: string | undefined }): void => {
+    console.log(values);
+    if (values["name"]) {
+      onSubmit(values["name"]);
     } else {
-      handleReset(e);
+      handleCancel();
     }
   };
-  const handleReset = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    e.currentTarget.reset();
-    onCancelValueChange();
+  const handleCancel = (): void => {
+    form.reset();
+    onCancel();
   };
+
   return (
     <form
       className={styles["text-form"]}
-      onSubmit={handleSubmit}
-      onReset={handleReset}
+      onSubmit={form.onSubmit(handleSubmit)}
+      onReset={handleCancel}
     >
-      <TextInput name="name" defaultValue={defaultValue} />
+      <TextInput key={form.key("name")} {...form.getInputProps("name")} />
       <ActionIcon type="submit" variant="filled" color="green" size="xs">
-        <IconComponent
-          collection="tabler"
-          name="check"
-          width={16}
-          height={16}
-        />
+        <IconComponent collection="tabler" name="check" />
       </ActionIcon>
       <ActionIcon type="reset" variant="filled" color="red" size="xs">
-        <IconComponent
-          collection="tabler"
-          name="playstation-x"
-          width={16}
-          height={16}
-        />
+        <IconComponent collection="tabler" name="x" />
       </ActionIcon>
     </form>
   );
