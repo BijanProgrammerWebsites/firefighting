@@ -1,0 +1,10 @@
+.sign-in-form {
+  display: grid;
+  gap: 1rem;
+
+  margin-block: 2rem;
+
+  > button {
+    inline-size: 100%;
+  }
+}
