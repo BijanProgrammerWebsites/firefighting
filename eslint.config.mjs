@@ -21,6 +21,18 @@ const eslintConfig = defineConfig([
       ],
       "@typescript-eslint/explicit-member-accessibility": "error",
       "@typescript-eslint/no-explicit-any": "off",
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "zod",
+              message:
+                'Do not import from "zod" directly. Use "@/lib/zod" instead.',
+            },
+          ],
+        },
+      ],
     },
   },
 ]);

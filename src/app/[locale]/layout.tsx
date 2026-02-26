@@ -6,7 +6,6 @@ import { Vazirmatn } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 
-import "@mantine/charts/styles.css";
 import {
   ColorSchemeScript,
   DirectionProvider,
@@ -14,15 +13,17 @@ import {
   createTheme,
   mantineHtmlProps,
 } from "@mantine/core";
-import "@mantine/core/styles.css";
-import "@mantine/dates/styles.css";
-import "@mantine/notifications/styles.css";
+import { ModalsProvider } from "@mantine/modals";
 
 import ToastComponent from "@/components/toast/toast.component";
 
 import QueryProvider from "@/providers/query.provider";
 
 import "./globals.css";
+import "@mantine/charts/styles.css";
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+import "@mantine/notifications/styles.css";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
@@ -72,10 +73,12 @@ export default async function RootLayout({
         <NextIntlClientProvider>
           <DirectionProvider>
             <MantineProvider theme={theme}>
-              <QueryProvider>
-                {children}
-                <ToastComponent />
-              </QueryProvider>
+              <ModalsProvider>
+                <QueryProvider>
+                  {children}
+                  <ToastComponent />
+                </QueryProvider>
+              </ModalsProvider>
             </MantineProvider>
           </DirectionProvider>
         </NextIntlClientProvider>

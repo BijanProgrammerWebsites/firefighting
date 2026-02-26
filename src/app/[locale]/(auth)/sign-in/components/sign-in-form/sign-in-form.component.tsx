@@ -37,8 +37,14 @@ export default function SignInFormComponent(): ReactNode {
       password: "",
     },
     validate: {
-      username: hasLength({ min: 1 }, t("usernameIsRequired")),
-      password: hasLength({ min: 1 }, t("passwordIsRequired")),
+      username: hasLength(
+        { min: 1 },
+        t("fieldIsRequired", { field: t("username") }),
+      ),
+      password: hasLength(
+        { min: 1 },
+        t("fieldIsRequired", { field: t("password") }),
+      ),
     },
   });
 
