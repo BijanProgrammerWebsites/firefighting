@@ -11,12 +11,11 @@ import {
   Button,
   Fieldset,
   Group,
-  PasswordInput,
   TextInput,
   Textarea,
   Tooltip,
 } from "@mantine/core";
-import { hasLength, useForm } from "@mantine/form";
+import { useForm } from "@mantine/form";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -24,8 +23,11 @@ import { toast } from "react-toastify";
 
 import { v4 as uuid } from "uuid";
 
+import { zod4Resolver } from "mantine-form-zod-resolver";
+
 import {
-  CreateStandardResponseDto,
+  CreateStandardRequestDto,
+  CreateStandardSchema,
   createStandardApi,
 } from "@/api/standards/create-standard.api";
 
@@ -36,7 +38,7 @@ import { standardKeys } from "@/queries/keys";
 import styles from "./standard-form.module.css";
 
 type Props = {
-  initialValues?: CreateStandardResponseDto;
+  initialValues?: CreateStandardRequestDto;
 };
 
 export default function StandardFormComponent({
@@ -52,25 +54,24 @@ export default function StandardFormComponent({
     mutationFn: createStandardApi,
   });
 
-  const form = useForm<CreateStandardResponseDto>({
+  const form = useForm<CreateStandardRequestDto>({
     initialValues: initialValues ?? {
       title: "",
       questions: [],
     },
-    validate: {
-      title: hasLength(
-        { min: 1 },
-        tCommon("fieldIsRequired", { field: t("titleField") }),
-      ),
-    },
+    validate: zod4Resolver(CreateStandardSchema),
   });
 
   const handleAddMoreButtonClick = (): void => {
-    form.insertListItem("questions", { id: uuid(), text: "", description: "" });
+    form.insertListItem("questions", {
+      id: uuid(),
+      title: "",
+      description: "",
+    });
   };
 
   const handleFormSubmit = async (
-    dto: CreateStandardResponseDto,
+    dto: CreateStandardRequestDto,
   ): Promise<void> => {
     await mutateAsync(dto, {
       onSuccess: (data): void => {

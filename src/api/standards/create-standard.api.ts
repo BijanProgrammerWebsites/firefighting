@@ -1,15 +1,26 @@
-import { ResponseDto } from "@/dto/response.dto";
+import { z } from "@/lib/zod";
 
-import { Standard } from "@/entities/standard";
+import { ResponseDto } from "@/dto/response.dto";
 
 import { richFetch } from "@/utils/fetch.utils";
 
-export type CreateStandardResponseDto = Omit<Standard, "id">;
+export const CreateStandardSchema = z.object({
+  title: z.string().nonempty(),
+  questions: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string().nonempty(),
+      description: z.string(),
+    }),
+  ),
+});
+
+export type CreateStandardRequestDto = z.infer<typeof CreateStandardSchema>;
 
 export async function createStandardApi(
-  dto: CreateStandardResponseDto,
+  dto: CreateStandardRequestDto,
 ): Promise<ResponseDto> {
-  return richFetch("/standards/create", {
+  return richFetch("/standards", {
     method: "POST",
     body: JSON.stringify(dto),
   });
