@@ -1,0 +1,10 @@
+.toolbar {
+  display: flex;
+  gap: var(--mantine-spacing-md);
+
+  margin-block-end: var(--mantine-spacing-md);
+
+  .actions {
+    margin-inline-start: auto;
+  }
+}

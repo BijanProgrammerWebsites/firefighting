@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
-import { Title } from "@mantine/core";
+import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
@@ -17,7 +17,7 @@ export default async function StandardsPage(): Promise<ReactNode> {
 
   return (
     <div className={styles.standards}>
-      <Title order={2}>{t("title")}</Title>
+      <ToolbarComponent title={t("title")} createHref="/standards/create" />
       <StandardListComponent />
     </div>
   );

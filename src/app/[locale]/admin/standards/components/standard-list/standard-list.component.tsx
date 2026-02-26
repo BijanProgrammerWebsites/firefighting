@@ -71,7 +71,7 @@ export default function StandardListComponent(): ReactNode {
         <Table.Tr>
           <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>{t("row")}</Table.Th>
           <Table.Th>{t("title")}</Table.Th>
-          <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)}></Table.Th>
+          <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
