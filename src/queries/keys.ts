@@ -8,6 +8,14 @@ export const userKeys = {
   one: (userId: string) => ["user", userId] as const,
 };
 
+export const standardKeys = {
+  all: ["standard"] as const,
+  one: (standardId: string) => ["standard", standardId] as const,
+  create: ["standard", "create"] as const,
+  edit: ["standard", "edit"] as const,
+  remove: ["standard", "remove"] as const,
+};
+
 export const mutationKeys = {
   signIn: () => ["auth", "sign-in"] as const,
   signUp: () => ["auth", "sign-up"] as const,
