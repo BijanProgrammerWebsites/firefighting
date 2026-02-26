@@ -2,7 +2,11 @@ import type { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
+import { Title } from "@mantine/core";
+
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
+
+import StandardListComponent from "@/admin/standards/components/standard-list/standard-list.component";
 
 import styles from "./page.module.css";
 
@@ -11,5 +15,10 @@ export const generateMetadata = generateDynamicMetadata("AdminStandardsPage");
 export default async function StandardsPage(): Promise<ReactNode> {
   const t = await getTranslations("AdminStandardsPage");
 
-  return <div className={styles.standards}>{t("title")}</div>;
+  return (
+    <div className={styles.standards}>
+      <Title order={2}>{t("title")}</Title>
+      <StandardListComponent />
+    </div>
+  );
 }
