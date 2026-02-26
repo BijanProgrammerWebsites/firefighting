@@ -5,7 +5,7 @@
     "^(react|react-dom)(/(.*))?$",
     "^next(/(.*))?$",
     "^next-intl(/(.*))?$",
-    "^@mantine(/(.*))?$",
+    "^@mantine(?!.*css$)",
     "^nuqs(/(.*))?$",
     "^@tanstack(/(.*))?$",
     "^@dnd-kit(/(.*))?$",
@@ -35,8 +35,8 @@
     "^@/android",
     "^@/admin",
     "^@/styles",
-    "^(\\.|\\.\\.)/(.(?!.(css|scss)))*$",
-    "\\.(css|scss)$"
+    "^(\\.|\\.\\.)/(.(?!.css))*$",
+    "\\.css$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,

@@ -6,23 +6,42 @@ import { useTranslations } from "next-intl";
 
 import { ActionIcon, Table, Text, Tooltip } from "@mantine/core";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { toast } from "react-toastify";
+
+import { signOutApi } from "@/api/auth/sign-out.api";
 import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
+import { removeStandardApi } from "@/api/standards/remove-standard.api";
 
 import IconComponent from "@/components/icon/icon.component";
 import LoadingComponent from "@/components/loading/loading.component";
+import RemoveButtonComponent from "@/components/remove-button/remove-button.component";
 
 import { Link } from "@/i18n/navigation";
 
-import { standardKeys } from "@/queries/keys";
+import { authKeys, mutationKeys, standardKeys, userKeys } from "@/queries/keys";
 
 export default function StandardListComponent(): ReactNode {
   const t = useTranslations("Common");
 
+  const queryClient = useQueryClient();
+
   const { isPending, isError, error, data } = useQuery({
     queryKey: standardKeys.all,
     queryFn: findAllStandardsApi,
+  });
+
+  const { mutateAsync } = useMutation({
+    mutationKey: standardKeys.remove,
+    mutationFn: removeStandardApi,
+    onError: (error) => {
+      toast.error(error.message);
+    },
+    onSuccess: async (result) => {
+      queryClient.removeQueries({ queryKey: standardKeys.all });
+      toast.success(result.message);
+    },
   });
 
   if (isPending) {
@@ -49,16 +68,10 @@ export default function StandardListComponent(): ReactNode {
             <IconComponent name="pen-linear" />
           </ActionIcon>
         </Tooltip>
-        <Tooltip label={t("remove")}>
-          <ActionIcon
-            variant="subtle"
-            color="gray"
-            aria-label={t("remove")}
-            onClick={() => {}}
-          >
-            <IconComponent name="trash-bin-trash-linear" />
-          </ActionIcon>
-        </Tooltip>
+        <RemoveButtonComponent
+          itemTitle={item.title}
+          onConfirm={() => mutateAsync(item.id)}
+        />
       </Table.Td>
     </Table.Tr>
   ));
