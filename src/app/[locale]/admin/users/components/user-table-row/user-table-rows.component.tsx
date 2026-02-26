@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Select, Table } from "@mantine/core";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
@@ -12,7 +12,7 @@ import { updateUser } from "@/api/user/update-user.api";
 
 import { PasswordlessUser } from "@/entities/user";
 
-import { mutationKeys } from "@/queries/keys";
+import { mutationKeys, userKeys } from "@/queries/keys";
 
 import { Role } from "@/types/role.type";
 
@@ -21,6 +21,8 @@ type Props = {
 };
 export default function UserTableRowsComponent({ users }: Props): ReactNode {
   const t = useTranslations("AdminUsersPage");
+
+  const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
     mutationKey: mutationKeys.userUpdate(),
@@ -42,6 +44,7 @@ export default function UserTableRowsComponent({ users }: Props): ReactNode {
         },
         onSuccess: (data): void => {
           toast.success(data.message);
+          queryClient.removeQueries({ queryKey: userKeys.all });
         },
       },
     );
