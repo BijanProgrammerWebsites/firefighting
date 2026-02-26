@@ -44,7 +44,8 @@
     "title": "تنظیمات عمومی"
   },
   "AdminStandardsPage": {
-    "title": "تنظیمات استانداردها"
+    "title": "تنظیمات استانداردها",
+    "create": "ساخت استاندارد جدید"
   },
   "AdminAssetsPage": {
     "title": "تنظیمات تجهیزات"

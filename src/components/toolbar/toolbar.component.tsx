@@ -33,7 +33,7 @@ export default function ToolbarComponent({
           </Button>
         )}
         {parentHref && (
-          <Button component={Link} href={parentHref}>
+          <Button component={Link} href={parentHref} variant="default">
             {t("return")}
           </Button>
         )}

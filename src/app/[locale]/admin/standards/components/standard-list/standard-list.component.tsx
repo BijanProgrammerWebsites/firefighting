@@ -56,7 +56,7 @@ export default function StandardListComponent(): ReactNode {
       <Table.Td>{index + 1}</Table.Td>
       <Table.Td>{item.title}</Table.Td>
       <Table.Td>
-        <EditButtonComponent href={`/standards/${item.id}`} />
+        <EditButtonComponent href={`/admin/standards/${item.id}`} />
         <RemoveButtonComponent
           itemTitle={item.title}
           onConfirm={() => mutateAsync(item.id)}
