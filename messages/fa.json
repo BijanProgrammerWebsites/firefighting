@@ -45,6 +45,7 @@
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها",
     "create": "ساخت استاندارد جدید",
+    "edit": "ویرایش استاندارد",
     "titleField": "عنوان",
     "description": "توضیحات",
     "questions": "سوالات",

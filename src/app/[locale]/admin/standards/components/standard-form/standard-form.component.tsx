@@ -17,7 +17,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
@@ -30,6 +30,7 @@ import {
   CreateStandardSchema,
   createStandardApi,
 } from "@/api/standards/create-standard.api";
+import { editStandardApi } from "@/api/standards/edit-standard.api";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -37,11 +38,18 @@ import { standardKeys } from "@/queries/keys";
 
 import styles from "./standard-form.module.css";
 
-type Props = {
-  initialValues?: CreateStandardRequestDto;
-};
+type Props =
+  | {
+      id?: never;
+      initialValues?: never;
+    }
+  | {
+      id: string;
+      initialValues: CreateStandardRequestDto;
+    };
 
 export default function StandardFormComponent({
+  id,
   initialValues,
 }: Props): ReactNode {
   const t = useTranslations("AdminStandardsPage");
@@ -49,9 +57,16 @@ export default function StandardFormComponent({
 
   const router = useRouter();
 
-  const { mutateAsync } = useMutation({
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: createMutateAsync } = useMutation({
     mutationKey: standardKeys.create,
     mutationFn: createStandardApi,
+  });
+
+  const { mutateAsync: editMutateAsync } = useMutation({
+    mutationKey: standardKeys.edit,
+    mutationFn: editStandardApi,
   });
 
   const form = useForm<CreateStandardRequestDto>({
@@ -73,15 +88,31 @@ export default function StandardFormComponent({
   const handleFormSubmit = async (
     dto: CreateStandardRequestDto,
   ): Promise<void> => {
-    await mutateAsync(dto, {
-      onSuccess: (data): void => {
-        toast.success(data.message);
-        router.push("/admin/standards");
-      },
-      onError: (error): void => {
-        toast.error(error.message);
-      },
-    });
+    if (id) {
+      await editMutateAsync(
+        { id, ...dto },
+        {
+          onSuccess: (data): void => {
+            toast.success(data.message);
+            queryClient.removeQueries({ queryKey: standardKeys.all });
+          },
+          onError: (error): void => {
+            toast.error(error.message);
+          },
+        },
+      );
+    } else {
+      await createMutateAsync(dto, {
+        onSuccess: (data): void => {
+          toast.success(data.message);
+          queryClient.removeQueries({ queryKey: standardKeys.all });
+          router.push("/admin/standards");
+        },
+        onError: (error): void => {
+          toast.error(error.message);
+        },
+      });
+    }
   };
 
   return (
