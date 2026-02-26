@@ -1,39 +1,64 @@
-import { ReactNode, use } from "react";
+import { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
 import { Select, Table } from "@mantine/core";
 
+import { useMutation } from "@tanstack/react-query";
+
+import { toast } from "react-toastify";
+
+import { updateUser } from "@/api/user/update-user.api";
+
 import { PasswordlessUser } from "@/entities/user";
 
-import { RefineryUserContext } from "@/admin/users/contexts/refinery-user-context";
-import { AccessLevelType } from "@/admin/users/types/access-level.type";
+import { mutationKeys } from "@/queries/keys";
+
+import { Role } from "@/types/role.type";
 
 type Props = {
   users: PasswordlessUser[];
 };
 export default function UserTableRowsComponent({ users }: Props): ReactNode {
-  const { updateUserAccessLevel } = use(RefineryUserContext);
   const t = useTranslations("AdminUsersPage");
-  const handleChangeAccessLevel = (id: number, e: string | null): void => {
-    if (e) {
-      updateUserAccessLevel(id.toString(), e as AccessLevelType);
+
+  const { mutateAsync } = useMutation({
+    mutationKey: mutationKeys.userUpdate(),
+    mutationFn: updateUser,
+  });
+
+  const handleChangeRole = async (
+    e: string | null,
+    id: number,
+  ): Promise<void> => {
+    if (!e) {
+      return;
     }
+    await mutateAsync(
+      { id: id, role: e as Role },
+      {
+        onError: (error): void => {
+          toast.error(error.message);
+        },
+        onSuccess: (data): void => {
+          toast.success(data.message);
+        },
+      },
+    );
   };
+
   return users.map((user: PasswordlessUser) => (
     <Table.Tr key={user.username}>
       <Table.Td>{user.username}</Table.Td>
-      {/*<Table.Td>{user.password}</Table.Td>*/}
-
       <Table.Td>
         <Select
           defaultValue={user.role}
           data={[
-            { value: "manager", label: t("manager") },
+            { value: "admin", label: t("manager") },
             { value: "inspector", label: t("inspector") },
             { value: "viewer", label: t("viewer") },
           ]}
-          onChange={(e) => handleChangeAccessLevel(user.id, e)}
+          onChange={(e) => handleChangeRole(e, user.id)}
         />
       </Table.Td>
     </Table.Tr>

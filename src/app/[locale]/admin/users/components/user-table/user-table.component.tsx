@@ -45,7 +45,6 @@ export default function UserTableComponent(): ReactNode {
         <Table.Thead>
           <Table.Tr>
             <Table.Th>{t("username")}</Table.Th>
-            <Table.Th>{t("password")}</Table.Th>
             <Table.Th>{t("role")}</Table.Th>
           </Table.Tr>
         </Table.Thead>
