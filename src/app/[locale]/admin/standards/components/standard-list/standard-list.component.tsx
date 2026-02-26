@@ -4,23 +4,22 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { ActionIcon, Table, Text, Tooltip } from "@mantine/core";
+import { Table, Text } from "@mantine/core";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { signOutApi } from "@/api/auth/sign-out.api";
+import { TableConstants } from "@/constants/table.constants";
+
 import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import { removeStandardApi } from "@/api/standards/remove-standard.api";
 
-import IconComponent from "@/components/icon/icon.component";
+import EditButtonComponent from "@/components/edit-button/edit-button.component";
 import LoadingComponent from "@/components/loading/loading.component";
 import RemoveButtonComponent from "@/components/remove-button/remove-button.component";
 
-import { Link } from "@/i18n/navigation";
-
-import { authKeys, mutationKeys, standardKeys, userKeys } from "@/queries/keys";
+import { standardKeys } from "@/queries/keys";
 
 export default function StandardListComponent(): ReactNode {
   const t = useTranslations("Common");
@@ -57,17 +56,7 @@ export default function StandardListComponent(): ReactNode {
       <Table.Td>{index + 1}</Table.Td>
       <Table.Td>{item.title}</Table.Td>
       <Table.Td>
-        <Tooltip label={t("edit")}>
-          <ActionIcon
-            component={Link}
-            href={`/standards/${item.id}`}
-            variant="subtle"
-            color="gray"
-            aria-label={t("edit")}
-          >
-            <IconComponent name="pen-linear" />
-          </ActionIcon>
-        </Tooltip>
+        <EditButtonComponent href={`/standards/${item.id}`} />
         <RemoveButtonComponent
           itemTitle={item.title}
           onConfirm={() => mutateAsync(item.id)}
@@ -80,9 +69,9 @@ export default function StandardListComponent(): ReactNode {
     <Table highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th w={40 + 20}>{t("row")}</Table.Th>
+          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>{t("row")}</Table.Th>
           <Table.Th>{t("title")}</Table.Th>
-          <Table.Th w={2 * 28 + 20}></Table.Th>
+          <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)}></Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
