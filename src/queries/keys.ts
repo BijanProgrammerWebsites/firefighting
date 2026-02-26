@@ -11,6 +11,7 @@ export const userKeys = {
 export const standardKeys = {
   all: ["standard"] as const,
   one: (standardId: string) => ["standard", standardId] as const,
+  create: ["standard", "create"] as const,
   remove: ["standard", "remove"] as const,
 };
 

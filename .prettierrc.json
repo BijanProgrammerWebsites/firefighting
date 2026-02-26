@@ -12,6 +12,7 @@
     "^swiper(/(.*))?$",
     "^@iconify(/(.*))?$",
     "^react-toastify(/(.*))?$",
+    "^uuid(/(.*))?$",
     "^clsx(/(.*))?$",
     "<THIRD_PARTY_MODULES>",
     "^@/api",

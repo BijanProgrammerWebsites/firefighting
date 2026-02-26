@@ -10,7 +10,8 @@
     "removeModalDescription": "با تایید این عملیات \"{itemTitle}\" حذف می‌شود و امکان بازگردانی آن وجود ندارد.",
     "confirm": "تایید",
     "cancel": "بازگشت",
-    "return": "بازگشت"
+    "return": "بازگشت",
+    "fieldIsRequired": "پر کردن {field} الزامی است."
   },
   "App": {
     "name": "مدیریت پالایشگاه"
@@ -36,16 +37,20 @@
     "subtitle": "لطفاً اطلاعات خود را وارد کنید.",
     "username": "نام کاربری",
     "password": "کلمه عبور",
-    "submit": "ورود",
-    "usernameIsRequired": "نام کاربری الزامی است.",
-    "passwordIsRequired": "کلمه عبور الزامی است."
+    "submit": "ورود"
   },
   "AdminGeneralPage": {
     "title": "تنظیمات عمومی"
   },
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها",
-    "create": "ساخت استاندارد جدید"
+    "create": "ساخت استاندارد جدید",
+    "titleField": "عنوان",
+    "description": "توضیحات",
+    "questions": "سوالات",
+    "question": "سوال {n}",
+    "addMore": "سوال جدید",
+    "submit": "تایید"
   },
   "AdminAssetsPage": {
     "title": "تنظیمات تجهیزات"
