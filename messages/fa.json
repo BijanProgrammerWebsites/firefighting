@@ -20,7 +20,7 @@
     "adminAssets": "تنظیمات تجهیزات",
     "adminUsers": "تنظیمات کاربران",
     "adminLogs": "لاگ‌ها",
-    "adminTemplates": "تنظیمات انواع تجهیزات",
+    "adminTemplates": "تنظیمات قالب‌ها",
     "dashboard": "داشبورد",
     "defects": "نواقص",
     "inspections": "بازرسی",
@@ -55,7 +55,7 @@
     "title": "لاگ‌ها"
   },
   "AdminTemplatesPage": {
-    "title": "تنظیمات انواع تجهیزات"
+    "title": "تنظیمات قالب‌ها"
   },
   "DashboardPage": {
     "title": "داشبورد"
