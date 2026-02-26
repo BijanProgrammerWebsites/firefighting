@@ -4,12 +4,13 @@ import { useTranslations } from "next-intl";
 
 import { Select, Table } from "@mantine/core";
 
+import { PasswordlessUser } from "@/entities/user";
+
 import { RefineryUserContext } from "@/admin/users/contexts/refinery-user-context";
 import { AccessLevelType } from "@/admin/users/types/access-level.type";
-import { UserType } from "@/admin/users/types/user.type";
 
 type Props = {
-  users: UserType[];
+  users: PasswordlessUser[];
 };
 export default function UserTableRowsComponent({ users }: Props): ReactNode {
   const { updateUserAccessLevel } = use(RefineryUserContext);
@@ -19,10 +20,10 @@ export default function UserTableRowsComponent({ users }: Props): ReactNode {
       updateUserAccessLevel(id.toString(), e as AccessLevelType);
     }
   };
-  return users.map((user: UserType) => (
+  return users.map((user: PasswordlessUser) => (
     <Table.Tr key={user.username}>
       <Table.Td>{user.username}</Table.Td>
-      <Table.Td>{user.password}</Table.Td>
+      {/*<Table.Td>{user.password}</Table.Td>*/}
 
       <Table.Td>
         <Select
