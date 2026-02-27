@@ -1,0 +1,33 @@
+.list-box {
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  block-size: 20rem;
+
+  padding: 0.5rem 1rem;
+
+  border: 1px var(--mantine-color-gray-4) solid;
+  border-radius: 0.5rem;
+
+  .detail {
+    padding-inline-start: 0;
+  }
+
+  .message {
+    display: grid;
+    place-items: center;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .loading {
+    margin: auto;
+  }
+}

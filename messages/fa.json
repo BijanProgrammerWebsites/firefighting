@@ -46,10 +46,27 @@
     "submit": "ورود"
   },
   "AdminGeneralPage": {
-    "title": "تنظیمات عمومی"
+    "title": "تنظیمات عمومی",
+    "refineryName": "نام پالایشگاه",
+    "sites": "سایت‌ها",
+    "zones": "زون‌ها",
+    "units": "واحد‌ها",
+    "selectSite": "لطفاً یک سایت انتخاب کنید.",
+    "selectZone": "لطفاً یک زون انتخاب کنید.",
+    "noZones": "هیچ زونی وجود ندارد.",
+    "noUnits": "هیچ واحدی وجود ندارد.",
+    "uploadLogo": "بارگذاری لوگو",
+    "reset": "بازنشانی"
   },
   "AdminUsersPage": {
-    "title": "تنظیمات کاربران"
+    "title": "تنظیمات کاربران",
+    "id": "شناسه",
+    "username": "نام کاربری",
+    "password": "رمزعبور",
+    "role": "سطح دسترسی",
+    "manager": "مدیر",
+    "inspector": "بازرس",
+    "viewer": "عادی"
   },
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها",

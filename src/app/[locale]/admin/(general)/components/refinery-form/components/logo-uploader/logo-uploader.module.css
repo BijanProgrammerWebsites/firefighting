@@ -1,0 +1,10 @@
+.logo-uploader {
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+
+  .upload-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

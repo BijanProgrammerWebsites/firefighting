@@ -1,15 +1,11 @@
 import type { ReactNode } from "react";
 
-import { getTranslations } from "next-intl/server";
-
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import styles from "./page.module.css";
+import UserTableComponent from "@/admin/users/components/user-table/user-table.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminUsersPage");
 
-export default async function UsersPage(): Promise<ReactNode> {
-  const t = await getTranslations("AdminUsersPage");
-
-  return <div className={styles.users}>{t("title")}</div>;
+export default function UsersPage(): ReactNode {
+  return <UserTableComponent />;
 }
