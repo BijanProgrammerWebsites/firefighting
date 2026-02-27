@@ -56,9 +56,10 @@ export default function EquipmentListComponent(): ReactNode {
     <Table.Tr key={item.id}>
       <Table.Td>{index + 1}</Table.Td>
       <Table.Td>{item.title}</Table.Td>
-      <Table.Td>{item.description}</Table.Td>
-      <Table.Td>{item.standard.title}</Table.Td>
-      <Table.Td>{item.inspectionPeriod} روز</Table.Td>
+      <Table.Td>{item.template.title}</Table.Td>
+      <Table.Td>{item.unit.zone.site.title}</Table.Td>
+      <Table.Td>{item.unit.zone.title}</Table.Td>
+      <Table.Td>{item.unit.title}</Table.Td>
       <Table.Td>
         <EditButtonComponent href={`/admin/equipments/${item.id}`} />
         <RemoveButtonComponent
@@ -77,9 +78,10 @@ export default function EquipmentListComponent(): ReactNode {
             {tCommon("row")}
           </Table.Th>
           <Table.Th>{tCommon("title")}</Table.Th>
-          <Table.Th>{t("description")}</Table.Th>
-          <Table.Th>{t("inspectionStandard")}</Table.Th>
-          <Table.Th>{t("inspectionPeriod")}</Table.Th>
+          <Table.Th>{tCommon("template")}</Table.Th>
+          <Table.Th>{tCommon("site")}</Table.Th>
+          <Table.Th>{tCommon("zone")}</Table.Th>
+          <Table.Th>{tCommon("unit")}</Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
       </Table.Thead>
