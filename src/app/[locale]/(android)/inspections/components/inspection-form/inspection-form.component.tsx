@@ -23,17 +23,17 @@ import { toast } from "react-toastify";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { FindOneEquipmentResponseDto } from "@/api/equipments/find-one-equipment.api";
-import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import {
-  CreateTemplateRequestDto,
-  CreateTemplateSchema,
-  createTemplateApi,
-} from "@/api/templates/create-template.api";
-import { editTemplateApi } from "@/api/templates/edit-template.api";
+  CreateInspectionRequestDto,
+  CreateInspectionSchema,
+  createInspectionApi,
+} from "@/api/inspections/create-inspection.api";
+import { editInspectionApi } from "@/api/inspections/edit-inspection.api";
+import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 
 import LoadingComponent from "@/components/loading/loading.component";
 
-import { standardKeys, templateKeys } from "@/queries/keys";
+import { inspectionKeys, standardKeys } from "@/queries/keys";
 
 import styles from "./inspection-form.module.css";
 
@@ -46,7 +46,7 @@ type Props = {
     }
   | {
       id: string;
-      initialValues: CreateTemplateRequestDto;
+      initialValues: CreateInspectionRequestDto;
     }
 );
 
@@ -55,122 +55,120 @@ export default function InspectionFormComponent({
   id,
   initialValues,
 }: Props): ReactNode {
-  return <div>{equipment.title}</div>;
+  const tCommon = useTranslations("Common");
+  const t = useTranslations("InspectionsPage");
 
-  // const tCommon = useTranslations("Common");
-  // const t = useTranslations("AdminTemplatesPage");
-  //
-  // const router = useRouter();
-  //
-  // const queryClient = useQueryClient();
-  //
-  // const { isPending, isError, error, data } = useQuery({
-  //   queryKey: standardKeys.all,
-  //   queryFn: findAllStandardsApi,
-  // });
-  //
-  // const { mutateAsync: createMutateAsync } = useMutation({
-  //   mutationKey: templateKeys.create,
-  //   mutationFn: createTemplateApi,
-  // });
-  //
-  // const { mutateAsync: editMutateAsync } = useMutation({
-  //   mutationKey: templateKeys.edit,
-  //   mutationFn: editTemplateApi,
-  // });
-  //
-  // const form = useForm<CreateTemplateRequestDto>({
-  //   initialValues: initialValues ?? {
-  //     title: "",
-  //     description: "",
-  //     inspectionPeriod: 30,
-  //     standardId: "",
-  //   },
-  //   validate: zod4Resolver(CreateTemplateSchema),
-  // });
-  //
-  // const handleFormSubmit = async (
-  //   dto: CreateTemplateRequestDto,
-  // ): Promise<void> => {
-  //   console.log(dto);
-  //
-  //   if (id) {
-  //     await editMutateAsync(
-  //       { id, ...dto },
-  //       {
-  //         onSuccess: (data): void => {
-  //           toast.success(data.message);
-  //           queryClient.removeQueries({ queryKey: templateKeys.all });
-  //         },
-  //         onError: (error): void => {
-  //           toast.error(error.message);
-  //         },
-  //       },
-  //     );
-  //   } else {
-  //     await createMutateAsync(dto, {
-  //       onSuccess: (data): void => {
-  //         toast.success(data.message);
-  //         queryClient.removeQueries({ queryKey: templateKeys.all });
-  //         router.push("/admin/templates");
-  //       },
-  //       onError: (error): void => {
-  //         toast.error(error.message);
-  //       },
-  //     });
-  //   }
-  // };
-  //
-  // if (isPending) {
-  //   return <LoadingComponent />;
-  // }
-  //
-  // if (isError) {
-  //   return <Text c="red">{error.message}</Text>;
-  // }
-  //
-  // const standards = data.map((item) => ({
-  //   value: item.id,
-  //   label: item.title,
-  // }));
-  //
-  // return (
-  //   <form
-  //     className={styles["template-form"]}
-  //     onSubmit={form.onSubmit(handleFormSubmit)}
-  //   >
-  //     <Stack>
-  //       <TextInput
-  //         withAsterisk
-  //         label={t("titleField")}
-  //         {...form.getInputProps("title")}
-  //       />
-  //       <TextInput
-  //         withAsterisk
-  //         label={t("description")}
-  //         {...form.getInputProps("description")}
-  //       />
-  //       <Select
-  //         withAsterisk
-  //         searchable
-  //         withAlignedLabels
-  //         label={t("inspectionStandard")}
-  //         data={standards}
-  //         {...form.getInputProps("standardId")}
-  //       />
-  //       <NumberInput
-  //         withAsterisk
-  //         label={t("inspectionPeriod")}
-  //         min={1}
-  //         allowNegative={false}
-  //         allowDecimal={false}
-  //         suffix={" " + tCommon("days")}
-  //         {...form.getInputProps("inspectionPeriod")}
-  //       />
-  //       <Button type="submit" w="max-content">
-  //         {t("submit")}
-  //       </Button>
-  //     </Stack>
-  //   </form>
-  // );
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  const { isPending, isError, error, data } = useQuery({
+    queryKey: standardKeys.all,
+    queryFn: findAllStandardsApi,
+  });
+
+  const { mutateAsync: createMutateAsync } = useMutation({
+    mutationKey: inspectionKeys.create,
+    mutationFn: createInspectionApi,
+  });
+
+  const { mutateAsync: editMutateAsync } = useMutation({
+    mutationKey: inspectionKeys.edit,
+    mutationFn: editInspectionApi,
+  });
+
+  const form = useForm<CreateInspectionRequestDto>({
+    initialValues: initialValues ?? {
+      title: "",
+      description: "",
+      inspectionPeriod: 30,
+      standardId: "",
+    },
+    validate: zod4Resolver(CreateInspectionSchema),
+  });
+
+  const handleFormSubmit = async (
+    dto: CreateInspectionRequestDto,
+  ): Promise<void> => {
+    console.log(dto);
+
+    if (id) {
+      await editMutateAsync(
+        { id, ...dto },
+        {
+          onSuccess: (data): void => {
+            toast.success(data.message);
+            queryClient.removeQueries({ queryKey: inspectionKeys.all });
+          },
+          onError: (error): void => {
+            toast.error(error.message);
+          },
+        },
+      );
+    } else {
+      await createMutateAsync(dto, {
+        onSuccess: (data): void => {
+          toast.success(data.message);
+          queryClient.removeQueries({ queryKey: inspectionKeys.all });
+          router.push("/admin/inspections");
+        },
+        onError: (error): void => {
+          toast.error(error.message);
+        },
+      });
+    }
+  };
+
+  if (isPending) {
+    return <LoadingComponent />;
+  }
+
+  if (isError) {
+    return <Text c="red">{error.message}</Text>;
+  }
+
+  const standards = data.map((item) => ({
+    value: item.id,
+    label: item.title,
+  }));
+
+  return (
+    <form
+      className={styles["inspection-form"]}
+      onSubmit={form.onSubmit(handleFormSubmit)}
+    >
+      <Stack>
+        <TextInput
+          withAsterisk
+          label={t("titleField")}
+          {...form.getInputProps("title")}
+        />
+        <TextInput
+          withAsterisk
+          label={t("description")}
+          {...form.getInputProps("description")}
+        />
+        <Select
+          withAsterisk
+          searchable
+          withAlignedLabels
+          label={t("inspectionStandard")}
+          data={standards}
+          {...form.getInputProps("standardId")}
+        />
+        <NumberInput
+          withAsterisk
+          label={t("inspectionPeriod")}
+          min={1}
+          allowNegative={false}
+          allowDecimal={false}
+          suffix={" " + tCommon("days")}
+          {...form.getInputProps("inspectionPeriod")}
+        />
+        <Button type="submit" w="max-content">
+          {t("submit")}
+        </Button>
+      </Stack>
+    </form>
+  );
 }

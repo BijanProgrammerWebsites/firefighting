@@ -33,6 +33,14 @@ export const equipmentKeys = {
   buckets: ["buckets"] as const,
 };
 
+export const inspectionKeys = {
+  all: ["inspection"] as const,
+  one: (inspectionId: string) => ["inspection", inspectionId] as const,
+  create: ["inspection", "create"] as const,
+  edit: ["inspection", "edit"] as const,
+  remove: ["inspection", "remove"] as const,
+};
+
 export const mutationKeys = {
   signIn: () => ["auth", "sign-in"] as const,
   signUp: () => ["auth", "sign-up"] as const,
