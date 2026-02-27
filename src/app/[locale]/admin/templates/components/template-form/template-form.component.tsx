@@ -7,24 +7,22 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import {
-  ActionIcon,
   Button,
-  Fieldset,
-  Group,
+  NumberInput,
+  Select,
+  Stack,
+  Text,
   TextInput,
-  Textarea,
-  Tooltip,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { v4 as uuid } from "uuid";
-
 import { zod4Resolver } from "mantine-form-zod-resolver";
 
+import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import {
   CreateTemplateRequestDto,
   CreateTemplateSchema,
@@ -32,9 +30,9 @@ import {
 } from "@/api/templates/create-template.api";
 import { editTemplateApi } from "@/api/templates/edit-template.api";
 
-import IconComponent from "@/components/icon/icon.component";
+import LoadingComponent from "@/components/loading/loading.component";
 
-import { templateKeys } from "@/queries/keys";
+import { standardKeys, templateKeys } from "@/queries/keys";
 
 import styles from "./template-form.module.css";
 
@@ -59,6 +57,11 @@ export default function TemplateFormComponent({
 
   const queryClient = useQueryClient();
 
+  const { isPending, isError, error, data } = useQuery({
+    queryKey: standardKeys.all,
+    queryFn: findAllStandardsApi,
+  });
+
   const { mutateAsync: createMutateAsync } = useMutation({
     mutationKey: templateKeys.create,
     mutationFn: createTemplateApi,
@@ -72,22 +75,18 @@ export default function TemplateFormComponent({
   const form = useForm<CreateTemplateRequestDto>({
     initialValues: initialValues ?? {
       title: "",
-      questions: [],
+      description: "",
+      inspectionPeriod: 30,
+      standardId: "",
     },
     validate: zod4Resolver(CreateTemplateSchema),
   });
 
-  const handleAddMoreButtonClick = (): void => {
-    form.insertListItem("questions", {
-      id: uuid(),
-      title: "",
-      description: "",
-    });
-  };
-
   const handleFormSubmit = async (
     dto: CreateTemplateRequestDto,
   ): Promise<void> => {
+    console.log(dto);
+
     if (id) {
       await editMutateAsync(
         { id, ...dto },
@@ -115,54 +114,56 @@ export default function TemplateFormComponent({
     }
   };
 
+  if (isPending) {
+    return <LoadingComponent />;
+  }
+
+  if (isError) {
+    return <Text c="red">{error.message}</Text>;
+  }
+
+  const standards = data.map((item) => ({
+    value: item.id,
+    label: item.title,
+  }));
+
   return (
     <form
       className={styles["template-form"]}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
-      <TextInput
-        withAsterisk
-        label={t("titleField")}
-        {...form.getInputProps("title")}
-      />
-      {form.getValues().questions.map((question, index) => (
-        <Fieldset
-          key={question.id}
-          legend={
-            <Group gap="xs">
-              <Tooltip label={tCommon("remove")}>
-                <ActionIcon
-                  variant="subtle"
-                  color="gray"
-                  aria-label={tCommon("remove")}
-                  onClick={() => form.removeListItem("questions", index)}
-                >
-                  <IconComponent name="trash-bin-trash-linear" />
-                </ActionIcon>
-              </Tooltip>
-              {t("question", { n: index + 1 })}
-            </Group>
-          }
-          mt="md"
-        >
-          <TextInput
-            withAsterisk
-            label={t("titleField")}
-            {...form.getInputProps(`questions.${index}.title`)}
-          />
-          <Textarea
-            label={t("description")}
-            mt="xs"
-            {...form.getInputProps(`questions.${index}.description`)}
-          />
-        </Fieldset>
-      ))}
-      <Group gap="xs" mt="md">
-        <Button variant="default" onClick={handleAddMoreButtonClick}>
-          {t("addMore")}
+      <Stack>
+        <TextInput
+          withAsterisk
+          label={t("titleField")}
+          {...form.getInputProps("title")}
+        />
+        <TextInput
+          withAsterisk
+          label={t("description")}
+          {...form.getInputProps("description")}
+        />
+        <Select
+          withAsterisk
+          searchable
+          withAlignedLabels
+          label={t("inspectionStandard")}
+          data={standards}
+          {...form.getInputProps("standardId")}
+        />
+        <NumberInput
+          withAsterisk
+          label={t("inspectionPeriod")}
+          min={1}
+          allowNegative={false}
+          allowDecimal={false}
+          suffix={" " + tCommon("days")}
+          {...form.getInputProps("inspectionPeriod")}
+        />
+        <Button type="submit" w="max-content">
+          {t("submit")}
         </Button>
-        <Button type="submit">{t("submit")}</Button>
-      </Group>
+      </Stack>
     </form>
   );
 }

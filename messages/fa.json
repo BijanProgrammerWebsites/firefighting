@@ -12,7 +12,8 @@
     "confirm": "تایید",
     "cancel": "بازگشت",
     "return": "بازگشت",
-    "fieldIsRequired": "پر کردن {field} الزامی است."
+    "fieldIsRequired": "پر کردن {field} الزامی است.",
+    "days": "روز"
   },
   "App": {
     "name": "مدیریت پالایشگاه"

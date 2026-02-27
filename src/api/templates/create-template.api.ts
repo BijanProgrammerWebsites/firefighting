@@ -6,13 +6,9 @@ import { richFetch } from "@/utils/fetch.utils";
 
 export const CreateTemplateSchema = z.object({
   title: z.string().nonempty(),
-  questions: z.array(
-    z.object({
-      id: z.string(),
-      title: z.string().nonempty(),
-      description: z.string(),
-    }),
-  ),
+  description: z.string().nonempty(),
+  standardId: z.uuid(),
+  inspectionPeriod: z.int().positive(),
 });
 
 export type CreateTemplateRequestDto = z.infer<typeof CreateTemplateSchema>;
