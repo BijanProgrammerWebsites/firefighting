@@ -12,7 +12,7 @@ import { updateUser } from "@/api/user/update-user.api";
 
 import { PasswordlessUser } from "@/entities/user";
 
-import { mutationKeys, userKeys } from "@/queries/keys";
+import { userKeys } from "@/queries/keys";
 
 import { Role } from "@/types/role.type";
 
@@ -25,7 +25,7 @@ export default function UserTableRowsComponent({ users }: Props): ReactNode {
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
-    mutationKey: mutationKeys.userUpdate(),
+    mutationKey: userKeys.update(),
     mutationFn: updateUser,
   });
 

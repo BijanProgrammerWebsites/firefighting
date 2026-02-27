@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { findAllUsersApi } from "@/api/user/find-all-users.api";
 
+import LoadingComponent from "@/components/loading/loading.component";
+
 import { userKeys } from "@/queries/keys";
 
 import UserTableRowsComponent from "@/admin/users/components/user-table-row/user-table-rows.component";
@@ -18,17 +20,13 @@ import styles from "./user-table.module.css";
 export default function UserTableComponent(): ReactNode {
   const t = useTranslations("AdminUsersPage");
 
-  const { data, error, isFetching, isLoading } = useQuery({
+  const { data, error, isFetching, isPending } = useQuery({
     queryKey: userKeys.all,
     queryFn: findAllUsersApi,
   });
 
-  if (isLoading) {
-    return (
-      <Center style={{ minHeight: 200 }}>
-        <Loader size="lg" />
-      </Center>
-    );
+  if (isPending) {
+    return <LoadingComponent />;
   }
 
   if (error) {
@@ -53,7 +51,7 @@ export default function UserTableComponent(): ReactNode {
         </Table.Tbody>
       </Table>
 
-      {isFetching && !isLoading && (
+      {isFetching && !isPending && (
         <Center style={{ marginTop: 16 }}>
           <Loader size="sm" />
         </Center>
