@@ -2,6 +2,7 @@
   "Common": {
     "row": "ردیف",
     "title": "عنوان",
+    "description": "توضیحات",
     "create": "افزودن",
     "edit": "ویرایش",
     "view": "مشاهده",
@@ -18,11 +19,11 @@
   },
   "Shell": {
     "adminGeneral": "تنظیمات عمومی",
-    "adminStandards": "تنظیمات استانداردها",
-    "adminAssets": "تنظیمات تجهیزات",
     "adminUsers": "تنظیمات کاربران",
-    "adminLogs": "لاگ‌ها",
+    "adminStandards": "تنظیمات استانداردها",
     "adminTemplates": "تنظیمات قالب‌ها",
+    "adminAssets": "تنظیمات تجهیزات",
+    "adminLogs": "لاگ‌ها",
     "dashboard": "داشبورد",
     "defects": "نواقص",
     "inspections": "بازرسی",
@@ -42,6 +43,9 @@
   "AdminGeneralPage": {
     "title": "تنظیمات عمومی"
   },
+  "AdminUsersPage": {
+    "title": "تنظیمات کاربران"
+  },
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها",
     "create": "ساخت استاندارد جدید",
@@ -53,17 +57,24 @@
     "addMore": "سوال جدید",
     "submit": "تایید"
   },
+  "AdminTemplatesPage": {
+    "title": "تنظیمات قالب‌ها",
+    "create": "ساخت قالب جدید",
+    "edit": "ویرایش قالب",
+    "titleField": "عنوان",
+    "description": "استاندارد ساخت",
+    "inspectionStandard": "استاندارد بازرسی",
+    "inspectionPeriod": "دوره بازرسی",
+    "questions": "سوالات",
+    "question": "سوال {n}",
+    "addMore": "سوال جدید",
+    "submit": "تایید"
+  },
   "AdminAssetsPage": {
     "title": "تنظیمات تجهیزات"
   },
-  "AdminUsersPage": {
-    "title": "تنظیمات کاربران"
-  },
   "AdminLogsPage": {
     "title": "لاگ‌ها"
-  },
-  "AdminTemplatesPage": {
-    "title": "تنظیمات قالب‌ها"
   },
   "DashboardPage": {
     "title": "داشبورد"

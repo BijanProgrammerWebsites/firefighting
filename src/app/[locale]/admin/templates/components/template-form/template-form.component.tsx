@@ -52,8 +52,8 @@ export default function TemplateFormComponent({
   id,
   initialValues,
 }: Props): ReactNode {
-  const t = useTranslations("AdminTemplatesPage");
   const tCommon = useTranslations("Common");
+  const t = useTranslations("AdminTemplatesPage");
 
   const router = useRouter();
 

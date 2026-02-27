@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { Table, Text } from "@mantine/core";
 
@@ -22,7 +23,8 @@ import RemoveButtonComponent from "@/components/remove-button/remove-button.comp
 import { templateKeys } from "@/queries/keys";
 
 export default function TemplateListComponent(): ReactNode {
-  const t = useTranslations("Common");
+  const tCommon = useTranslations("Common");
+  const t = useTranslations("AdminTemplatesPage");
 
   const queryClient = useQueryClient();
 
@@ -55,6 +57,9 @@ export default function TemplateListComponent(): ReactNode {
     <Table.Tr key={item.id}>
       <Table.Td>{index + 1}</Table.Td>
       <Table.Td>{item.title}</Table.Td>
+      <Table.Td>{item.description}</Table.Td>
+      <Table.Td>{item.standard.title}</Table.Td>
+      <Table.Td>{item.inspectionPeriod} روز</Table.Td>
       <Table.Td>
         <EditButtonComponent href={`/admin/templates/${item.id}`} />
         <RemoveButtonComponent
@@ -69,8 +74,13 @@ export default function TemplateListComponent(): ReactNode {
     <Table highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>{t("row")}</Table.Th>
-          <Table.Th>{t("title")}</Table.Th>
+          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>
+            {tCommon("row")}
+          </Table.Th>
+          <Table.Th>{tCommon("title")}</Table.Th>
+          <Table.Th>{t("description")}</Table.Th>
+          <Table.Th>{t("inspectionStandard")}</Table.Th>
+          <Table.Th>{t("inspectionPeriod")}</Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
       </Table.Thead>

@@ -22,7 +22,7 @@ import RemoveButtonComponent from "@/components/remove-button/remove-button.comp
 import { standardKeys } from "@/queries/keys";
 
 export default function StandardListComponent(): ReactNode {
-  const t = useTranslations("Common");
+  const tCommon = useTranslations("Common");
 
   const queryClient = useQueryClient();
 
@@ -69,8 +69,10 @@ export default function StandardListComponent(): ReactNode {
     <Table highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>{t("row")}</Table.Th>
-          <Table.Th>{t("title")}</Table.Th>
+          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>
+            {tCommon("row")}
+          </Table.Th>
+          <Table.Th>{tCommon("title")}</Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
       </Table.Thead>
