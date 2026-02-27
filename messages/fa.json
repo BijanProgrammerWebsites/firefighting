@@ -97,7 +97,10 @@
     "submit": "تایید"
   },
   "AdminEquipmentsPage": {
-    "title": "تنظیمات تجهیزات"
+    "title": "تنظیمات تجهیزات",
+    "create": "ساخت تجهیز جدید",
+    "edit": "ویرایش تجهیز",
+    "submit": "تایید"
   },
   "AdminLogsPage": {
     "title": "لاگ‌ها"

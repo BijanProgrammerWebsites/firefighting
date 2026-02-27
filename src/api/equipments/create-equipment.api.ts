@@ -6,9 +6,10 @@ import { richFetch } from "@/utils/fetch.utils";
 
 export const CreateEquipmentSchema = z.object({
   title: z.string().nonempty(),
-  description: z.string().nonempty(),
-  standardId: z.uuid(),
-  inspectionPeriod: z.int().positive(),
+  templateId: z.uuid(),
+  siteId: z.uuid(),
+  zoneId: z.uuid(),
+  unitId: z.uuid(),
 });
 
 export type CreateEquipmentRequestDto = z.infer<typeof CreateEquipmentSchema>;

@@ -28,11 +28,19 @@ import {
   createEquipmentApi,
 } from "@/api/equipments/create-equipment.api";
 import { editEquipmentApi } from "@/api/equipments/edit-equipment.api";
-import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
+import { findAllSitesApi } from "@/api/sites/find-all-sites.api";
+import { findOneSiteApi } from "@/api/sites/find-one-site.api";
+import { findAllTemplatesApi } from "@/api/templates/find-all-templates.api";
+import { findOneZoneApi } from "@/api/zones/find-one-zone.api";
 
 import LoadingComponent from "@/components/loading/loading.component";
 
-import { equipmentKeys, standardKeys } from "@/queries/keys";
+import {
+  equipmentKeys,
+  siteKeys,
+  templateKeys,
+  zoneKeys,
+} from "@/queries/keys";
 
 import styles from "./equipment-form.module.css";
 
@@ -57,9 +65,9 @@ export default function EquipmentFormComponent({
 
   const queryClient = useQueryClient();
 
-  const { isPending, isError, error, data } = useQuery({
-    queryKey: standardKeys.all,
-    queryFn: findAllStandardsApi,
+  const templatesQuery = useQuery({
+    queryKey: templateKeys.all,
+    queryFn: findAllTemplatesApi,
   });
 
   const { mutateAsync: createMutateAsync } = useMutation({
@@ -75,11 +83,27 @@ export default function EquipmentFormComponent({
   const form = useForm<CreateEquipmentRequestDto>({
     initialValues: initialValues ?? {
       title: "",
-      description: "",
-      inspectionPeriod: 30,
-      standardId: "",
+      templateId: "",
+      siteId: "",
+      zoneId: "",
+      unitId: "",
     },
     validate: zod4Resolver(CreateEquipmentSchema),
+  });
+
+  const allSitesQuery = useQuery({
+    queryKey: siteKeys.all,
+    queryFn: findAllSitesApi,
+  });
+
+  const selectedSiteQuery = useQuery({
+    queryKey: siteKeys.one(form.getValues().siteId),
+    queryFn: () => findOneSiteApi(form.getValues().siteId),
+  });
+
+  const selectedZoneQuery = useQuery({
+    queryKey: zoneKeys.one(form.getValues().zoneId),
+    queryFn: () => findOneZoneApi(form.getValues().zoneId),
   });
 
   const handleFormSubmit = async (
@@ -112,15 +136,55 @@ export default function EquipmentFormComponent({
     }
   };
 
-  if (isPending) {
+  if (
+    templatesQuery.isPending ||
+    allSitesQuery.isPending ||
+    selectedSiteQuery.isPending ||
+    selectedZoneQuery.isPending
+  ) {
     return <LoadingComponent />;
   }
 
-  if (isError) {
-    return <Text c="red">{error.message}</Text>;
+  if (
+    templatesQuery.isError ||
+    allSitesQuery.isError ||
+    selectedSiteQuery.isError ||
+    selectedZoneQuery.isError
+  ) {
+    return (
+      <Stack>
+        {[
+          templatesQuery,
+          allSitesQuery,
+          selectedSiteQuery,
+          selectedZoneQuery,
+        ].map((query, index) =>
+          query.isError ? (
+            <Text key={index} c="red">
+              {query.error.message}
+            </Text>
+          ) : null,
+        )}
+      </Stack>
+    );
   }
 
-  const standards = data.map((item) => ({
+  const templates = templatesQuery.data.map((item) => ({
+    value: item.id,
+    label: item.title,
+  }));
+
+  const sites = allSitesQuery.data.map((item) => ({
+    value: item.id,
+    label: item.title,
+  }));
+
+  const zones = selectedSiteQuery.data.zones?.map((item) => ({
+    value: item.id,
+    label: item.title,
+  }));
+
+  const units = selectedZoneQuery.data.units?.map((item) => ({
     value: item.id,
     label: item.title,
   }));
@@ -133,30 +197,42 @@ export default function EquipmentFormComponent({
       <Stack>
         <TextInput
           withAsterisk
-          label={t("titleField")}
+          label={tCommon("title")}
           {...form.getInputProps("title")}
-        />
-        <TextInput
-          withAsterisk
-          label={t("description")}
-          {...form.getInputProps("description")}
         />
         <Select
           withAsterisk
           searchable
           withAlignedLabels
-          label={t("inspectionStandard")}
-          data={standards}
-          {...form.getInputProps("standardId")}
+          label={tCommon("template")}
+          data={templates}
+          {...form.getInputProps("templateId")}
         />
-        <NumberInput
+        <Select
           withAsterisk
-          label={t("inspectionPeriod")}
-          min={1}
-          allowNegative={false}
-          allowDecimal={false}
-          suffix={" " + tCommon("days")}
-          {...form.getInputProps("inspectionPeriod")}
+          searchable
+          withAlignedLabels
+          label={tCommon("site")}
+          data={sites}
+          {...form.getInputProps("siteId")}
+        />
+        <Select
+          withAsterisk
+          searchable
+          withAlignedLabels
+          label={tCommon("zone")}
+          data={zones}
+          disabled={!form.getValues().siteId}
+          {...form.getInputProps("zoneId")}
+        />
+        <Select
+          withAsterisk
+          searchable
+          withAlignedLabels
+          label={tCommon("unit")}
+          data={units}
+          disabled={!form.getValues().zoneId}
+          {...form.getInputProps("unitId")}
         />
         <Button type="submit" w="max-content">
           {t("submit")}
