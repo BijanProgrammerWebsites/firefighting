@@ -13,7 +13,10 @@
     "cancel": "بازگشت",
     "return": "بازگشت",
     "fieldIsRequired": "پر کردن {field} الزامی است.",
-    "days": "روز"
+    "days": "روز",
+    "ok": "خوب",
+    "warning": "هشدار",
+    "error": "خطر"
   },
   "App": {
     "name": "مدیریت پالایشگاه"
@@ -84,7 +87,14 @@
     "title": "نواقص"
   },
   "InspectionsPage": {
-    "title": "بازرسی"
+    "title": "بازرسی",
+    "withoutHistory": "بدون سابقه بازرسی",
+    "overdue": "گذشته",
+    "today": "امروز",
+    "next7Days": "7 روز آینده",
+    "next30Days": "30 روز آینده",
+    "lastInspection": "آخرین بازرسی",
+    "nextInspection": "بازرسی بعدی"
   },
   "NotificationsPage": {
     "title": "اعلانات"
