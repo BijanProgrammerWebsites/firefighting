@@ -8,18 +8,19 @@ import { useTranslations } from "next-intl";
 
 import {
   Button,
-  NumberInput,
-  Select,
+  Fieldset,
+  SegmentedControl,
   Stack,
   Text,
-  TextInput,
+  Textarea,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
+import { StatusEnum } from "@/enums/status.enum";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { FindOneEquipmentResponseDto } from "@/api/equipments/find-one-equipment.api";
@@ -29,11 +30,8 @@ import {
   createInspectionApi,
 } from "@/api/inspections/create-inspection.api";
 import { editInspectionApi } from "@/api/inspections/edit-inspection.api";
-import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 
-import LoadingComponent from "@/components/loading/loading.component";
-
-import { inspectionKeys, standardKeys } from "@/queries/keys";
+import { inspectionKeys } from "@/queries/keys";
 
 import styles from "./inspection-form.module.css";
 
@@ -62,11 +60,6 @@ export default function InspectionFormComponent({
 
   const queryClient = useQueryClient();
 
-  const { isPending, isError, error, data } = useQuery({
-    queryKey: standardKeys.all,
-    queryFn: findAllStandardsApi,
-  });
-
   const { mutateAsync: createMutateAsync } = useMutation({
     mutationKey: inspectionKeys.create,
     mutationFn: createInspectionApi,
@@ -79,10 +72,13 @@ export default function InspectionFormComponent({
 
   const form = useForm<CreateInspectionRequestDto>({
     initialValues: initialValues ?? {
-      title: "",
-      description: "",
-      inspectionPeriod: 30,
-      standardId: "",
+      equipmentId: equipment.id,
+      answers: equipment.template.standard.questions.map((question) => ({
+        questionId: question.id,
+        status: StatusEnum.OK,
+        text: "",
+        picture: null,
+      })),
     },
     validate: zod4Resolver(CreateInspectionSchema),
   });
@@ -90,8 +86,6 @@ export default function InspectionFormComponent({
   const handleFormSubmit = async (
     dto: CreateInspectionRequestDto,
   ): Promise<void> => {
-    console.log(dto);
-
     if (id) {
       await editMutateAsync(
         { id, ...dto },
@@ -110,7 +104,7 @@ export default function InspectionFormComponent({
         onSuccess: (data): void => {
           toast.success(data.message);
           queryClient.removeQueries({ queryKey: inspectionKeys.all });
-          router.push("/admin/inspections");
+          router.push("/inspections");
         },
         onError: (error): void => {
           toast.error(error.message);
@@ -119,52 +113,38 @@ export default function InspectionFormComponent({
     }
   };
 
-  if (isPending) {
-    return <LoadingComponent />;
-  }
-
-  if (isError) {
-    return <Text c="red">{error.message}</Text>;
-  }
-
-  const standards = data.map((item) => ({
-    value: item.id,
-    label: item.title,
-  }));
-
   return (
     <form
       className={styles["inspection-form"]}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
       <Stack>
-        <TextInput
-          withAsterisk
-          label={t("titleField")}
-          {...form.getInputProps("title")}
-        />
-        <TextInput
-          withAsterisk
-          label={t("description")}
-          {...form.getInputProps("description")}
-        />
-        <Select
-          withAsterisk
-          searchable
-          withAlignedLabels
-          label={t("inspectionStandard")}
-          data={standards}
-          {...form.getInputProps("standardId")}
-        />
-        <NumberInput
-          withAsterisk
-          label={t("inspectionPeriod")}
-          min={1}
-          allowNegative={false}
-          allowDecimal={false}
-          suffix={" " + tCommon("days")}
-          {...form.getInputProps("inspectionPeriod")}
-        />
+        {equipment.template.standard.questions.map((question, index) => (
+          <Fieldset key={index} legend={t("question", { n: index + 1 })}>
+            <Text size="md" fw={500}>
+              {question.title}
+            </Text>
+            <Text c="dimmed" size="sm" mb="sm">
+              {question.description}
+            </Text>
+            <Text size="sm" fw={500}>
+              {tCommon("status")}
+            </Text>
+            <SegmentedControl
+              data={[
+                { label: tCommon("ok"), value: StatusEnum.OK },
+                { label: tCommon("warning"), value: StatusEnum.WARNING },
+                { label: tCommon("error"), value: StatusEnum.ERROR },
+              ]}
+              {...form.getInputProps(`answers.${index}.status`)}
+            />
+            <Textarea
+              label={tCommon("description")}
+              mt="xs"
+              {...form.getInputProps(`answers.${index}.text`)}
+            />
+          </Fieldset>
+        ))}
         <Button type="submit" w="max-content">
           {t("submit")}
         </Button>
