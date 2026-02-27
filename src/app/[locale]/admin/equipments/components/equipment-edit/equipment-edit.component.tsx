@@ -32,5 +32,16 @@ export default function EquipmentEditComponent({ id }: Props): ReactNode {
     return <Text c="red">{error.message}</Text>;
   }
 
-  return <EquipmentFormComponent id={id} initialValues={data} />;
+  return (
+    <EquipmentFormComponent
+      id={id}
+      initialValues={{
+        title: data.title,
+        templateId: data.template.id,
+        siteId: data.unit.zone.site.id,
+        zoneId: data.unit.zone.id,
+        unitId: data.unit.id,
+      }}
+    />
+  );
 }
