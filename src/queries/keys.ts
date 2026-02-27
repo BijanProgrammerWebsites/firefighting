@@ -16,6 +16,14 @@ export const standardKeys = {
   remove: ["standard", "remove"] as const,
 };
 
+export const templateKeys = {
+  all: ["template"] as const,
+  one: (templateId: string) => ["template", templateId] as const,
+  create: ["template", "create"] as const,
+  edit: ["template", "edit"] as const,
+  remove: ["template", "remove"] as const,
+};
+
 export const mutationKeys = {
   signIn: () => ["auth", "sign-in"] as const,
   signUp: () => ["auth", "sign-up"] as const,

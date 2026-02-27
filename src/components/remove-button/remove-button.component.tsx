@@ -15,27 +15,29 @@ export default function RemoveButtonComponent({
   itemTitle,
   onConfirm,
 }: Props): ReactNode {
-  const t = useTranslations("Common");
+  const tCommon = useTranslations("Common");
 
   const handleRemoveButtonClick = (): void => {
     modals.openConfirmModal({
-      title: t("areYouSure"),
+      title: tCommon("areYouSure"),
       centered: true,
       children: (
-        <Text size="sm">{t("removeModalDescription", { itemTitle })}</Text>
+        <Text size="sm">
+          {tCommon("removeModalDescription", { itemTitle })}
+        </Text>
       ),
-      labels: { confirm: t("confirm"), cancel: t("cancel") },
+      labels: { confirm: tCommon("confirm"), cancel: tCommon("cancel") },
       confirmProps: { color: "red" },
       onConfirm,
     });
   };
 
   return (
-    <Tooltip label={t("remove")}>
+    <Tooltip label={tCommon("remove")}>
       <ActionIcon
         variant="subtle"
         color="gray"
-        aria-label={t("remove")}
+        aria-label={tCommon("remove")}
         onClick={handleRemoveButtonClick}
       >
         <IconComponent name="trash-bin-trash-linear" />

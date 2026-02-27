@@ -13,16 +13,16 @@ type Props = {
 };
 
 export default function EditButtonComponent({ href }: Props): ReactNode {
-  const t = useTranslations("Common");
+  const tCommon = useTranslations("Common");
 
   return (
-    <Tooltip label={t("edit")}>
+    <Tooltip label={tCommon("edit")}>
       <ActionIcon
         component={Link}
         href={href}
         variant="subtle"
         color="gray"
-        aria-label={t("edit")}
+        aria-label={tCommon("edit")}
       >
         <IconComponent name="pen-linear" />
       </ActionIcon>
