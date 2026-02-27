@@ -2,8 +2,17 @@ import { Template } from "@/entities/template";
 
 import { richFetch } from "@/utils/fetch.utils";
 
-export async function findOneTemplateApi(id: string): Promise<Template> {
-  const data = await richFetch<Template>(`/templates/${id}`);
+export type FindOneTemplateResponseDto = Omit<
+  Template,
+  "standard" | "equipments"
+> & {
+  standardId: string;
+};
+
+export async function findOneTemplateApi(
+  id: string,
+): Promise<FindOneTemplateResponseDto> {
+  const data = await richFetch<FindOneTemplateResponseDto>(`/templates/${id}`);
 
   if ("error" in data) {
     throw new Error(data.error);
