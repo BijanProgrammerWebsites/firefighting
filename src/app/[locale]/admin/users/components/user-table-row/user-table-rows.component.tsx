@@ -8,13 +8,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
+import { RoleEnum } from "@/enums/role.enum";
+
 import { updateUser } from "@/api/user/update-user.api";
 
 import { PasswordlessUser } from "@/entities/user";
 
 import { userKeys } from "@/queries/keys";
-
-import { Role } from "@/types/role.type";
 
 type Props = {
   users: PasswordlessUser[];
@@ -37,7 +37,7 @@ export default function UserTableRowsComponent({ users }: Props): ReactNode {
       return;
     }
     await mutateAsync(
-      { id: id, role: e as Role },
+      { id: id, role: e as RoleEnum },
       {
         onError: (error): void => {
           toast.error(error.message);
