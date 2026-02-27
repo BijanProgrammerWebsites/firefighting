@@ -12,33 +12,34 @@ import { toast } from "react-toastify";
 
 import { TableConstants } from "@/constants/table.constants";
 
-import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
-import { removeStandardApi } from "@/api/standards/remove-standard.api";
+import { findAllTemplatesApi } from "@/api/templates/find-all-templates.api";
+import { removeTemplateApi } from "@/api/templates/remove-template.api";
 
 import EditButtonComponent from "@/components/edit-button/edit-button.component";
 import LoadingComponent from "@/components/loading/loading.component";
 import RemoveButtonComponent from "@/components/remove-button/remove-button.component";
 
-import { standardKeys } from "@/queries/keys";
+import { templateKeys } from "@/queries/keys";
 
-export default function StandardListComponent(): ReactNode {
+export default function TemplateListComponent(): ReactNode {
   const tCommon = useTranslations("Common");
+  const t = useTranslations("AdminTemplatesPage");
 
   const queryClient = useQueryClient();
 
   const { isPending, isError, error, data } = useQuery({
-    queryKey: standardKeys.all,
-    queryFn: findAllStandardsApi,
+    queryKey: templateKeys.all,
+    queryFn: findAllTemplatesApi,
   });
 
   const { mutateAsync } = useMutation({
-    mutationKey: standardKeys.remove,
-    mutationFn: removeStandardApi,
+    mutationKey: templateKeys.remove,
+    mutationFn: removeTemplateApi,
     onError: (error) => {
       toast.error(error.message);
     },
     onSuccess: async (result) => {
-      queryClient.removeQueries({ queryKey: standardKeys.all });
+      queryClient.removeQueries({ queryKey: templateKeys.all });
       toast.success(result.message);
     },
   });
@@ -55,8 +56,11 @@ export default function StandardListComponent(): ReactNode {
     <Table.Tr key={item.id}>
       <Table.Td>{index + 1}</Table.Td>
       <Table.Td>{item.title}</Table.Td>
+      <Table.Td>{item.description}</Table.Td>
+      <Table.Td>{item.standard.title}</Table.Td>
+      <Table.Td>{item.inspectionPeriod} روز</Table.Td>
       <Table.Td>
-        <EditButtonComponent href={`/admin/standards/${item.id}`} />
+        <EditButtonComponent href={`/admin/templates/${item.id}`} />
         <RemoveButtonComponent
           itemTitle={item.title}
           onConfirm={() => mutateAsync(item.id)}
@@ -73,6 +77,9 @@ export default function StandardListComponent(): ReactNode {
             {tCommon("row")}
           </Table.Th>
           <Table.Th>{tCommon("title")}</Table.Th>
+          <Table.Th>{t("description")}</Table.Th>
+          <Table.Th>{t("inspectionStandard")}</Table.Th>
+          <Table.Th>{t("inspectionPeriod")}</Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
       </Table.Thead>

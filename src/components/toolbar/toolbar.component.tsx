@@ -21,7 +21,7 @@ export default function ToolbarComponent({
   parentHref,
   createHref,
 }: Props): ReactNode {
-  const t = useTranslations("Common");
+  const tCommon = useTranslations("Common");
 
   return (
     <div className={styles.toolbar}>
@@ -29,12 +29,12 @@ export default function ToolbarComponent({
       <div className={styles.actions}>
         {createHref && (
           <Button component={Link} href={createHref}>
-            {t("create")}
+            {tCommon("create")}
           </Button>
         )}
         {parentHref && (
           <Button component={Link} href={parentHref} variant="default">
-            {t("return")}
+            {tCommon("return")}
           </Button>
         )}
       </div>

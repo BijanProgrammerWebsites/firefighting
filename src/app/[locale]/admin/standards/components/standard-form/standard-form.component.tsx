@@ -52,8 +52,8 @@ export default function StandardFormComponent({
   id,
   initialValues,
 }: Props): ReactNode {
-  const t = useTranslations("AdminStandardsPage");
   const tCommon = useTranslations("Common");
+  const t = useTranslations("AdminStandardsPage");
 
   const router = useRouter();
 
