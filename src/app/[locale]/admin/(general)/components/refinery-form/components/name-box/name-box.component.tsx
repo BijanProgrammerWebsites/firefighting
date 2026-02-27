@@ -18,7 +18,7 @@ export type Props = {
   title?: string;
 };
 export default function NameBoxComponent({ title }: Props): ReactNode {
-  const name = useRef("");
+  const name = useRef(title ?? "");
 
   const t = useTranslations("AdminGeneralPage");
 
@@ -35,7 +35,7 @@ export default function NameBoxComponent({ title }: Props): ReactNode {
       {
         onSuccess: (data): void => {
           toast.success(data.message);
-          queryClient.removeQueries({ queryKey: refineryKeys.find });
+          queryClient.invalidateQueries({ queryKey: refineryKeys.find });
         },
         onError: (error): void => {
           toast.error(error.message);

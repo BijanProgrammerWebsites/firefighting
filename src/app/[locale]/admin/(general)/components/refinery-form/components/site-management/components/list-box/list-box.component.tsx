@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 
-import { ActionIcon, Divider, List, Text } from "@mantine/core";
+import { ActionIcon, Divider, List, Loader, Text } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -17,6 +17,7 @@ type Props = {
   onRemove: (item: ListItemType) => void;
   onEdit: (item: ListItemType) => void;
   onSelect: (id: string) => void;
+  isLoading?: boolean;
   selectedItemId?: string;
   addIconDisable?: boolean;
   messages?: string;
@@ -31,41 +32,30 @@ export function ListBoxComponent({
   selectedItemId,
   messages,
   addIconDisable,
+  isLoading,
 }: Props): ReactNode {
-  const [addMode, setAddMode] = useState(false);
-  const handleEditItem = (newItem: ListItemType): void => {
-    onEdit(newItem);
-  };
-  const handleRemoveItem = (item: ListItemType): void => {
-    onRemove(item);
-  };
-  const handleAddItem = (value: string): void => {
-    setAddMode(false);
-    onAdd(value);
-  };
+  const [isAdding, setIsAdding] = useState(false);
 
-  const handleAddIconClick = (): void => {
-    setAddMode(true);
-  };
-  const handleCancelAddIconClick = (): void => {
-    setAddMode(false);
+  const handleAddItem = (value: string): void => {
+    setIsAdding(false);
+    onAdd(value);
   };
 
   const messageBox = <div className={styles["message"]}>{messages}</div>;
   const detailBox = (
     <List className={styles["detail"]}>
-      {addMode && (
+      {isAdding && (
         <TextFormComponent
           onSubmit={handleAddItem}
-          onCancel={handleCancelAddIconClick}
+          onCancel={() => setIsAdding(false)}
         />
       )}
       {items.map((item) => (
         <ListItemComponent
           key={item.id}
           item={item}
-          onEdit={handleEditItem}
-          onRemove={handleRemoveItem}
+          onEdit={(item) => onEdit(item)}
+          onRemove={(item) => onRemove(item)}
           onSelect={onSelect}
           selected={item.id === selectedItemId}
         />
@@ -81,13 +71,19 @@ export function ListBoxComponent({
           variant="outline"
           size="xs"
           disabled={addIconDisable}
-          onClick={handleAddIconClick}
+          onClick={() => setIsAdding(true)}
         >
           <IconComponent collection="tabler" name="plus" />
         </ActionIcon>
       </div>
       <Divider />
-      {!!messages && !addMode ? messageBox : detailBox}
+      {isLoading ? (
+        <div className={styles["loading"]}>
+          <Loader size="sm" />
+        </div>
+      ) : (
+        <>{!!messages && !isAdding ? messageBox : detailBox}</>
+      )}
     </div>
   );
 }

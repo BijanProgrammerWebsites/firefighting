@@ -1,31 +1,70 @@
 "use client";
-import { ReactNode, use, useRef, useState } from "react";
+import { ReactNode, useRef } from "react";
 
 import { useTranslations } from "next-intl";
 
 import { Avatar, Button, FileButton } from "@mantine/core";
 
-import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { toast } from "react-toastify";
+
+import { deleteRefineryPictureApi } from "@/api/refinery/delete-refinery-picture.api";
+import { editRefineryPictureApi } from "@/api/refinery/edit-refinery-picture.api";
+
+import { refineryKeys } from "@/queries/keys";
 
 import styles from "./logo-uploader.module.css";
 
-export default function LogoUploaderComponent(): ReactNode {
+type Props = {
+  picture?: string | null;
+};
+export default function LogoUploaderComponent({ picture }: Props): ReactNode {
   const t = useTranslations("AdminGeneralPage");
-  const { dispatch } = use(RefineryGeneralFormContext);
-  const [file, setFile] = useState<File | null>(null);
   const resetRef = useRef<() => void>(null);
 
-  const clearFile = (): void => {
-    setFile(null);
+  const queryClient = useQueryClient();
+  const { mutateAsync: deleteMutateAsync } = useMutation({
+    mutationKey: refineryKeys.picture.delete,
+    mutationFn: deleteRefineryPictureApi,
+  });
+
+  const { mutateAsync: editMutateAsync } = useMutation({
+    mutationKey: refineryKeys.picture.edit,
+    mutationFn: editRefineryPictureApi,
+  });
+
+  const clearFile = async (): Promise<void> => {
+    await deleteMutateAsync(undefined, {
+      onSuccess: (data): void => {
+        toast.success(data.message);
+        queryClient.invalidateQueries({ queryKey: refineryKeys.find });
+      },
+      onError: (error): void => {
+        toast.error(error.message);
+      },
+    });
     resetRef.current?.();
   };
-  const handleSetFile = (payload: File | null): void => {
+  const handleSetFile = async (payload: File | null): Promise<void> => {
     if (!payload) {
       return;
     }
-    setFile(payload);
-    dispatch({ type: "set_logo", payload: URL.createObjectURL(payload) });
+
+    await editMutateAsync(
+      { picture: payload },
+      {
+        onSuccess: (data): void => {
+          toast.success(data.message);
+          queryClient.invalidateQueries({ queryKey: refineryKeys.find });
+        },
+        onError: (error): void => {
+          toast.error(error.message);
+        },
+      },
+    );
   };
+
   return (
     <div className={styles["logo-uploader"]}>
       <div className={styles.preview}>
@@ -33,7 +72,7 @@ export default function LogoUploaderComponent(): ReactNode {
           variant="filled"
           radius="md"
           size="xl"
-          src={file && URL.createObjectURL(file)}
+          src={picture}
           alt="Logo preview"
         />
       </div>
@@ -45,7 +84,7 @@ export default function LogoUploaderComponent(): ReactNode {
         >
           {(props) => <Button {...props}>{t("uploadLogo")}</Button>}
         </FileButton>
-        <Button disabled={!file} color="red" onClick={clearFile}>
+        <Button disabled={!picture} color="red" onClick={clearFile}>
           {t("reset")}
         </Button>
       </div>

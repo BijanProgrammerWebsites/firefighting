@@ -1,35 +1,46 @@
 "use client";
-import { PropsWithChildren, ReactNode, useReducer, useState } from "react";
+import { PropsWithChildren, ReactNode, useState } from "react";
 
-import {
-  RefineryGeneralFormContext,
-  SelectedRefineryItemType,
-} from "@/admin/(general)/contexts/refinery-general-form-context";
-import { INITIAL_STATE } from "@/admin/(general)/mock/refinery-mock-data";
-import RefineryReducer from "@/admin/(general)/reducers/refinery.reducer";
+import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 
 type Props = PropsWithChildren;
 
 const RefineryGeneralFormProvider = ({ children }: Props): ReactNode => {
-  const [state, dispatch] = useReducer(RefineryReducer, INITIAL_STATE);
-  const [selectedRefineryItemId, setSelectedRefineryItemId] =
-    useState<SelectedRefineryItemType>({
-      selectedSiteId: "",
-      selectedZoneId: "",
-      selectedUnitId: "",
-    });
+  const [selectedSiteId, setSelectedSiteIdState] = useState("");
+  const [selectedZoneId, setSelectedZoneIdState] = useState("");
+  const [selectedUnitId, setSelectedUnitIdState] = useState("");
+
+  const setSelectedSiteId = (newSiteId: string) => {
+    if (newSiteId !== selectedSiteId) {
+      setSelectedZoneIdState("");
+      setSelectedUnitIdState("");
+    }
+    setSelectedSiteIdState(newSiteId);
+  };
+
+  const setSelectedZoneId = (newZoneId: string) => {
+    if (newZoneId !== selectedZoneId) {
+      setSelectedUnitIdState(""); // پاک کردن یونیت
+    }
+    setSelectedZoneIdState(newZoneId);
+  };
+
+  const setSelectedUnitId = setSelectedUnitIdState;
 
   return (
     <RefineryGeneralFormContext
       value={{
-        state,
-        dispatch,
-        selectedRefineryItemId,
-        setSelectedRefineryItemId,
+        selectedSiteId,
+        setSelectedSiteId,
+        selectedZoneId,
+        setSelectedZoneId,
+        selectedUnitId,
+        setSelectedUnitId,
       }}
     >
       {children}
     </RefineryGeneralFormContext>
   );
 };
+
 export default RefineryGeneralFormProvider;
