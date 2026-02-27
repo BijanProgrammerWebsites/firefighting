@@ -85,8 +85,6 @@ export default function TemplateFormComponent({
   const handleFormSubmit = async (
     dto: CreateTemplateRequestDto,
   ): Promise<void> => {
-    console.log(dto);
-
     if (id) {
       await editMutateAsync(
         { id, ...dto },

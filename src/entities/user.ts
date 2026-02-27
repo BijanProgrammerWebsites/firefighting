@@ -1,10 +1,10 @@
-import { Role } from "@/types/role.type";
+import { RoleEnum } from "@/enums/role.enum";
 
 export type User = {
   id: number;
   username: string;
   password: string;
-  role: Role;
+  role: RoleEnum;
 };
 
 export type PasswordlessUser = Omit<User, "password">;

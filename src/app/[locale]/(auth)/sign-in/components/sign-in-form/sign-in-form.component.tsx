@@ -22,6 +22,7 @@ import { mutationKeys } from "@/queries/keys";
 import styles from "./sign-in-form.module.css";
 
 export default function SignInFormComponent(): ReactNode {
+  const tCommon = useTranslations("Common");
   const t = useTranslations("SignInPage");
 
   const router = useRouter();
@@ -39,11 +40,11 @@ export default function SignInFormComponent(): ReactNode {
     validate: {
       username: hasLength(
         { min: 1 },
-        t("fieldIsRequired", { field: t("username") }),
+        tCommon("fieldIsRequired", { field: t("username") }),
       ),
       password: hasLength(
         { min: 1 },
-        t("fieldIsRequired", { field: t("password") }),
+        tCommon("fieldIsRequired", { field: t("password") }),
       ),
     },
   });

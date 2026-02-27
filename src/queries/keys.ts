@@ -58,6 +58,23 @@ export const unitKeys = {
   remove: ["unit", "remove"] as const,
 };
 
+export const equipmentKeys = {
+  all: ["equipment"] as const,
+  one: (equipmentId: string) => ["equipment", equipmentId] as const,
+  create: ["equipment", "create"] as const,
+  edit: ["equipment", "edit"] as const,
+  remove: ["equipment", "remove"] as const,
+  buckets: ["buckets"] as const,
+};
+
+export const inspectionKeys = {
+  all: ["inspection"] as const,
+  one: (inspectionId: string) => ["inspection", inspectionId] as const,
+  create: ["inspection", "create"] as const,
+  edit: ["inspection", "edit"] as const,
+  remove: ["inspection", "remove"] as const,
+};
+
 export const mutationKeys = {
   signIn: () => ["auth", "sign-in"] as const,
   signUp: () => ["auth", "sign-up"] as const,
