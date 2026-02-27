@@ -72,7 +72,7 @@ export default function LogoUploaderComponent({ picture }: Props): ReactNode {
           variant="filled"
           radius="md"
           size="xl"
-          src={picture}
+          src={process.env.NEXT_PUBLIC_API_BASE_URL + "/pictures/" + picture}
           alt="Logo preview"
         />
       </div>
