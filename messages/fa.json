@@ -27,7 +27,7 @@
     "adminUsers": "تنظیمات کاربران",
     "adminStandards": "تنظیمات استانداردها",
     "adminTemplates": "تنظیمات قالب‌ها",
-    "adminAssets": "تنظیمات تجهیزات",
+    "adminEquipments": "تنظیمات تجهیزات",
     "adminLogs": "لاگ‌ها",
     "dashboard": "داشبورد",
     "defects": "نواقص",
@@ -92,7 +92,7 @@
     "addMore": "سوال جدید",
     "submit": "تایید"
   },
-  "AdminAssetsPage": {
+  "AdminEquipmentsPage": {
     "title": "تنظیمات تجهیزات"
   },
   "AdminLogsPage": {

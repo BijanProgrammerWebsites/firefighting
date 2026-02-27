@@ -41,8 +41,8 @@ export default function NavbarComponent(): ReactNode {
       icon: <IconComponent collection="tabler" name="layers-intersect" />,
     },
     {
-      href: "/admin/assets",
-      title: t("adminAssets"),
+      href: "/admin/equipments",
+      title: t("adminEquipments"),
       icon: <IconComponent name="box-minimalistic-linear" />,
     },
     {
