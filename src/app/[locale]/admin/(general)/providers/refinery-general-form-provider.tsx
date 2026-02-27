@@ -10,7 +10,7 @@ const RefineryGeneralFormProvider = ({ children }: Props): ReactNode => {
   const [selectedZoneId, setSelectedZoneIdState] = useState("");
   const [selectedUnitId, setSelectedUnitIdState] = useState("");
 
-  const setSelectedSiteId = (newSiteId: string) => {
+  const setSelectedSiteId = (newSiteId: string): void => {
     if (newSiteId !== selectedSiteId) {
       setSelectedZoneIdState("");
       setSelectedUnitIdState("");
@@ -18,7 +18,7 @@ const RefineryGeneralFormProvider = ({ children }: Props): ReactNode => {
     setSelectedSiteIdState(newSiteId);
   };
 
-  const setSelectedZoneId = (newZoneId: string) => {
+  const setSelectedZoneId = (newZoneId: string): void => {
     if (newZoneId !== selectedZoneId) {
       setSelectedUnitIdState(""); // پاک کردن یونیت
     }
