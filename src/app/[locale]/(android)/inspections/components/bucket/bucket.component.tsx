@@ -6,8 +6,6 @@ import { BucketItem } from "@/api/equipments/find-all-buckets.api";
 
 import BucketItemComponent from "@/android/inspections/components/bucket-item/bucket-item.component";
 
-import styles from "./bucket.module.css";
-
 type Props = {
   title: string;
   items: BucketItem[];
@@ -19,7 +17,7 @@ export default function BucketComponent({ title, items }: Props): ReactNode {
   }
 
   return (
-    <Box className={styles.bucket} mb="xl">
+    <Box mb="xl">
       <Divider my="xs" label={title} labelPosition="left" />
       {items.map((item) => (
         <BucketItemComponent key={item.equipment.id} item={item} />

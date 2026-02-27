@@ -16,8 +16,6 @@ import { equipmentKeys } from "@/queries/keys";
 
 import BucketComponent from "@/android/inspections/components/bucket/bucket.component";
 
-import styles from "./buckets.module.css";
-
 export default function BucketsComponent(): ReactNode {
   const t = useTranslations("InspectionsPage");
 
@@ -35,7 +33,7 @@ export default function BucketsComponent(): ReactNode {
   }
 
   return (
-    <div className={styles.buckets}>
+    <div>
       <BucketComponent
         title={t("withoutHistory")}
         items={data.withoutHistory}

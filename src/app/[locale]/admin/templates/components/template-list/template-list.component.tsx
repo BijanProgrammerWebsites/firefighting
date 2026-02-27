@@ -3,7 +3,6 @@
 import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
 
 import { Table, Text } from "@mantine/core";
 

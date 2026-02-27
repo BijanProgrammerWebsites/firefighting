@@ -2,15 +2,12 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-
 import { Badge, Card, Group, Text } from "@mantine/core";
 
 import { BucketItem } from "@/api/equipments/find-all-buckets.api";
 
 import { dateFormatter } from "@/utils/format.utils";
 import { StatusToColor } from "@/utils/map.utils";
-
-import styles from "./bucket-item.module.css";
 
 type Props = {
   item: BucketItem;
