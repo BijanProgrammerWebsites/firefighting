@@ -1,12 +1,14 @@
 import { ReactNode, useState } from "react";
 
-import clsx from "clsx";
+import { useTranslations } from "next-intl";
 
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Text } from "@mantine/core";
+import { modals } from "@mantine/modals";
+
+import clsx from "clsx";
 
 import IconComponent from "@/components/icon/icon.component";
 
-import RemoveItemDialogComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/remove-item/remove-item-dialog.component";
 import TextFormComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/text-form/text-form.component";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
 
@@ -26,10 +28,23 @@ export default function ListItemComponent({
   selected,
   onSelect,
 }: Props): ReactNode {
-  const [mode, setMode] = useState<"edit" | "remove" | "none">("none");
+  const tCommon = useTranslations("Common");
+
+  const [mode, setMode] = useState<"edit" | "none">("none");
 
   const handleRemoveMode = (): void => {
-    setMode("remove");
+    modals.openConfirmModal({
+      title: tCommon("areYouSure"),
+      centered: true,
+      children: (
+        <Text size="sm">
+          {tCommon("removeModalDescription", { itemTitle: item.name })}
+        </Text>
+      ),
+      labels: { confirm: tCommon("confirm"), cancel: tCommon("cancel") },
+      confirmProps: { color: "red" },
+      onConfirm: handleRemoveItem,
+    });
   };
 
   const handleOnTextFormValueChange = (value: string): void => {
@@ -40,14 +55,13 @@ export default function ListItemComponent({
   const handleRemoveItem = (): void => {
     onRemove(item);
   };
-  const handleCancelRemoveItem = (): void => {
-    setMode("none");
-  };
+
   const handleSelectItem = (): void => {
     if (mode === "none") {
       onSelect(item.id);
     }
   };
+
   return (
     <div
       className={clsx(styles["list-item"], selected && styles.selected)}
@@ -80,11 +94,6 @@ export default function ListItemComponent({
           </ActionIcon>
         </div>
       )}
-      <RemoveItemDialogComponent
-        opened={mode === "remove"}
-        onSuccess={handleRemoveItem}
-        onCancel={handleCancelRemoveItem}
-      />
     </div>
   );
 }

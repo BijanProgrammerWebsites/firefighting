@@ -24,7 +24,6 @@ export default function TextFormComponent({
     },
   });
   const handleSubmit = (values: { name: string | undefined }): void => {
-    console.log(values);
     if (values["name"]) {
       onSubmit(values["name"]);
     } else {
