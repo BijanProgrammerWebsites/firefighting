@@ -88,6 +88,8 @@
   },
   "InspectionsPage": {
     "title": "بازرسی",
+    "create": "شروع بازرسی جدید",
+    "edit": "ویرایش بازرسی",
     "withoutHistory": "بدون سابقه بازرسی",
     "overdue": "گذشته",
     "today": "امروز",
