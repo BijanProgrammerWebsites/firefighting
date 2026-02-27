@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 0.5rem;
 
-  max-block-size: 20rem;
+  block-size: 20rem;
 
   padding: 0.5rem 1rem;
 
