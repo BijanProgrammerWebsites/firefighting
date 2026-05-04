@@ -16,12 +16,11 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
+import { zod4Resolver } from "mantine-form-zod-resolver";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
-
-import { StatusEnum } from "@/enums/status.enum";
-import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { FindOneEquipmentResponseDto } from "@/api/equipments/find-one-equipment.api";
 import {
@@ -30,6 +29,8 @@ import {
   createInspectionApi,
 } from "@/api/inspections/create-inspection.api";
 import { editInspectionApi } from "@/api/inspections/edit-inspection.api";
+
+import { StatusEnum } from "@/enums/status.enum";
 
 import { inspectionKeys } from "@/queries/keys";
 

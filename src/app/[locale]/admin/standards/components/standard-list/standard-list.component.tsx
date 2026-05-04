@@ -10,14 +10,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { TableConstants } from "@/constants/table.constants";
-
 import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import { removeStandardApi } from "@/api/standards/remove-standard.api";
 
 import EditButtonComponent from "@/components/edit-button/edit-button.component";
 import LoadingComponent from "@/components/loading/loading.component";
 import RemoveButtonComponent from "@/components/remove-button/remove-button.component";
+
+import { TableConstants } from "@/constants/table.constants";
 
 import { standardKeys } from "@/queries/keys";
 

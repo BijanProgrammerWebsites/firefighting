@@ -16,11 +16,11 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
+import { zod4Resolver } from "mantine-form-zod-resolver";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
-
-import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import {

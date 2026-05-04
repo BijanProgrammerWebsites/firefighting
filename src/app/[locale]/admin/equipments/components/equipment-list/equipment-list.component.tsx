@@ -10,14 +10,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { TableConstants } from "@/constants/table.constants";
-
 import { findAllEquipmentsApi } from "@/api/equipments/find-all-equipments.api";
 import { removeEquipmentApi } from "@/api/equipments/remove-equipment.api";
 
 import EditButtonComponent from "@/components/edit-button/edit-button.component";
 import LoadingComponent from "@/components/loading/loading.component";
 import RemoveButtonComponent from "@/components/remove-button/remove-button.component";
+
+import { TableConstants } from "@/constants/table.constants";
 
 import { equipmentKeys } from "@/queries/keys";
 

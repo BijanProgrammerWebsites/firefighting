@@ -1,6 +1,6 @@
-import { z } from "@/lib/zod";
-
 import { ResponseDto } from "@/dto/response.dto";
+
+import { z } from "@/lib/zod";
 
 import { richFetch } from "@/utils/fetch.utils";
 

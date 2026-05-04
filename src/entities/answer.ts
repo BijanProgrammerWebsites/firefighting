@@ -1,7 +1,7 @@
-import { StatusEnum } from "@/enums/status.enum";
-
 import { Inspection } from "@/entities/inspection";
 import { Question } from "@/entities/question";
+
+import { StatusEnum } from "@/enums/status.enum";
 
 export type Answer = {
   id: string;
