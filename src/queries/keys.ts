@@ -6,7 +6,9 @@ export const authKeys = {
 export const userKeys = {
   all: ["user"] as const,
   one: (userId: string) => ["user", userId] as const,
-  update: () => ["user", "update"] as const,
+  create: ["user", "create"] as const,
+  edit: ["user", "edit"] as const,
+  remove: ["user", "remove"] as const,
 };
 
 export const standardKeys = {
