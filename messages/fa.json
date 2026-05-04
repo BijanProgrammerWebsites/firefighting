@@ -64,13 +64,15 @@
   },
   "AdminUsersPage": {
     "title": "تنظیمات کاربران",
-    "id": "شناسه",
+    "create": "ساخت کاربر جدید",
+    "edit": "ویرایش کاربر",
     "username": "نام کاربری",
     "password": "رمزعبور",
     "role": "سطح دسترسی",
-    "manager": "مدیر",
+    "admin": "مدیر",
     "inspector": "بازرس",
-    "viewer": "عادی"
+    "viewer": "عادی",
+    "submit": "تایید"
   },
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها",
@@ -91,9 +93,6 @@
     "description": "استاندارد ساخت",
     "inspectionStandard": "استاندارد بازرسی",
     "inspectionPeriod": "دوره بازرسی",
-    "questions": "سوالات",
-    "question": "سوال {n}",
-    "addMore": "سوال جدید",
     "submit": "تایید"
   },
   "AdminEquipmentsPage": {

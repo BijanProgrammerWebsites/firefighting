@@ -12,33 +12,34 @@ import { toast } from "react-toastify";
 
 import { TableConstants } from "@/constants/table.constants";
 
-import { findAllEquipmentsApi } from "@/api/equipments/find-all-equipments.api";
-import { removeEquipmentApi } from "@/api/equipments/remove-equipment.api";
+import { findAllUsersApi } from "@/api/users/find-all-users.api";
+import { removeUserApi } from "@/api/users/remove-user.api";
 
 import EditButtonComponent from "@/components/edit-button/edit-button.component";
 import LoadingComponent from "@/components/loading/loading.component";
 import RemoveButtonComponent from "@/components/remove-button/remove-button.component";
 
-import { equipmentKeys } from "@/queries/keys";
+import { userKeys } from "@/queries/keys";
 
-export default function EquipmentListComponent(): ReactNode {
+export default function UserListComponent(): ReactNode {
   const tCommon = useTranslations("Common");
+  const t = useTranslations("AdminUsersPage");
 
   const queryClient = useQueryClient();
 
   const { isPending, isError, error, data } = useQuery({
-    queryKey: equipmentKeys.all,
-    queryFn: findAllEquipmentsApi,
+    queryKey: userKeys.all,
+    queryFn: findAllUsersApi,
   });
 
   const { mutateAsync } = useMutation({
-    mutationKey: equipmentKeys.remove,
-    mutationFn: removeEquipmentApi,
+    mutationKey: userKeys.remove,
+    mutationFn: removeUserApi,
     onError: (error) => {
       toast.error(error.message);
     },
     onSuccess: async (result) => {
-      queryClient.removeQueries({ queryKey: equipmentKeys.all });
+      queryClient.removeQueries({ queryKey: userKeys.all });
       toast.success(result.message);
     },
   });
@@ -54,15 +55,12 @@ export default function EquipmentListComponent(): ReactNode {
   const rows = data.map((item, index) => (
     <Table.Tr key={item.id}>
       <Table.Td>{index + 1}</Table.Td>
-      <Table.Td>{item.title}</Table.Td>
-      <Table.Td>{item.template.title}</Table.Td>
-      <Table.Td>{item.unit.zone.site.title}</Table.Td>
-      <Table.Td>{item.unit.zone.title}</Table.Td>
-      <Table.Td>{item.unit.title}</Table.Td>
+      <Table.Td>{item.username}</Table.Td>
+      <Table.Td>{item.role}</Table.Td>
       <Table.Td>
-        <EditButtonComponent href={`/admin/equipments/${item.id}`} />
+        <EditButtonComponent href={`/admin/users/${item.id}`} />
         <RemoveButtonComponent
-          itemTitle={item.title}
+          itemTitle={item.username}
           onConfirm={() => mutateAsync(item.id)}
         />
       </Table.Td>
@@ -76,11 +74,8 @@ export default function EquipmentListComponent(): ReactNode {
           <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>
             {tCommon("row")}
           </Table.Th>
-          <Table.Th>{tCommon("title")}</Table.Th>
-          <Table.Th>{tCommon("template")}</Table.Th>
-          <Table.Th>{tCommon("site")}</Table.Th>
-          <Table.Th>{tCommon("zone")}</Table.Th>
-          <Table.Th>{tCommon("unit")}</Table.Th>
+          <Table.Th>{t("username")}</Table.Th>
+          <Table.Th>{t("role")}</Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
       </Table.Thead>
