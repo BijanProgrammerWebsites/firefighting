@@ -13,6 +13,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
+import { DataTable } from "mantine-datatable";
+
 import { findAllUsersApi } from "@/api/users/find-all-users.api";
 import { removeUserApi } from "@/api/users/remove-user.api";
 
@@ -90,47 +92,56 @@ export default function UserListComponent(): ReactNode {
       filterByText(item.role, form.values.role),
   );
 
-  const rows = filteredData.map((item, index) => (
-    <Table.Tr key={item.id}>
-      <Table.Td>{index + 1}</Table.Td>
-      <Table.Td>{item.username}</Table.Td>
-      <Table.Td>{item.role}</Table.Td>
-      <Table.Td>
-        <EditButtonComponent href={`/admin/users/${item.id}`} />
-        <RemoveButtonComponent
-          itemTitle={item.username}
-          onConfirm={() => mutateAsync(item.id)}
-        />
-      </Table.Td>
-    </Table.Tr>
-  ));
-
   return (
-    <Table highlightOnHover>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH} {...ROW_COLUMN_PROPS}>
-            {tCommon("row")}
-          </Table.Th>
-          <Table.Th>
-            {t("username")}
+    <DataTable
+      highlightOnHover
+      records={filteredData}
+      columns={[
+        {
+          accessor: "id",
+          title: tCommon("row"),
+          width: TableConstants.ROW_COLUMN_WIDTH,
+          render: (_, index) => index + 1,
+        },
+        {
+          accessor: "username",
+          title: t("username"),
+          sortable: true,
+          sortKey: "username",
+          filter: (
             <TextInput
               {...TEXT_FILTER_PROPS}
               {...form.getInputProps("username")}
             />
-          </Table.Th>
-          <Table.Th>
-            {t("role")}
+          ),
+        },
+        {
+          accessor: "role",
+          title: t("role"),
+          sortable: true,
+          sortKey: "role",
+          filter: (
             <Select
               data={roles}
               {...SELECT_FILTER_PROPS}
               {...form.getInputProps("role")}
             />
-          </Table.Th>
-          <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+          ),
+        },
+        {
+          accessor: "",
+          width: TableConstants.ACTIONS_COLUMN_WIDTH(3),
+          render: (item) => (
+            <>
+              <EditButtonComponent href={`/admin/users/${item.id}`} />
+              <RemoveButtonComponent
+                itemTitle={item.username}
+                onConfirm={() => mutateAsync(item.id)}
+              />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }

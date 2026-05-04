@@ -21,9 +21,10 @@ import QueryProvider from "@/providers/query.provider";
 
 import "./globals.css";
 import "@mantine/charts/styles.css";
-import "@mantine/core/styles.css";
+import "@mantine/core/styles.layer.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
+import "mantine-datatable/styles.layer.css";
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
