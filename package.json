@@ -13,7 +13,10 @@
     "stylelint:fix": "stylelint \"**/*.css\" --fix"
   },
   "dependencies": {
+    "@iconify-json/solar": "^1.2.5",
+    "@iconify-json/tabler": "^1.2.33",
     "@iconify/react": "^6.0.2",
+    "@iconify/utils": "^3.1.1",
     "@mantine/charts": "^8.3.13",
     "@mantine/core": "^8.3.13",
     "@mantine/dates": "^8.3.13",
