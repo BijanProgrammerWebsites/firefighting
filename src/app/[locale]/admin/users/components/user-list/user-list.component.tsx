@@ -41,14 +41,6 @@ export default function UserListComponent(): ReactNode {
 
   const queryClient = useQueryClient();
 
-  const form = useForm<UserListFiltersType>({
-    initialValues: {
-      username: "",
-      role: "",
-    },
-    validate: zod4Resolver(UserListFiltersSchema),
-  });
-
   const { isPending, isError, error, data } = useQuery({
     queryKey: userKeys.all,
     queryFn: findAllUsersApi,
@@ -64,6 +56,11 @@ export default function UserListComponent(): ReactNode {
       queryClient.removeQueries({ queryKey: userKeys.all });
       toast.success(result.message);
     },
+  });
+
+  const form = useForm<UserListFiltersType>({
+    initialValues: { username: "", role: "" },
+    validate: zod4Resolver(UserListFiltersSchema),
   });
 
   if (isPending) {

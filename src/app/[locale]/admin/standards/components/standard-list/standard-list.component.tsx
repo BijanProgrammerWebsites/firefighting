@@ -4,7 +4,10 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Table, Text } from "@mantine/core";
+import { Table, Text, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+
+import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -19,7 +22,15 @@ import RemoveButtonComponent from "@/components/remove-button/remove-button.comp
 
 import { TableConstants } from "@/constants/table.constants";
 
+import { z } from "@/lib/zod";
+
 import { standardKeys } from "@/queries/keys";
+
+export const StandardListFiltersSchema = z.object({
+  title: z.string(),
+});
+
+export type StandardListFiltersType = z.infer<typeof StandardListFiltersSchema>;
 
 export default function StandardListComponent(): ReactNode {
   const tCommon = useTranslations("Common");
@@ -43,6 +54,11 @@ export default function StandardListComponent(): ReactNode {
     },
   });
 
+  const form = useForm<StandardListFiltersType>({
+    initialValues: { title: "" },
+    validate: zod4Resolver(StandardListFiltersSchema),
+  });
+
   if (isPending) {
     return <LoadingComponent />;
   }
@@ -51,7 +67,16 @@ export default function StandardListComponent(): ReactNode {
     return <Text c="red">{error.message}</Text>;
   }
 
-  const rows = data.map((item, index) => (
+  const filteredData = data.filter((item) => {
+    const trimmedTitle = form.values.title.trim();
+    if (trimmedTitle && !item.title.includes(trimmedTitle)) {
+      return false;
+    }
+
+    return true;
+  });
+
+  const rows = filteredData.map((item, index) => (
     <Table.Tr key={item.id}>
       <Table.Td>{index + 1}</Table.Td>
       <Table.Td>{item.title}</Table.Td>
@@ -72,7 +97,11 @@ export default function StandardListComponent(): ReactNode {
           <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>
             {tCommon("row")}
           </Table.Th>
-          <Table.Th>{tCommon("title")}</Table.Th>
+          <Table.Th>
+            {tCommon("title")}
+            <br />
+            <TextInput size="xs" {...form.getInputProps("title")} />
+          </Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
       </Table.Thead>
