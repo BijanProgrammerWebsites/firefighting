@@ -11,7 +11,7 @@
 
 ### Users
 
-- [ ] CRUD
+- [x] CRUD
 - [ ] Search and Filter
 
 ### Standards
