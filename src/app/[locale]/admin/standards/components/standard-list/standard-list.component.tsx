@@ -26,6 +26,9 @@ import { z } from "@/lib/zod";
 
 import { standardKeys } from "@/queries/keys";
 
+import { FILTER_PROPS, ROW_COLUMN_PROPS } from "@/utils/component.utils";
+import { filterByText } from "@/utils/filter.utils";
+
 export const StandardListFiltersSchema = z.object({
   title: z.string(),
 });
@@ -67,14 +70,9 @@ export default function StandardListComponent(): ReactNode {
     return <Text c="red">{error.message}</Text>;
   }
 
-  const filteredData = data.filter((item) => {
-    const trimmedTitle = form.values.title.trim();
-    if (trimmedTitle && !item.title.includes(trimmedTitle)) {
-      return false;
-    }
-
-    return true;
-  });
+  const filteredData = data.filter((item) =>
+    filterByText(item.title, form.values.title),
+  );
 
   const rows = filteredData.map((item, index) => (
     <Table.Tr key={item.id}>
@@ -94,13 +92,12 @@ export default function StandardListComponent(): ReactNode {
     <Table highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>
+          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH} {...ROW_COLUMN_PROPS}>
             {tCommon("row")}
           </Table.Th>
           <Table.Th>
             {tCommon("title")}
-            <br />
-            <TextInput size="xs" {...form.getInputProps("title")} />
+            <TextInput {...FILTER_PROPS} {...form.getInputProps("title")} />
           </Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>

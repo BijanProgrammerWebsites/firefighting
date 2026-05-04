@@ -28,6 +28,9 @@ import { z } from "@/lib/zod";
 
 import { userKeys } from "@/queries/keys";
 
+import { FILTER_PROPS, ROW_COLUMN_PROPS } from "@/utils/component.utils";
+import { filterByText } from "@/utils/filter.utils";
+
 export const UserListFiltersSchema = z.object({
   username: z.string(),
   role: z.enum(RoleEnum).or(z.literal("")),
@@ -77,19 +80,11 @@ export default function UserListComponent(): ReactNode {
     { value: RoleEnum.VIEWER, label: t("viewer") },
   ];
 
-  const filteredData = data.filter((item) => {
-    const trimmedUsername = form.values.username.trim();
-    if (trimmedUsername && !item.username.includes(trimmedUsername)) {
-      return false;
-    }
-
-    const role = form.values.role;
-    if (role && item.role !== role) {
-      return false;
-    }
-
-    return true;
-  });
+  const filteredData = data.filter(
+    (item) =>
+      filterByText(item.username, form.values.username) &&
+      filterByText(item.role, form.values.role),
+  );
 
   const rows = filteredData.map((item, index) => (
     <Table.Tr key={item.id}>
@@ -110,26 +105,21 @@ export default function UserListComponent(): ReactNode {
     <Table highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th
-            w={TableConstants.ROW_COLUMN_WIDTH}
-            styles={{ th: { "vertical-align": "top" } }}
-          >
+          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH} {...ROW_COLUMN_PROPS}>
             {tCommon("row")}
           </Table.Th>
           <Table.Th>
             {t("username")}
-            <br />
-            <TextInput size="xs" {...form.getInputProps("username")} />
+            <TextInput {...FILTER_PROPS} {...form.getInputProps("username")} />
           </Table.Th>
           <Table.Th>
             {t("role")}
-            <br />
             <Select
               searchable
               withAlignedLabels
               clearable
               data={roles}
-              size="xs"
+              {...FILTER_PROPS}
               {...form.getInputProps("role")}
             />
           </Table.Th>
