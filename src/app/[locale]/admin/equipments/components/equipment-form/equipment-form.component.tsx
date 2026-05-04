@@ -6,14 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
-import {
-  Button,
-  NumberInput,
-  Select,
-  Stack,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { Button, Select, Stack, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

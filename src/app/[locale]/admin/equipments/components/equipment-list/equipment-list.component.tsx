@@ -23,7 +23,6 @@ import { equipmentKeys } from "@/queries/keys";
 
 export default function EquipmentListComponent(): ReactNode {
   const tCommon = useTranslations("Common");
-  const t = useTranslations("AdminEquipmentsPage");
 
   const queryClient = useQueryClient();
 
