@@ -28,7 +28,11 @@ import { z } from "@/lib/zod";
 
 import { userKeys } from "@/queries/keys";
 
-import { FILTER_PROPS, ROW_COLUMN_PROPS } from "@/utils/component.utils";
+import {
+  ROW_COLUMN_PROPS,
+  SELECT_FILTER_PROPS,
+  TEXT_FILTER_PROPS,
+} from "@/utils/component.utils";
 import { filterByText } from "@/utils/filter.utils";
 
 export const UserListFiltersSchema = z.object({
@@ -110,16 +114,16 @@ export default function UserListComponent(): ReactNode {
           </Table.Th>
           <Table.Th>
             {t("username")}
-            <TextInput {...FILTER_PROPS} {...form.getInputProps("username")} />
+            <TextInput
+              {...TEXT_FILTER_PROPS}
+              {...form.getInputProps("username")}
+            />
           </Table.Th>
           <Table.Th>
             {t("role")}
             <Select
-              searchable
-              withAlignedLabels
-              clearable
               data={roles}
-              {...FILTER_PROPS}
+              {...SELECT_FILTER_PROPS}
               {...form.getInputProps("role")}
             />
           </Table.Th>

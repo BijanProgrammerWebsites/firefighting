@@ -26,7 +26,7 @@ import { z } from "@/lib/zod";
 
 import { standardKeys } from "@/queries/keys";
 
-import { FILTER_PROPS, ROW_COLUMN_PROPS } from "@/utils/component.utils";
+import { ROW_COLUMN_PROPS, TEXT_FILTER_PROPS } from "@/utils/component.utils";
 import { filterByText } from "@/utils/filter.utils";
 
 export const StandardListFiltersSchema = z.object({
@@ -97,7 +97,10 @@ export default function StandardListComponent(): ReactNode {
           </Table.Th>
           <Table.Th>
             {tCommon("title")}
-            <TextInput {...FILTER_PROPS} {...form.getInputProps("title")} />
+            <TextInput
+              {...TEXT_FILTER_PROPS}
+              {...form.getInputProps("title")}
+            />
           </Table.Th>
           <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
         </Table.Tr>
