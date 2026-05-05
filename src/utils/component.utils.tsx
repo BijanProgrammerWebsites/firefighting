@@ -1,15 +1,6 @@
-import {
-  NumberInputProps,
-  SelectProps,
-  TableThProps,
-  TextInputProps,
-} from "@mantine/core";
+import { NumberInputProps, SelectProps, TextInputProps } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
-
-export const ROW_COLUMN_PROPS: Partial<TableThProps> = {
-  styles: { th: { verticalAlign: "top" } },
-};
 
 export const TEXT_FILTER_PROPS: Partial<TextInputProps> = {
   size: "xs",

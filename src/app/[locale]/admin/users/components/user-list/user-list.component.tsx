@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Select, Table, Text, TextInput } from "@mantine/core";
+import { Select, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -31,7 +31,6 @@ import { z } from "@/lib/zod";
 import { userKeys } from "@/queries/keys";
 
 import {
-  ROW_COLUMN_PROPS,
   SELECT_FILTER_PROPS,
   TEXT_FILTER_PROPS,
 } from "@/utils/component.utils";
@@ -106,8 +105,6 @@ export default function UserListComponent(): ReactNode {
         {
           accessor: "username",
           title: t("username"),
-          sortable: true,
-          sortKey: "username",
           filter: (
             <TextInput
               {...TEXT_FILTER_PROPS}
@@ -118,8 +115,6 @@ export default function UserListComponent(): ReactNode {
         {
           accessor: "role",
           title: t("role"),
-          sortable: true,
-          sortKey: "role",
           filter: (
             <Select
               data={roles}

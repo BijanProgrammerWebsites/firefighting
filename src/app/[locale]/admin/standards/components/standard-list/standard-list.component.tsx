@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Table, Text, TextInput } from "@mantine/core";
+import { Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -12,6 +12,8 @@ import { zod4Resolver } from "mantine-form-zod-resolver";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
+
+import { DataTable } from "mantine-datatable";
 
 import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import { removeStandardApi } from "@/api/standards/remove-standard.api";
@@ -26,7 +28,7 @@ import { z } from "@/lib/zod";
 
 import { standardKeys } from "@/queries/keys";
 
-import { ROW_COLUMN_PROPS, TEXT_FILTER_PROPS } from "@/utils/component.utils";
+import { TEXT_FILTER_PROPS } from "@/utils/component.utils";
 import { filterByText } from "@/utils/filter.utils";
 
 export const StandardListFiltersSchema = z.object({
@@ -74,38 +76,41 @@ export default function StandardListComponent(): ReactNode {
     filterByText(item.title, form.values.title),
   );
 
-  const rows = filteredData.map((item, index) => (
-    <Table.Tr key={item.id}>
-      <Table.Td>{index + 1}</Table.Td>
-      <Table.Td>{item.title}</Table.Td>
-      <Table.Td>
-        <EditButtonComponent href={`/admin/standards/${item.id}`} />
-        <RemoveButtonComponent
-          itemTitle={item.title}
-          onConfirm={() => mutateAsync(item.id)}
-        />
-      </Table.Td>
-    </Table.Tr>
-  ));
-
   return (
-    <Table highlightOnHover>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH} {...ROW_COLUMN_PROPS}>
-            {tCommon("row")}
-          </Table.Th>
-          <Table.Th>
-            {tCommon("title")}
+    <DataTable
+      highlightOnHover
+      records={filteredData}
+      columns={[
+        {
+          accessor: "id",
+          title: tCommon("row"),
+          width: TableConstants.ROW_COLUMN_WIDTH,
+          render: (_, index) => index + 1,
+        },
+        {
+          accessor: "title",
+          title: tCommon("title"),
+          filter: (
             <TextInput
               {...TEXT_FILTER_PROPS}
               {...form.getInputProps("title")}
             />
-          </Table.Th>
-          <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+          ),
+        },
+        {
+          accessor: "",
+          width: TableConstants.ACTIONS_COLUMN_WIDTH(3),
+          render: (item) => (
+            <>
+              <EditButtonComponent href={`/admin/standards/${item.id}`} />
+              <RemoveButtonComponent
+                itemTitle={item.title}
+                onConfirm={() => mutateAsync(item.id)}
+              />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }

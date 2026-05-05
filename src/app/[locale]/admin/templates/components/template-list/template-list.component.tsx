@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { NumberInput, Select, Table, Text, TextInput } from "@mantine/core";
+import { NumberInput, Select, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -12,6 +12,8 @@ import { zod4Resolver } from "mantine-form-zod-resolver";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
+
+import { DataTable } from "mantine-datatable";
 
 import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import { findAllTemplatesApi } from "@/api/templates/find-all-templates.api";
@@ -29,7 +31,6 @@ import { standardKeys, templateKeys } from "@/queries/keys";
 
 import {
   NUMBER_FILTER_PROPS,
-  ROW_COLUMN_PROPS,
   SELECT_FILTER_PROPS,
   TEXT_FILTER_PROPS,
 } from "@/utils/component.utils";
@@ -103,54 +104,53 @@ export default function TemplateListComponent(): ReactNode {
       filterByNumber(item.inspectionPeriod, form.values.inspectionPeriod),
   );
 
-  const rows = filteredData.map((item, index) => (
-    <Table.Tr key={item.id}>
-      <Table.Td>{index + 1}</Table.Td>
-      <Table.Td>{item.title}</Table.Td>
-      <Table.Td>{item.description}</Table.Td>
-      <Table.Td>{item.standard.title}</Table.Td>
-      <Table.Td>{item.inspectionPeriod} روز</Table.Td>
-      <Table.Td>
-        <EditButtonComponent href={`/admin/templates/${item.id}`} />
-        <RemoveButtonComponent
-          itemTitle={item.title}
-          onConfirm={() => mutateAsync(item.id)}
-        />
-      </Table.Td>
-    </Table.Tr>
-  ));
-
   return (
-    <Table highlightOnHover>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH} {...ROW_COLUMN_PROPS}>
-            {tCommon("row")}
-          </Table.Th>
-          <Table.Th>
-            {tCommon("title")}
+    <DataTable
+      highlightOnHover
+      records={filteredData}
+      columns={[
+        {
+          accessor: "id",
+          title: tCommon("row"),
+          width: TableConstants.ROW_COLUMN_WIDTH,
+          render: (_, index) => index + 1,
+        },
+        {
+          accessor: "title",
+          title: tCommon("title"),
+          filter: (
             <TextInput
               {...TEXT_FILTER_PROPS}
               {...form.getInputProps("title")}
             />
-          </Table.Th>
-          <Table.Th>
-            {t("description")}
+          ),
+        },
+        {
+          accessor: "description",
+          title: t("description"),
+          filter: (
             <TextInput
               {...TEXT_FILTER_PROPS}
               {...form.getInputProps("description")}
             />
-          </Table.Th>
-          <Table.Th>
-            {t("inspectionStandard")}
+          ),
+        },
+        {
+          accessor: "standard.title",
+          title: t("inspectionStandard"),
+          filter: (
             <Select
               data={standardOptions}
               {...SELECT_FILTER_PROPS}
               {...form.getInputProps("standardId")}
             />
-          </Table.Th>
-          <Table.Th>
-            {t("inspectionPeriod")}
+          ),
+        },
+        {
+          accessor: "inspectionPeriod",
+          title: t("inspectionPeriod"),
+          render: (item) => item.inspectionPeriod + " روز",
+          filter: (
             <NumberInput
               min={1}
               allowNegative={false}
@@ -158,11 +158,22 @@ export default function TemplateListComponent(): ReactNode {
               {...NUMBER_FILTER_PROPS}
               {...form.getInputProps("inspectionPeriod")}
             />
-          </Table.Th>
-          <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+          ),
+        },
+        {
+          accessor: "",
+          width: TableConstants.ACTIONS_COLUMN_WIDTH(3),
+          render: (item) => (
+            <>
+              <EditButtonComponent href={`/admin/templates/${item.id}`} />
+              <RemoveButtonComponent
+                itemTitle={item.title}
+                onConfirm={() => mutateAsync(item.id)}
+              />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }
