@@ -6,6 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
+import Chart3 from "@/android/(dashboard)/charts/chart3.chart";
 import InspectionChart from "@/android/(dashboard)/charts/inspections.chart";
 
 import Chart2 from "./charts/chart2.chart";
@@ -22,6 +23,7 @@ export default async function DashboardPage(): Promise<ReactNode> {
       <ToolbarComponent title={t("title")} />
       <InspectionChart />
       <Chart2 />
+      <Chart3 />
     </div>
   );
 }
