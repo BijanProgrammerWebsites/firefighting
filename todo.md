@@ -59,9 +59,17 @@
 - [ ] Set Time Period for Re-inspect Equipments
 - [ ] Notify User When an Equipment Should be Inspected Today
 - [ ] Notify User When an Equipment Should be Re-inspected When Specified Time Has Passed
-- [ ]
-- [ ]
-- [ ]
+
+---
+
+## Quick R&D
+
+- [ ] PDF
+- [ ] Excel
+- [ ] Push Notification
+- [ ] Logs
+- [ ] Calendar
+- [ ] Crone Job
 
 ---
 
