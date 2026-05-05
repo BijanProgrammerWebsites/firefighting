@@ -8,6 +8,8 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import InspectionChart from "@/android/(dashboard)/charts/inspections.chart";
 
+import Chart2 from "./charts/chart2.chart";
+
 import styles from "./page.module.css";
 
 export const generateMetadata = generateDynamicMetadata("DashboardPage");
@@ -19,6 +21,7 @@ export default async function DashboardPage(): Promise<ReactNode> {
     <div className={styles.dashboard}>
       <ToolbarComponent title={t("title")} />
       <InspectionChart />
+      <Chart2 />
     </div>
   );
 }
