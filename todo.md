@@ -66,10 +66,10 @@
 
 - [ ] PDF
 - [ ] Excel
-- [ ] Push Notification
-- [ ] Logs
 - [ ] Calendar
 - [ ] Crone Job
+- [ ] Logs
+- [ ] Push Notification
 
 ---
 
