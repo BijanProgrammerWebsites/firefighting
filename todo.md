@@ -64,10 +64,11 @@
 
 ## Quick R&D
 
+- [x] Charts
 - [x] PDF
 - [x] Excel
 - [x] Calendar
-- [ ] Crone Job
+- [x] Crone Job
 - [ ] Logs
 - [ ] Push Notification
 
