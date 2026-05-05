@@ -64,9 +64,9 @@
 
 ## Quick R&D
 
-- [ ] PDF
-- [ ] Excel
-- [ ] Calendar
+- [x] PDF
+- [x] Excel
+- [x] Calendar
 - [ ] Crone Job
 - [ ] Logs
 - [ ] Push Notification
