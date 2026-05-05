@@ -13,21 +13,25 @@
 
 - [x] CRUD
 - [x] Search and Filter
+- [ ] Sort
 
 ### Standards
 
 - [x] CRUD
 - [x] Search and Filter
+- [ ] Sort
 
 ### Templates
 
 - [x] CRUD
 - [x] Search and Filter
+- [ ] Sort
 
 ### Equipments
 
 - [x] CRUD
 - [x] Search and Filter
+- [ ] Sort
 - [ ] Quick Actions
   - [ ] Change Status
 - [ ] View Details
