@@ -4,13 +4,16 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Table, Text } from "@mantine/core";
+import { Select, Text, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+
+import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { TableConstants } from "@/constants/table.constants";
+import { DataTable } from "mantine-datatable";
 
 import { findAllUsersApi } from "@/api/users/find-all-users.api";
 import { removeUserApi } from "@/api/users/remove-user.api";
@@ -19,7 +22,26 @@ import EditButtonComponent from "@/components/edit-button/edit-button.component"
 import LoadingComponent from "@/components/loading/loading.component";
 import RemoveButtonComponent from "@/components/remove-button/remove-button.component";
 
+import { TableConstants } from "@/constants/table.constants";
+
+import { RoleEnum } from "@/enums/role.enum";
+
+import { z } from "@/lib/zod";
+
 import { userKeys } from "@/queries/keys";
+
+import {
+  SELECT_FILTER_PROPS,
+  TEXT_FILTER_PROPS,
+} from "@/utils/component.utils";
+import { filterByText } from "@/utils/filter.utils";
+
+export const UserListFiltersSchema = z.object({
+  username: z.string(),
+  role: z.enum(RoleEnum).or(z.literal("")),
+});
+
+export type UserListFiltersType = z.infer<typeof UserListFiltersSchema>;
 
 export default function UserListComponent(): ReactNode {
   const tCommon = useTranslations("Common");
@@ -44,6 +66,11 @@ export default function UserListComponent(): ReactNode {
     },
   });
 
+  const form = useForm<UserListFiltersType>({
+    initialValues: { username: "", role: "" },
+    validate: zod4Resolver(UserListFiltersSchema),
+  });
+
   if (isPending) {
     return <LoadingComponent />;
   }
@@ -52,34 +79,64 @@ export default function UserListComponent(): ReactNode {
     return <Text c="red">{error.message}</Text>;
   }
 
-  const rows = data.map((item, index) => (
-    <Table.Tr key={item.id}>
-      <Table.Td>{index + 1}</Table.Td>
-      <Table.Td>{item.username}</Table.Td>
-      <Table.Td>{item.role}</Table.Td>
-      <Table.Td>
-        <EditButtonComponent href={`/admin/users/${item.id}`} />
-        <RemoveButtonComponent
-          itemTitle={item.username}
-          onConfirm={() => mutateAsync(item.id)}
-        />
-      </Table.Td>
-    </Table.Tr>
-  ));
+  const roles = [
+    { value: RoleEnum.ADMIN, label: t("admin") },
+    { value: RoleEnum.INSPECTOR, label: t("inspector") },
+    { value: RoleEnum.VIEWER, label: t("viewer") },
+  ];
+
+  const filteredData = data.filter(
+    (item) =>
+      filterByText(item.username, form.values.username) &&
+      filterByText(item.role, form.values.role),
+  );
 
   return (
-    <Table highlightOnHover>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th w={TableConstants.ROW_COLUMN_WIDTH}>
-            {tCommon("row")}
-          </Table.Th>
-          <Table.Th>{t("username")}</Table.Th>
-          <Table.Th>{t("role")}</Table.Th>
-          <Table.Th w={TableConstants.ACTIONS_COLUMN_WIDTH(2)} />
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+    <DataTable
+      highlightOnHover
+      records={filteredData}
+      columns={[
+        {
+          accessor: "id",
+          title: tCommon("row"),
+          width: TableConstants.ROW_COLUMN_WIDTH,
+          render: (_, index) => index + 1,
+        },
+        {
+          accessor: "username",
+          title: t("username"),
+          filter: (
+            <TextInput
+              {...TEXT_FILTER_PROPS}
+              {...form.getInputProps("username")}
+            />
+          ),
+        },
+        {
+          accessor: "role",
+          title: t("role"),
+          filter: (
+            <Select
+              data={roles}
+              {...SELECT_FILTER_PROPS}
+              {...form.getInputProps("role")}
+            />
+          ),
+        },
+        {
+          accessor: "",
+          width: TableConstants.ACTIONS_COLUMN_WIDTH(3),
+          render: (item) => (
+            <>
+              <EditButtonComponent href={`/admin/users/${item.id}`} />
+              <RemoveButtonComponent
+                itemTitle={item.username}
+                onConfirm={() => mutateAsync(item.id)}
+              />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 }

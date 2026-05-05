@@ -9,12 +9,11 @@ import { useTranslations } from "next-intl";
 import { Button, PasswordInput, Select, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
+import { zod4Resolver } from "mantine-form-zod-resolver";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
-
-import { RoleEnum } from "@/enums/role.enum";
-import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import {
   CreateUserRequestDto,
@@ -24,6 +23,8 @@ import {
 import { editUserApi } from "@/api/users/edit-user.api";
 
 import IconComponent from "@/components/icon/icon.component";
+
+import { RoleEnum } from "@/enums/role.enum";
 
 import { userKeys } from "@/queries/keys";
 

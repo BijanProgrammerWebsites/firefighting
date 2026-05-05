@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
     optimizePackageImports: [
       "@mantine/core",
       "@mantine/hooks",
-      "@mantine/charts",
       "@mantine/form",
       "@mantine/modals",
       "@mantine/notifications",

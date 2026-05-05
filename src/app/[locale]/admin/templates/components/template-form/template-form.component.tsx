@@ -16,11 +16,11 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
+import { zod4Resolver } from "mantine-form-zod-resolver";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
-
-import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { findAllStandardsApi } from "@/api/standards/find-all-standards.api";
 import {
@@ -57,7 +57,7 @@ export default function TemplateFormComponent({
 
   const queryClient = useQueryClient();
 
-  const { isPending, isError, error, data } = useQuery({
+  const standards = useQuery({
     queryKey: standardKeys.all,
     queryFn: findAllStandardsApi,
   });
@@ -112,15 +112,15 @@ export default function TemplateFormComponent({
     }
   };
 
-  if (isPending) {
+  if (standards.isPending) {
     return <LoadingComponent />;
   }
 
-  if (isError) {
-    return <Text c="red">{error.message}</Text>;
+  if (standards.isError) {
+    return <Text c="red">{standards.error.message}</Text>;
   }
 
-  const standards = data.map((item) => ({
+  const standardOptions = standards.data.map((item) => ({
     value: item.id,
     label: item.title,
   }));
@@ -146,7 +146,7 @@ export default function TemplateFormComponent({
           searchable
           withAlignedLabels
           label={t("inspectionStandard")}
-          data={standards}
+          data={standardOptions}
           {...form.getInputProps("standardId")}
         />
         <NumberInput

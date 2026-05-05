@@ -12,22 +12,22 @@
 ### Users
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 
 ### Standards
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 
 ### Templates
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 
 ### Equipments
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 - [ ] Quick Actions
   - [ ] Change Status
 - [ ] View Details
@@ -59,9 +59,18 @@
 - [ ] Set Time Period for Re-inspect Equipments
 - [ ] Notify User When an Equipment Should be Inspected Today
 - [ ] Notify User When an Equipment Should be Re-inspected When Specified Time Has Passed
-- [ ]
-- [ ]
-- [ ]
+
+---
+
+## Quick R&D
+
+- [x] Charts
+- [x] PDF
+- [x] Excel
+- [x] Calendar
+- [x] Crone Job
+- [ ] Logs
+- [ ] Push Notification
 
 ---
 
