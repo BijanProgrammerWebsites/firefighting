@@ -12,22 +12,22 @@
 ### Users
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 
 ### Standards
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 
 ### Templates
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 
 ### Equipments
 
 - [x] CRUD
-- [ ] Search and Filter
+- [x] Search and Filter
 - [ ] Quick Actions
   - [ ] Change Status
 - [ ] View Details
