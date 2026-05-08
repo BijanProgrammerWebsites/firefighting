@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Box, Card, Group, Stack, Text } from "@mantine/core";
+import { Box, Card, Skeleton, Stack, Text } from "@mantine/core";
 
 import { StatusEnum } from "@/enums/status.enum";
 
@@ -9,8 +9,9 @@ import { KpiStatusToColor } from "@/utils/map.utils";
 
 type Props = {
   title: string;
-  value: number;
+  value: number | undefined;
   status: StatusEnum;
+  isLoading?: boolean;
   icon: ReactNode;
 };
 
@@ -18,23 +19,41 @@ export default function KpiChart({
   title,
   value,
   status,
+  isLoading,
   icon,
 }: Props): ReactNode {
   return (
     <Card radius="md" withBorder color="red" variant="">
-      <Group align="start">
-        <Box c="dimmed" fz={36}>
-          {icon}
-        </Box>
-        <Stack gap={0}>
+      <Stack gap={0}>
+        <Box
+          style={(theme) => ({
+            display: "grid",
+            gridTemplateColumns: "auto minmax(0, 1fr)",
+            alignItems: "center",
+            gap: theme.spacing.md,
+            textAlign: "end",
+          })}
+        >
+          <Box c="dimmed" fz={24}>
+            {icon}
+          </Box>
           <Text c={KpiStatusToColor[status]} fz="h1" fw={700}>
-            {numberFormatter.format(value)}
+            {isLoading || value === undefined ? (
+              <Skeleton
+                component="span"
+                display="block"
+                width="100%"
+                height="1lh"
+              />
+            ) : (
+              numberFormatter.format(value)
+            )}
           </Text>
-          <Text c="dimmed" fz="xs">
-            {title}
-          </Text>
-        </Stack>
-      </Group>
+        </Box>
+        <Text c="dimmed" fz="xs">
+          {title}
+        </Text>
+      </Stack>
     </Card>
   );
 }

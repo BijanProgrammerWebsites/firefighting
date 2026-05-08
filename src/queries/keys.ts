@@ -77,6 +77,10 @@ export const inspectionKeys = {
   remove: ["inspection", "remove"] as const,
 };
 
+export const dashboardKeys = {
+  kpi: ["kpi"] as const,
+};
+
 export const mutationKeys = {
   signIn: () => ["auth", "sign-in"] as const,
   signUp: () => ["auth", "sign-up"] as const,
