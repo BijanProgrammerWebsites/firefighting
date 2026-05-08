@@ -10,3 +10,5 @@ export const dateFormatter = new Intl.DateTimeFormat("fa-IR", {
   month: "long",
   day: "numeric",
 });
+
+export const numberFormatter = new Intl.NumberFormat("fa-IR", {});

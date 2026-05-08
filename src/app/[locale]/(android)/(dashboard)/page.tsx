@@ -6,7 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import InspectionChart from "@/android/(dashboard)/charts/inspections.chart";
+import KpiComponent from "@/android/(dashboard)/components/kpi/kpi.component";
 
 import styles from "./page.module.css";
 
@@ -18,7 +18,7 @@ export default async function DashboardPage(): Promise<ReactNode> {
   return (
     <div className={styles.dashboard}>
       <ToolbarComponent title={t("title")} />
-      <InspectionChart />
+      <KpiComponent />
     </div>
   );
 }

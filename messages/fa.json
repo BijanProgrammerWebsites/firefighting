@@ -105,7 +105,13 @@
     "title": "لاگ‌ها"
   },
   "DashboardPage": {
-    "title": "داشبورد"
+    "title": "داشبورد",
+    "totalAssets": "تمام تجهیزات",
+    "inspectionsDueToday": "بازرسی‌های باقی‌مانده‌ی امروز",
+    "overdueInspections": "بازرسی‌های به تاخیر افتاده",
+    "openDefects": "نقص‌های حل‌نشده",
+    "criticalDefects": "نقص‌های بحرانی",
+    "outOfServiceAssets": "تجهیزات خارج از سرویس"
   },
   "DefectsPage": {
     "title": "نواقص"
