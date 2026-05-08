@@ -106,12 +106,12 @@
   },
   "DashboardPage": {
     "title": "داشبورد",
-    "totalAssets": "تمام تجهیزات",
-    "inspectionsDueToday": "بازرسی‌های باقی‌مانده‌ی امروز",
+    "totalEquipments": "تمام تجهیزات",
+    "outOfServiceEquipments": "تجهیزات خارج از سرویس",
+    "todayRemainingInspections": "بازرسی‌های باقی‌مانده‌ی امروز",
     "overdueInspections": "بازرسی‌های به تاخیر افتاده",
-    "openDefects": "نقص‌های حل‌نشده",
-    "criticalDefects": "نقص‌های بحرانی",
-    "outOfServiceAssets": "تجهیزات خارج از سرویس"
+    "totalDefects": "نقص‌های حل‌نشده",
+    "criticalDefects": "نقص‌های بحرانی"
   },
   "DefectsPage": {
     "title": "نواقص"

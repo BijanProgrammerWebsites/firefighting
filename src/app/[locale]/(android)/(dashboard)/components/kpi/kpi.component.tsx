@@ -33,21 +33,21 @@ export default function KpiComponent(): ReactNode {
   return (
     <SimpleGrid cols={2}>
       <KpiChart
-        title={t("totalAssets")}
+        title={t("totalEquipments")}
         value={data?.totalEquipments}
         status={StatusEnum.OK}
         isLoading={isPending}
         icon={<IconComponent name="box-minimalistic-linear" />}
       />
       <KpiChart
-        title={t("outOfServiceAssets")}
+        title={t("outOfServiceEquipments")}
         value={17}
         status={StatusEnum.WARNING}
         isLoading={isPending}
         icon={<IconComponent name="box-minimalistic-linear" />}
       />
       <KpiChart
-        title={t("inspectionsDueToday")}
+        title={t("todayRemainingInspections")}
         value={29}
         status={StatusEnum.OK}
         isLoading={isPending}
@@ -61,7 +61,7 @@ export default function KpiComponent(): ReactNode {
         icon={<IconComponent name="magnifer-bug-linear" />}
       />
       <KpiChart
-        title={t("openDefects")}
+        title={t("totalDefects")}
         value={15}
         status={StatusEnum.WARNING}
         isLoading={isPending}
