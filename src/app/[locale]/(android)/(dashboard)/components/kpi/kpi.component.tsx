@@ -41,36 +41,44 @@ export default function KpiComponent(): ReactNode {
       />
       <KpiChart
         title={t("outOfServiceEquipments")}
-        value={17}
-        status={StatusEnum.WARNING}
+        value={data?.outOfServiceEquipments}
+        status={
+          data?.outOfServiceEquipments === 0 ? StatusEnum.OK : StatusEnum.ERROR
+        }
         isLoading={isPending}
         icon={<IconComponent name="box-minimalistic-linear" />}
       />
       <KpiChart
         title={t("todayRemainingInspections")}
-        value={29}
-        status={StatusEnum.OK}
+        value={data?.todayRemainingInspections}
+        status={
+          data?.todayRemainingInspections === 0
+            ? StatusEnum.OK
+            : StatusEnum.WARNING
+        }
         isLoading={isPending}
         icon={<IconComponent name="magnifer-bug-linear" />}
       />
       <KpiChart
         title={t("overdueInspections")}
-        value={3}
-        status={StatusEnum.WARNING}
+        value={data?.overdueInspections}
+        status={
+          data?.overdueInspections === 0 ? StatusEnum.OK : StatusEnum.ERROR
+        }
         isLoading={isPending}
         icon={<IconComponent name="magnifer-bug-linear" />}
       />
       <KpiChart
         title={t("totalDefects")}
-        value={15}
-        status={StatusEnum.WARNING}
+        value={data?.totalDefects}
+        status={data?.totalDefects === 0 ? StatusEnum.OK : StatusEnum.WARNING}
         isLoading={isPending}
         icon={<IconComponent name="shield-warning-linear" />}
       />
       <KpiChart
         title={t("criticalDefects")}
-        value={1}
-        status={StatusEnum.ERROR}
+        value={data?.criticalDefects}
+        status={data?.criticalDefects === 0 ? StatusEnum.OK : StatusEnum.ERROR}
         isLoading={isPending}
         icon={<IconComponent name="shield-warning-linear" />}
       />
