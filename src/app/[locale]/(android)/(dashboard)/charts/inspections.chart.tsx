@@ -2,10 +2,11 @@
 
 import { ReactNode } from "react";
 
+import { EChartsOption } from "echarts";
 import ReactECharts from "echarts-for-react";
 
 export default function InspectionChart(): ReactNode {
-  const options = {
+  const options: EChartsOption = {
     tooltip: {
       trigger: "item",
     },
