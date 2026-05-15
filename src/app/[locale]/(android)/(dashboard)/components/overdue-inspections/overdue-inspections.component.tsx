@@ -14,9 +14,9 @@ import LoadingComponent from "@/components/loading/loading.component";
 
 import { equipmentKeys } from "@/queries/keys";
 
-import InspectionsOverviewChart from "@/android/(dashboard)/charts/inspections-overview.chart";
+import BucketComponent from "@/android/inspections/components/bucket/bucket.component";
 
-export default function InspectionsOverviewComponent(): ReactNode {
+export default function OverdueInspectionsComponent(): ReactNode {
   const t = useTranslations("DashboardPage");
 
   const { isPending, isError, error, data } = useQuery({
@@ -35,9 +35,9 @@ export default function InspectionsOverviewComponent(): ReactNode {
   return (
     <div>
       <Title order={3} mb={8}>
-        {t("inspectionsOverview")}
+        {t("overdueInspections")}
       </Title>
-      <InspectionsOverviewChart data={data} />
+      <BucketComponent items={data.overdue} />
     </div>
   );
 }

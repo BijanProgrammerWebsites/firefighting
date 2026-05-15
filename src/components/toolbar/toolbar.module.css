@@ -1,10 +1,14 @@
 .toolbar {
-  display: flex;
-  gap: var(--mantine-spacing-md);
+  .top {
+    display: flex;
+    gap: var(--mantine-spacing-md);
 
-  margin-block-end: var(--mantine-spacing-md);
+    .actions {
+      margin-inline-start: auto;
+    }
+  }
 
-  .actions {
-    margin-inline-start: auto;
+  &:not(.no-margin) {
+    margin-block-end: var(--mantine-spacing-md);
   }
 }

@@ -22,11 +22,6 @@ export default function InspectionsOverviewChart({ data }: Props): ReactNode {
   const theme = useMantineTheme();
 
   const options: EChartsOption = {
-    title: {
-      text: t("inspectionsOverviewTitle"),
-      subtext: t("inspectionsOverviewSubtitle"),
-      left: "center",
-    },
     tooltip: {
       trigger: "item",
     },
@@ -37,7 +32,8 @@ export default function InspectionsOverviewChart({ data }: Props): ReactNode {
       {
         type: "pie",
         stillShowZeroSum: false,
-        radius: ["60%", "70%"],
+        radius: ["80%", "100%"],
+        bottom: 60,
         padAngle: 5,
         itemStyle: {
           borderRadius: 10,

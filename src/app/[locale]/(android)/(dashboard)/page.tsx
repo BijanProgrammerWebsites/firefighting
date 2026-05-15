@@ -2,16 +2,17 @@ import { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
+import { Stack } from "@mantine/core";
+
 import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import InspectionsOverviewComponent from "@/android/(dashboard)/components/inspections-overview/inspections-overview.component";
 import KpiComponent from "@/android/(dashboard)/components/kpi/kpi.component";
+import OverdueInspectionsComponent from "@/android/(dashboard)/components/overdue-inspections/overdue-inspections.component";
 import ScopeFilterComponent from "@/android/(dashboard)/components/scope-filter/scope-filter.component";
 import DashboardProvider from "@/android/(dashboard)/providers/dashboard.provider";
-
-import styles from "./page.module.css";
 
 export const generateMetadata = generateDynamicMetadata("DashboardPage");
 
@@ -20,12 +21,16 @@ export default async function DashboardPage(): Promise<ReactNode> {
 
   return (
     <DashboardProvider>
-      <div className={styles.dashboard}>
-        <ToolbarComponent title={t("title")} />
-        <ScopeFilterComponent />
+      <Stack>
+        <ToolbarComponent
+          noMargin
+          title={t("title")}
+          subtitle={<ScopeFilterComponent />}
+        />
         <KpiComponent />
         <InspectionsOverviewComponent />
-      </div>
+        <OverdueInspectionsComponent />
+      </Stack>
     </DashboardProvider>
   );
 }
