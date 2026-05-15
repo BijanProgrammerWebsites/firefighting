@@ -35,6 +35,10 @@ export default function OverdueInspectionsComponent(): ReactNode {
     return <Text c="red">{error.message}</Text>;
   }
 
+  if (data.overdue.length === 0) {
+    return null;
+  }
+
   return (
     <div>
       <Title order={3} mb={8}>

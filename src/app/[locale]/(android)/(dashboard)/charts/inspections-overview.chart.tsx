@@ -33,6 +33,7 @@ export default function InspectionsOverviewChart({ data }: Props): ReactNode {
         type: "pie",
         stillShowZeroSum: false,
         radius: ["80%", "100%"],
+        top: 5,
         bottom: 60,
         padAngle: 5,
         itemStyle: {
