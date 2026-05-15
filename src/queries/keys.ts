@@ -69,7 +69,8 @@ export const equipmentKeys = {
   create: ["equipment", "create"] as const,
   edit: ["equipment", "edit"] as const,
   remove: ["equipment", "remove"] as const,
-  buckets: ["buckets"] as const,
+  buckets: (scope: ScopeType) =>
+    ["buckets", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,
 };
 
 export const inspectionKeys = {

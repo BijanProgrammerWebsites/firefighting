@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { ReactNode, use } from "react";
 
 import { useTranslations } from "next-intl";
 
@@ -15,13 +15,16 @@ import LoadingComponent from "@/components/loading/loading.component";
 import { equipmentKeys } from "@/queries/keys";
 
 import InspectionsOverviewChart from "@/android/(dashboard)/charts/inspections-overview.chart";
+import { DashboardContext } from "@/android/(dashboard)/context/dashboard.context";
 
 export default function InspectionsOverviewComponent(): ReactNode {
   const t = useTranslations("DashboardPage");
 
+  const { scope } = use(DashboardContext);
+
   const { isPending, isError, error, data } = useQuery({
-    queryKey: equipmentKeys.buckets,
-    queryFn: findAllBucketsApi,
+    queryKey: equipmentKeys.buckets(scope),
+    queryFn: () => findAllBucketsApi(scope),
   });
 
   if (isPending) {

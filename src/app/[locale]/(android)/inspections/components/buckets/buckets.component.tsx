@@ -20,8 +20,8 @@ export default function BucketsComponent(): ReactNode {
   const t = useTranslations("InspectionsPage");
 
   const { isPending, isError, error, data } = useQuery({
-    queryKey: equipmentKeys.buckets,
-    queryFn: findAllBucketsApi,
+    queryKey: equipmentKeys.buckets({}),
+    queryFn: () => findAllBucketsApi({}),
   });
 
   if (isPending) {
