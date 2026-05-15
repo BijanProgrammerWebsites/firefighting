@@ -6,6 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
+import InspectionsOverviewComponent from "@/android/(dashboard)/components/inspections-overview/inspections-overview.component";
 import KpiComponent from "@/android/(dashboard)/components/kpi/kpi.component";
 import ScopeFilterComponent from "@/android/(dashboard)/components/scope-filter/scope-filter.component";
 import DashboardProvider from "@/android/(dashboard)/providers/dashboard.provider";
@@ -23,6 +24,7 @@ export default async function DashboardPage(): Promise<ReactNode> {
         <ToolbarComponent title={t("title")} />
         <ScopeFilterComponent />
         <KpiComponent />
+        <InspectionsOverviewComponent />
       </div>
     </DashboardProvider>
   );

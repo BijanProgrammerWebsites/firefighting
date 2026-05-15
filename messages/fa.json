@@ -106,15 +106,22 @@
   },
   "DashboardPage": {
     "title": "داشبورد",
+    "allSites": "تمام سایت‌ها",
+    "allZones": "تمام زون‌ها",
+    "allUnits": "تمام واحدها",
     "totalEquipments": "تمام تجهیزات",
     "outOfServiceEquipments": "تجهیزات خارج از سرویس",
     "todayRemainingInspections": "بازرسی‌های باقی‌مانده‌ی امروز",
     "overdueInspections": "بازرسی‌های به تاخیر افتاده",
     "totalDefects": "نقص‌های حل‌نشده",
     "criticalDefects": "نقص‌های بحرانی",
-    "allSites": "تمام سایت‌ها",
-    "allZones": "تمام زون‌ها",
-    "allUnits": "تمام واحدها"
+    "inspectionsOverviewTitle": "بررسی اجمالی بازرسی‌ها",
+    "inspectionsOverviewSubtitle": "",
+    "withoutHistory": "بدون سابقه بازرسی",
+    "overdue": "به تاخیر افتاده",
+    "today": "امروز",
+    "next7Days": "7 روز آینده",
+    "next30Days": "30 روز آینده"
   },
   "DefectsPage": {
     "title": "نواقص"
@@ -124,7 +131,7 @@
     "create": "شروع بازرسی جدید",
     "edit": "ویرایش بازرسی",
     "withoutHistory": "بدون سابقه بازرسی",
-    "overdue": "گذشته",
+    "overdue": "به تاخیر افتاده",
     "today": "امروز",
     "next7Days": "7 روز آینده",
     "next30Days": "30 روز آینده",
