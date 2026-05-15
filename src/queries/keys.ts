@@ -1,3 +1,5 @@
+import { ScopeType } from "@/android/(dashboard)/types/scope.type";
+
 export const authKeys = {
   all: ["auth"] as const,
   verify: () => ["auth", "verify"] as const,
@@ -29,6 +31,7 @@ export const templateKeys = {
 
 export const refineryKeys = {
   find: ["refinery"] as const,
+  detailed: ["refinery", "detailed"] as const,
   edit: ["refinery", "edit"] as const,
   picture: {
     edit: ["refinery", "picture", "edit"] as const,
@@ -78,7 +81,8 @@ export const inspectionKeys = {
 };
 
 export const dashboardKeys = {
-  kpi: ["kpi"] as const,
+  kpi: (scope: ScopeType) =>
+    ["kpi", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,
 };
 
 export const mutationKeys = {

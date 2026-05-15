@@ -111,7 +111,10 @@
     "todayRemainingInspections": "بازرسی‌های باقی‌مانده‌ی امروز",
     "overdueInspections": "بازرسی‌های به تاخیر افتاده",
     "totalDefects": "نقص‌های حل‌نشده",
-    "criticalDefects": "نقص‌های بحرانی"
+    "criticalDefects": "نقص‌های بحرانی",
+    "allSites": "تمام سایت‌ها",
+    "allZones": "تمام زون‌ها",
+    "allUnits": "تمام واحدها"
   },
   "DefectsPage": {
     "title": "نواقص"

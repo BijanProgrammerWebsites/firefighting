@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { ReactNode, use } from "react";
 
 import { useTranslations } from "next-intl";
 
@@ -17,13 +17,16 @@ import { StatusEnum } from "@/enums/status.enum";
 import { dashboardKeys } from "@/queries/keys";
 
 import KpiChart from "@/android/(dashboard)/charts/kpi.chart";
+import { DashboardContext } from "@/android/(dashboard)/context/dashboard.context";
 
 export default function KpiComponent(): ReactNode {
   const t = useTranslations("DashboardPage");
 
+  const { scope } = use(DashboardContext);
+
   const { isPending, isError, error, data } = useQuery({
-    queryKey: dashboardKeys.kpi,
-    queryFn: kpiApi,
+    queryKey: dashboardKeys.kpi(scope),
+    queryFn: () => kpiApi(scope),
   });
 
   if (isError) {
