@@ -48,22 +48,12 @@ export default function InspectionsOverviewBarChart({
     yAxis: {
       type: "category",
       inverse: true,
-      data: [
-        t("withoutHistory"),
-        t("overdue"),
-        t("today"),
-        t("next7Days"),
-        t("next30Days"),
-      ],
+      data: [t("overdue"), t("today"), t("next7Days"), t("next30Days")],
     },
     series: [
       {
         type: "bar",
         data: [
-          {
-            value: 1, //data.withoutHistory.length,
-            itemStyle: { color: theme.colors.gray[colorIndex] },
-          },
           {
             value: data.overdue.length,
             itemStyle: { color: theme.colors.red[colorIndex] },

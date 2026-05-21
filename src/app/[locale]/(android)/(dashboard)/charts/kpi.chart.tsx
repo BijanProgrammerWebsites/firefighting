@@ -27,7 +27,7 @@ export default function KpiChart({
   icon,
 }: Props): ReactNode {
   return (
-    <Card radius="md" withBorder color="red" variant="">
+    <Card withBorder radius="md">
       <Stack gap={0}>
         <Box
           style={(theme) => ({

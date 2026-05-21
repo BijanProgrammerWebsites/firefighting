@@ -20,7 +20,7 @@ export default function BucketComponent({ title, items }: Props): ReactNode {
     <Box mb="xl">
       {title && <Divider my="xs" label={title} labelPosition="left" />}
       {items.map((item) => (
-        <BucketItemComponent key={item.equipment.id} item={item} />
+        <BucketItemComponent key={item.inspection.id} item={item} />
       ))}
     </Box>
   );

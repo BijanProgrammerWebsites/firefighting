@@ -19,32 +19,33 @@ export default function BucketItemComponent({ item }: Props): ReactNode {
   const tCommon = useTranslations("Common");
   const t = useTranslations("InspectionsPage");
 
-  const status = item.lastInspection?.status || EquipmentStatusEnum.IN_SERVICE;
-  const lastDate = item.lastInspection?.createdDate;
+  const status = item.inspection.status || EquipmentStatusEnum.IN_SERVICE;
+  const color = EquipmentStatusToColor[status];
+
+  const lastDate = item.inspection.createdDate;
   const nextDate = item.nextInspectionAt;
 
   return (
     <Card
-      key={item.equipment.id}
       withBorder
       component="a"
-      c={EquipmentStatusToColor[status]}
-      href={`/inspections/create/${item.equipment.id}`}
+      href={`/inspections/create/${item.inspection.equipment.id}`}
       mb="sm"
+      radius="md"
     >
       <Group justify="space-between">
-        <Text size="md" fw={500}>
-          {item.equipment.title}
+        <Text c={color} size="md" fw={500}>
+          {item.inspection.equipment.title}
         </Text>
-        <Badge color={EquipmentStatusToColor[status]}>{tCommon(status)}</Badge>
+        <Badge variant="light" color={EquipmentStatusToColor[status]}>
+          {tCommon(status)}
+        </Badge>
       </Group>
       <Text c="dimmed" size="sm" mt="xs">
-        {t("lastInspection")}:{" "}
-        {lastDate ? dateFormatter.format(new Date(lastDate)) : "ناموجود"}
+        {t("lastInspection")}: {dateFormatter.format(new Date(lastDate))}
       </Text>
       <Text c="dimmed" size="sm" mt="xs">
-        {t("nextInspection")}:{" "}
-        {nextDate ? dateFormatter.format(new Date(nextDate)) : "ناموجود"}
+        {t("nextInspection")}: {dateFormatter.format(new Date(nextDate))}
       </Text>
     </Card>
   );

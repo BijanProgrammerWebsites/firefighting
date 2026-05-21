@@ -10,7 +10,7 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import InspectionsOverviewComponent from "@/android/(dashboard)/components/inspections-overview/inspections-overview.component";
 import KpiComponent from "@/android/(dashboard)/components/kpi/kpi.component";
-import OverdueInspectionsComponent from "@/android/(dashboard)/components/overdue-inspections/overdue-inspections.component";
+import OverdueInspectionListComponent from "@/android/(dashboard)/components/overdue-inspection-list/overdue-inspection-list.component";
 import ScopeFilterComponent from "@/android/(dashboard)/components/scope-filter/scope-filter.component";
 import DashboardProvider from "@/android/(dashboard)/providers/dashboard.provider";
 
@@ -29,7 +29,7 @@ export default async function DashboardPage(): Promise<ReactNode> {
         />
         <KpiComponent />
         <InspectionsOverviewComponent />
-        <OverdueInspectionsComponent />
+        <OverdueInspectionListComponent />
       </Stack>
     </DashboardProvider>
   );

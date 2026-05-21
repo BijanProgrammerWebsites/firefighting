@@ -34,10 +34,6 @@ export default function BucketsComponent(): ReactNode {
 
   return (
     <div>
-      <BucketComponent
-        title={t("withoutHistory")}
-        items={data.withoutHistory}
-      />
       <BucketComponent title={t("overdue")} items={data.overdue} />
       <BucketComponent title={t("today")} items={data.today} />
       <BucketComponent title={t("next7Days")} items={data.next7Days} />

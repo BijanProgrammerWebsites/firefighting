@@ -36,6 +36,7 @@
     "completed": "تمام‌شده",
     "verified": "تاییدشده",
     "template": "قالب",
+    "locatedIn": "واقع در",
     "site": "سایت",
     "zone": "زون",
     "unit": "واحد",
@@ -136,23 +137,22 @@
     "totalDefects": "نقص‌های حل‌نشده",
     "criticalDefects": "نقص‌های بحرانی",
     "inspectionsOverview": "بررسی اجمالی بازرسی‌ها",
-    "withoutHistory": "بدون سابقه بازرسی",
     "overdue": "به تاخیر افتاده",
     "today": "امروز",
     "next7Days": "7 روز آینده",
-    "next30Days": "30 روز آینده"
+    "next30Days": "30 روز آینده",
+    "lastInspectionAt": "آخرین بازرسی در",
+    "daysArePassedSinceDeadline": "روز از موعد بازرسی گذشته است."
   },
   "DefectsPage": {
     "title": "نواقص",
     "edit": "ویرایش نقص",
-    "locatedIn": "واقع در",
     "submit": "تایید"
   },
   "InspectionsPage": {
     "title": "بازرسی",
     "create": "شروع بازرسی جدید",
     "edit": "ویرایش بازرسی",
-    "withoutHistory": "بدون سابقه بازرسی",
     "overdue": "به تاخیر افتاده",
     "today": "امروز",
     "next7Days": "7 روز آینده",

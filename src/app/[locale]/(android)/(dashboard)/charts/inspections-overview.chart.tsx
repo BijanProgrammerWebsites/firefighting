@@ -44,11 +44,6 @@ export default function InspectionsOverviewChart({ data }: Props): ReactNode {
         },
         data: [
           {
-            name: t("withoutHistory"),
-            value: data.withoutHistory.length,
-            itemStyle: { color: theme.colors.gray[5] },
-          },
-          {
             name: t("overdue"),
             value: data.overdue.length,
             itemStyle: { color: theme.colors.red[5] },

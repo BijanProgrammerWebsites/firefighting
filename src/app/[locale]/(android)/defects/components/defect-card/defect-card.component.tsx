@@ -22,7 +22,6 @@ type Props = {
 
 export default function DefectCardComponent({ defect }: Props): ReactNode {
   const tCommon = useTranslations("Common");
-  const t = useTranslations("DefectsPage");
 
   const color = SeverityToColor[defect.severity];
 
@@ -51,7 +50,7 @@ export default function DefectCardComponent({ defect }: Props): ReactNode {
         <IconComponent name="map-point-linear" />
         <Text c="dimmed" size="sm">
           {defect.equipment.title + " "}
-          {t("locatedIn") + " "}
+          {tCommon("locatedIn") + " "}
           {defect.equipment.unit.zone.site.title}
           {tCommon("comma") + " "}
           {defect.equipment.unit.zone.title}
