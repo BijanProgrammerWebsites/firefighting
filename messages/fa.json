@@ -143,6 +143,7 @@
     "next30Days": "30 روز آینده",
     "lastInspection": "آخرین بازرسی",
     "nextInspection": "بازرسی بعدی",
+    "overallStatus": "وضعیت کلی",
     "question": "سوال {n}",
     "submit": "تایید"
   },

@@ -30,6 +30,7 @@ import {
 } from "@/api/inspections/create-inspection.api";
 
 import { DefectSeverityEnum } from "@/enums/defect-severity.enum";
+import { EquipmentStatusEnum } from "@/enums/equipment-status.enum";
 
 import { z } from "@/lib/zod";
 
@@ -39,6 +40,7 @@ import styles from "./inspection-form.module.css";
 
 const FormSchema = z.object({
   equipmentId: z.uuid(),
+  status: z.enum(EquipmentStatusEnum),
   answers: z.array(
     z.object({
       questionId: z.uuid(),
@@ -74,6 +76,7 @@ export default function InspectionFormComponent({
   const form = useForm<FormValues>({
     initialValues: {
       equipmentId: equipment.id,
+      status: EquipmentStatusEnum.IN_SERVICE,
       answers: equipment.template.standard.questions.map((question) => ({
         questionId: question.id,
         hasSeverity: "noSeverity",
@@ -88,6 +91,7 @@ export default function InspectionFormComponent({
   const handleFormSubmit = async (values: FormValues): Promise<void> => {
     const dto: CreateInspectionRequestDto = {
       equipmentId: values.equipmentId,
+      status: values.status,
       answers: values.answers.map((answer) => ({
         questionId: answer.questionId,
         severity: answer.hasSeverity === "hasSeverity" ? answer.severity : null,
@@ -121,6 +125,28 @@ export default function InspectionFormComponent({
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
       <Stack>
+        <Fieldset legend={t("title")}>
+          <Text size="md" fw={500}>
+            {t("overallStatus")}
+          </Text>
+          <SegmentedControl
+            data={[
+              {
+                label: tCommon("inService"),
+                value: EquipmentStatusEnum.IN_SERVICE,
+              },
+              {
+                label: tCommon("needsRepair"),
+                value: EquipmentStatusEnum.NEEDS_REPAIR,
+              },
+              {
+                label: tCommon("outOfService"),
+                value: EquipmentStatusEnum.OUT_OF_SERVICE,
+              },
+            ]}
+            {...form.getInputProps("status")}
+          />
+        </Fieldset>
         {equipment.template.standard.questions.map((question, index) => (
           <Fieldset key={index} legend={t("question", { n: index + 1 })}>
             <Text size="md" fw={500}>
