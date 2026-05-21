@@ -81,6 +81,14 @@ export const inspectionKeys = {
   remove: ["inspection", "remove"] as const,
 };
 
+export const defectKeys = {
+  all: ["defect"] as const,
+  one: (defectId: string) => ["defect", defectId] as const,
+  create: ["defect", "create"] as const,
+  edit: ["defect", "edit"] as const,
+  remove: ["defect", "remove"] as const,
+};
+
 export const dashboardKeys = {
   kpi: (scope: ScopeType) =>
     ["kpi", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,

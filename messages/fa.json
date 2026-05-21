@@ -25,6 +25,18 @@
     "medium": "متوسط",
     "high": "زیاد",
     "critical": "بحرانی",
+    "defectStatus": "وضعیت نقص",
+    "open": "باز",
+    "inProgress": "در حال رفع",
+    "waitingForSparePart": "منتظر قطعه یدکی",
+    "closed": "بسته",
+    "maintenanceStatus": "وضعیت تعمیر و نگهداری",
+    "notStarted": "عدم شروع",
+    "assigned": "بازرس انتخاب شد",
+    "inProgress": "در حال انجام",
+    "waitingForSparePart": "منتظر قطعه یدکی",
+    "completed": "تمام‌شده",
+    "verified": "تاییدشده",
     "template": "قالب",
     "site": "سایت",
     "zone": "زون",
@@ -130,7 +142,9 @@
     "next30Days": "30 روز آینده"
   },
   "DefectsPage": {
-    "title": "نواقص"
+    "title": "نواقص",
+    "edit": "ویرایش نقص",
+    "submit": "تایید"
   },
   "InspectionsPage": {
     "title": "بازرسی",

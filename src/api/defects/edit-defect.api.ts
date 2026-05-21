@@ -9,8 +9,8 @@ import { z } from "@/lib/zod";
 import { richFetch } from "@/utils/fetch.utils";
 
 export const CreateDefectSchema = z.object({
-  title: z.string().nonempty(),
-  description: z.string().nonempty(),
+  title: z.string().nullable(),
+  description: z.string().nullable(),
   severity: z.enum(DefectSeverityEnum),
   status: z.enum(DefectStatusEnum),
   maintenanceStatus: z.enum(MaintenanceStatusEnum),

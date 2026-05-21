@@ -1,3 +1,4 @@
+import { Answer } from "@/entities/answer";
 import { Equipment } from "@/entities/equipment";
 
 import { DefectSeverityEnum } from "@/enums/defect-severity.enum";
@@ -12,6 +13,7 @@ export type Defect = {
   status: DefectStatusEnum;
   maintenanceStatus: MaintenanceStatusEnum;
   equipment: Equipment;
+  answer: Answer;
   createdDate: string;
   updatedDate: string;
 };

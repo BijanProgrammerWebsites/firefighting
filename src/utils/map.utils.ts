@@ -3,3 +3,10 @@ export const StatusToColor = {
   needsRepair: "yellow",
   outOfService: "red",
 } as const;
+
+export const SeverityToColor = {
+  low: "lime",
+  medium: "yellow",
+  high: "orange",
+  critical: "red",
+} as const;
