@@ -6,6 +6,8 @@ import { Badge, Card, Group, Text } from "@mantine/core";
 
 import { BucketItem } from "@/api/equipments/find-all-buckets.api";
 
+import { EquipmentStatusEnum } from "@/enums/equipment-status.enum";
+
 import { dateFormatter } from "@/utils/format.utils";
 import { StatusToColor } from "@/utils/map.utils";
 
@@ -17,7 +19,7 @@ export default function BucketItemComponent({ item }: Props): ReactNode {
   const tCommon = useTranslations("Common");
   const t = useTranslations("InspectionsPage");
 
-  const status = item.lastInspection?.status || "ok";
+  const status = item.lastInspection?.status || EquipmentStatusEnum.IN_SERVICE;
   const lastDate = item.lastInspection?.createdDate;
   const nextDate = item.nextInspectionAt;
 
@@ -34,9 +36,7 @@ export default function BucketItemComponent({ item }: Props): ReactNode {
         <Text size="md" fw={500}>
           {item.equipment.title}
         </Text>
-        <Badge w="10ch" color={StatusToColor[status]}>
-          {tCommon(status)}
-        </Badge>
+        <Badge color={StatusToColor[status]}>{tCommon(status)}</Badge>
       </Group>
       <Text c="dimmed" size="sm" mt="xs">
         {t("lastInspection")}:{" "}
