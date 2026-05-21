@@ -94,6 +94,13 @@ export const dashboardKeys = {
     ["kpi", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,
   overdue: (scope: ScopeType) =>
     ["overdue", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,
+  defectsBySeverity: (scope: ScopeType) =>
+    [
+      "defectsBySeverity",
+      scope.site?.id,
+      scope.zone?.id,
+      scope.unit?.id,
+    ] as const,
 };
 
 export const mutationKeys = {

@@ -8,18 +8,16 @@ import { useMantineTheme } from "@mantine/core";
 
 import { EChartsOption } from "echarts";
 
-import { FindAllBucketsDto } from "@/api/equipments/find-all-buckets.api";
+import { defectsBySeverityDto } from "@/api/dashboard/defects-by-severity.api";
 
 import ChartComponent from "@/components/chart/chart.component";
 
 type Props = {
-  data: FindAllBucketsDto;
+  data: defectsBySeverityDto;
 };
 
-export default function InspectionsOverviewBarChart({
-  data,
-}: Props): ReactNode {
-  const t = useTranslations("DashboardPage");
+export default function DefectsBySeverityChart({ data }: Props): ReactNode {
+  const tCommon = useTranslations("Common");
 
   const theme = useMantineTheme();
 
@@ -48,27 +46,32 @@ export default function InspectionsOverviewBarChart({
     yAxis: {
       type: "category",
       inverse: true,
-      data: [t("overdue"), t("today"), t("next7Days"), t("next30Days")],
+      data: [
+        tCommon("low"),
+        tCommon("medium"),
+        tCommon("high"),
+        tCommon("critical"),
+      ],
     },
     series: [
       {
         type: "bar",
         data: [
           {
-            value: data.overdue.length,
-            itemStyle: { color: theme.colors.red[colorIndex] },
+            value: data.low,
+            itemStyle: { color: theme.colors.lime[colorIndex] },
           },
           {
-            value: data.today.length,
-            itemStyle: { color: theme.colors.orange[colorIndex] },
-          },
-          {
-            value: data.next7Days.length,
+            value: data.medium,
             itemStyle: { color: theme.colors.yellow[colorIndex] },
           },
           {
-            value: data.next30Days.length,
-            itemStyle: { color: theme.colors.lime[colorIndex] },
+            value: data.high,
+            itemStyle: { color: theme.colors.orange[colorIndex] },
+          },
+          {
+            value: data.critical,
+            itemStyle: { color: theme.colors.red[colorIndex] },
           },
         ],
       },
