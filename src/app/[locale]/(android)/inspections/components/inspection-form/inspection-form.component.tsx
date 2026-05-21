@@ -10,6 +10,7 @@ import {
   Button,
   Fieldset,
   SegmentedControl,
+  Select,
   Stack,
   Text,
   Textarea,
@@ -25,34 +26,38 @@ import { toast } from "react-toastify";
 import { FindOneEquipmentResponseDto } from "@/api/equipments/find-one-equipment.api";
 import {
   CreateInspectionRequestDto,
-  CreateInspectionSchema,
   createInspectionApi,
 } from "@/api/inspections/create-inspection.api";
-import { editInspectionApi } from "@/api/inspections/edit-inspection.api";
 
-import { StatusEnum } from "@/enums/status.enum";
+import { DefectSeverityEnum } from "@/enums/defect-severity.enum";
+
+import { z } from "@/lib/zod";
 
 import { inspectionKeys } from "@/queries/keys";
 
 import styles from "./inspection-form.module.css";
 
+const FormSchema = z.object({
+  equipmentId: z.uuid(),
+  answers: z.array(
+    z.object({
+      questionId: z.uuid(),
+      hasSeverity: z.literal(["noSeverity", "hasSeverity"]),
+      severity: z.enum(DefectSeverityEnum).nullable(),
+      text: z.string().nullable(),
+      picture: z.string().nullable(),
+    }),
+  ),
+});
+
+type FormValues = z.infer<typeof FormSchema>;
+
 type Props = {
   equipment: FindOneEquipmentResponseDto;
-} & (
-  | {
-      id?: never;
-      initialValues?: never;
-    }
-  | {
-      id: string;
-      initialValues: CreateInspectionRequestDto;
-    }
-);
+};
 
 export default function InspectionFormComponent({
   equipment,
-  id,
-  initialValues,
 }: Props): ReactNode {
   const tCommon = useTranslations("Common");
   const t = useTranslations("InspectionsPage");
@@ -66,53 +71,49 @@ export default function InspectionFormComponent({
     mutationFn: createInspectionApi,
   });
 
-  const { mutateAsync: editMutateAsync } = useMutation({
-    mutationKey: inspectionKeys.edit,
-    mutationFn: editInspectionApi,
-  });
-
-  const form = useForm<CreateInspectionRequestDto>({
-    initialValues: initialValues ?? {
+  const form = useForm<FormValues>({
+    initialValues: {
       equipmentId: equipment.id,
       answers: equipment.template.standard.questions.map((question) => ({
         questionId: question.id,
-        status: StatusEnum.OK,
+        hasSeverity: "noSeverity",
+        severity: DefectSeverityEnum.LOW,
         text: "",
         picture: null,
       })),
     },
-    validate: zod4Resolver(CreateInspectionSchema),
+    validate: zod4Resolver(FormSchema),
   });
 
-  const handleFormSubmit = async (
-    dto: CreateInspectionRequestDto,
-  ): Promise<void> => {
-    if (id) {
-      await editMutateAsync(
-        { id, ...dto },
-        {
-          onSuccess: (data): void => {
-            toast.success(data.message);
-            queryClient.removeQueries({ queryKey: inspectionKeys.all });
-          },
-          onError: (error): void => {
-            toast.error(error.message);
-          },
-        },
-      );
-    } else {
-      await createMutateAsync(dto, {
-        onSuccess: (data): void => {
-          toast.success(data.message);
-          queryClient.removeQueries({ queryKey: inspectionKeys.all });
-          router.push("/inspections");
-        },
-        onError: (error): void => {
-          toast.error(error.message);
-        },
-      });
-    }
+  const handleFormSubmit = async (values: FormValues): Promise<void> => {
+    const dto: CreateInspectionRequestDto = {
+      equipmentId: values.equipmentId,
+      answers: values.answers.map((answer) => ({
+        questionId: answer.questionId,
+        severity: answer.hasSeverity === "hasSeverity" ? answer.severity : null,
+        text: answer.text,
+        picture: answer.picture,
+      })),
+    };
+
+    await createMutateAsync(dto, {
+      onSuccess: (data): void => {
+        toast.success(data.message);
+        queryClient.removeQueries({ queryKey: inspectionKeys.all });
+        router.push("/inspections");
+      },
+      onError: (error): void => {
+        toast.error(error.message);
+      },
+    });
   };
+
+  const severities = [
+    { value: DefectSeverityEnum.LOW, label: tCommon("low") },
+    { value: DefectSeverityEnum.MEDIUM, label: tCommon("medium") },
+    { value: DefectSeverityEnum.HIGH, label: tCommon("high") },
+    { value: DefectSeverityEnum.CRITICAL, label: tCommon("critical") },
+  ];
 
   return (
     <form
@@ -128,17 +129,23 @@ export default function InspectionFormComponent({
             <Text c="dimmed" size="sm" mb="sm">
               {question.description}
             </Text>
-            <Text size="sm" fw={500}>
-              {tCommon("status")}
-            </Text>
             <SegmentedControl
               data={[
-                { label: tCommon("ok"), value: StatusEnum.OK },
-                { label: tCommon("warning"), value: StatusEnum.WARNING },
-                { label: tCommon("error"), value: StatusEnum.ERROR },
+                { label: tCommon("noSeverity"), value: "noSeverity" },
+                { label: tCommon("hasSeverity"), value: "hasSeverity" },
               ]}
-              {...form.getInputProps(`answers.${index}.status`)}
+              {...form.getInputProps(`answers.${index}.hasSeverity`)}
             />
+            {form.values.answers[index].hasSeverity === "hasSeverity" && (
+              <Select
+                searchable
+                withAlignedLabels
+                label={tCommon("severity")}
+                data={severities}
+                mt="xs"
+                {...form.getInputProps(`answers.${index}.severity`)}
+              />
+            )}
             <Textarea
               label={tCommon("description")}
               mt="xs"

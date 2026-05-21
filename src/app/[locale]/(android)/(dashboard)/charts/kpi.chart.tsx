@@ -1,16 +1,20 @@
 import type { ReactNode } from "react";
 
-import { Box, Card, Skeleton, Stack, Text } from "@mantine/core";
-
-import { StatusEnum } from "@/enums/status.enum";
+import {
+  Box,
+  Card,
+  MantineStyleProps,
+  Skeleton,
+  Stack,
+  Text,
+} from "@mantine/core";
 
 import { numberFormatter } from "@/utils/format.utils";
-import { KpiStatusToColor } from "@/utils/map.utils";
 
 type Props = {
   title: string;
   value: number | undefined;
-  status: StatusEnum;
+  color: MantineStyleProps["c"];
   isLoading?: boolean;
   icon: ReactNode;
 };
@@ -18,7 +22,7 @@ type Props = {
 export default function KpiChart({
   title,
   value,
-  status,
+  color,
   isLoading,
   icon,
 }: Props): ReactNode {
@@ -37,7 +41,7 @@ export default function KpiChart({
           <Box c="dimmed" fz={24}>
             {icon}
           </Box>
-          <Text c={KpiStatusToColor[status]} fz="h1" fw={700}>
+          <Text c={color} fz="h1" fw={700}>
             {isLoading || value === undefined ? (
               <Skeleton
                 component="span"
