@@ -9,7 +9,7 @@ import { BucketItem } from "@/api/equipments/find-all-buckets.api";
 import { EquipmentStatusEnum } from "@/enums/equipment-status.enum";
 
 import { dateFormatter } from "@/utils/format.utils";
-import { StatusToColor } from "@/utils/map.utils";
+import { EquipmentStatusToColor } from "@/utils/map.utils";
 
 type Props = {
   item: BucketItem;
@@ -28,7 +28,7 @@ export default function BucketItemComponent({ item }: Props): ReactNode {
       key={item.equipment.id}
       withBorder
       component="a"
-      c={StatusToColor[status]}
+      c={EquipmentStatusToColor[status]}
       href={`/inspections/create/${item.equipment.id}`}
       mb="sm"
     >
@@ -36,7 +36,7 @@ export default function BucketItemComponent({ item }: Props): ReactNode {
         <Text size="md" fw={500}>
           {item.equipment.title}
         </Text>
-        <Badge color={StatusToColor[status]}>{tCommon(status)}</Badge>
+        <Badge color={EquipmentStatusToColor[status]}>{tCommon(status)}</Badge>
       </Group>
       <Text c="dimmed" size="sm" mt="xs">
         {t("lastInspection")}:{" "}

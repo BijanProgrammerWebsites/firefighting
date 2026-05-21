@@ -27,8 +27,6 @@
     "critical": "بحرانی",
     "defectStatus": "وضعیت نقص",
     "open": "باز",
-    "inProgress": "در حال رفع",
-    "waitingForSparePart": "منتظر قطعه یدکی",
     "closed": "بسته",
     "maintenanceStatus": "وضعیت تعمیر و نگهداری",
     "notStarted": "عدم شروع",
@@ -40,7 +38,10 @@
     "template": "قالب",
     "site": "سایت",
     "zone": "زون",
-    "unit": "واحد"
+    "unit": "واحد",
+    "createdAt": "ایجادشده در",
+    "updatedAt": "ویرایش‌شده در",
+    "comma": "،"
   },
   "App": {
     "name": "مدیریت پالایشگاه"
@@ -144,6 +145,7 @@
   "DefectsPage": {
     "title": "نواقص",
     "edit": "ویرایش نقص",
+    "locatedIn": "واقع در",
     "submit": "تایید"
   },
   "InspectionsPage": {
