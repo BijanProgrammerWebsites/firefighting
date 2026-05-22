@@ -54,7 +54,7 @@ export default function StandardListComponent(): ReactNode {
       toast.error(error.message);
     },
     onSuccess: async (result) => {
-      queryClient.removeQueries({ queryKey: standardKeys.all });
+      await queryClient.invalidateQueries({ queryKey: standardKeys.all });
       toast.success(result.message);
     },
   });

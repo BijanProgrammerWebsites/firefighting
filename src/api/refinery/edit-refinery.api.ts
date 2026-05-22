@@ -1,10 +1,14 @@
 import { ResponseDto } from "@/dto/response.dto";
 
-import { Refinery } from "@/entities/refinery";
+import { z } from "@/lib/zod";
 
 import { richFetch } from "@/utils/fetch.utils";
 
-export type EditRefineryRequestDto = Pick<Refinery, "title">;
+export const EditRefineryRequestSchema = z.object({
+  title: z.string().nonempty(),
+});
+
+export type EditRefineryRequestDto = z.infer<typeof EditRefineryRequestSchema>;
 
 export async function editRefineryApi({
   ...dto

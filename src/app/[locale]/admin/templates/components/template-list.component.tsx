@@ -68,7 +68,7 @@ export default function TemplateListComponent(): ReactNode {
       toast.error(error.message);
     },
     onSuccess: async (result) => {
-      queryClient.removeQueries({ queryKey: templateKeys.all });
+      await queryClient.invalidateQueries({ queryKey: templateKeys.all });
       toast.success(result.message);
     },
   });

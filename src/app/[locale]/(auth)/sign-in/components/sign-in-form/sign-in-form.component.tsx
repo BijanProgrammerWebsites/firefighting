@@ -51,7 +51,7 @@ export default function SignInFormComponent(): ReactNode {
 
   const handleFormSubmit = async (dto: SignInRequestDto): Promise<void> => {
     await mutateAsync(dto, {
-      onSuccess: (data): void => {
+      onSuccess: async (data): Promise<void> => {
         toast.success(data.message);
 
         if ("result" in data) {
@@ -84,7 +84,7 @@ export default function SignInFormComponent(): ReactNode {
         leftSection={<IconComponent name="lock-keyhole-minimalistic-outline" />}
         {...form.getInputProps("password")}
       />
-      <Button type="submit">{t("submit")}</Button>
+      <Button type="submit">{t("signIn")}</Button>
     </form>
   );
 }

@@ -12,6 +12,7 @@
     "confirm": "تایید",
     "cancel": "بازگشت",
     "return": "بازگشت",
+    "submit": "تایید",
     "fieldIsRequired": "پر کردن {field} الزامی است.",
     "days": "روز",
     "status": "وضعیت",
@@ -68,7 +69,7 @@
     "subtitle": "لطفاً اطلاعات خود را وارد کنید.",
     "username": "نام کاربری",
     "password": "کلمه عبور",
-    "submit": "ورود"
+    "signIn": "ورود"
   },
   "AdminGeneralPage": {
     "title": "تنظیمات عمومی",
@@ -92,8 +93,7 @@
     "role": "سطح دسترسی",
     "admin": "مدیر",
     "inspector": "بازرس",
-    "viewer": "عادی",
-    "submit": "تایید"
+    "viewer": "عادی"
   },
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها",
@@ -103,8 +103,7 @@
     "description": "توضیحات",
     "questions": "سوالات",
     "question": "سوال {n}",
-    "addMore": "سوال جدید",
-    "submit": "تایید"
+    "addMore": "سوال جدید"
   },
   "AdminTemplatesPage": {
     "title": "تنظیمات قالب‌ها",
@@ -113,14 +112,12 @@
     "titleField": "عنوان",
     "description": "استاندارد ساخت",
     "inspectionStandard": "استاندارد بازرسی",
-    "inspectionPeriod": "دوره بازرسی",
-    "submit": "تایید"
+    "inspectionPeriod": "دوره بازرسی"
   },
   "AdminEquipmentsPage": {
     "title": "تنظیمات تجهیزات",
     "create": "ساخت تجهیز جدید",
-    "edit": "ویرایش تجهیز",
-    "submit": "تایید"
+    "edit": "ویرایش تجهیز"
   },
   "AdminLogsPage": {
     "title": "لاگ‌ها"
@@ -152,8 +149,7 @@
   },
   "DefectsPage": {
     "title": "نواقص",
-    "edit": "ویرایش نقص",
-    "submit": "تایید"
+    "edit": "ویرایش نقص"
   },
   "InspectionsPage": {
     "title": "بازرسی",
@@ -166,8 +162,7 @@
     "lastInspection": "آخرین بازرسی",
     "nextInspection": "بازرسی بعدی",
     "overallStatus": "وضعیت کلی",
-    "question": "سوال {n}",
-    "submit": "تایید"
+    "question": "سوال {n}"
   },
   "NotificationsPage": {
     "title": "اعلانات"

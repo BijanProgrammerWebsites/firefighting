@@ -2,15 +2,12 @@
 
 import type { ReactNode } from "react";
 
-import { useTranslations } from "next-intl";
-
 import { Box } from "@mantine/core";
 
 import clsx from "clsx";
 
+import LogoTypeComponent from "@/components/logo-type.component";
 import ToggleLocaleComponent from "@/components/toggle-locale.component";
-
-import { Link } from "@/i18n/navigation";
 
 import styles from "./header.module.css";
 
@@ -19,13 +16,9 @@ type Props = {
 };
 
 export default function HeaderComponent({ className }: Props): ReactNode {
-  const t = useTranslations("App");
-
   return (
     <header className={clsx(styles.header, className)}>
-      <Link className={styles.name} href="/">
-        {t("name")}
-      </Link>
+      <LogoTypeComponent href="/sign-in" />
       <Box className={styles.actions}>
         <ToggleLocaleComponent />
       </Box>

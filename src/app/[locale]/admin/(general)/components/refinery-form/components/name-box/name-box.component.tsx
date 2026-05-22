@@ -1,61 +1,73 @@
-import { ChangeEvent, ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Box, Button, TextInput } from "@mantine/core";
+import { TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+
+import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { editRefineryApi } from "@/api/refinery/edit-refinery.api";
+import {
+  EditRefineryRequestDto,
+  EditRefineryRequestSchema,
+  editRefineryApi,
+} from "@/api/refinery/edit-refinery.api";
+
+import SubmitButtonComponent from "@/components/submit-button.component";
 
 import { refineryKeys } from "@/queries/keys";
 
 import styles from "./name-box.module.css";
 
 export type Props = {
-  title?: string;
+  title: string;
 };
-export default function NameBoxComponent({ title }: Props): ReactNode {
-  const name = useRef(title ?? "");
 
-  const t = useTranslations("AdminGeneralPage");
+export default function NameBoxComponent({ title }: Props): ReactNode {
+  const tCommon = useTranslations("Common");
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: editMutateAsync } = useMutation({
     mutationKey: refineryKeys.edit,
     mutationFn: editRefineryApi,
   });
 
-  const handleButtonClick = async (): Promise<void> => {
-    await mutateAsync(
-      { title: name.current },
-      {
-        onSuccess: (data): void => {
-          toast.success(data.message);
-          queryClient.invalidateQueries({ queryKey: refineryKeys.find });
-        },
-        onError: (error): void => {
-          toast.error(error.message);
-        },
+  const form = useForm<EditRefineryRequestDto>({
+    initialValues: { title },
+    validate: zod4Resolver(EditRefineryRequestSchema),
+  });
+
+  const handleFormSubmit = async (
+    dto: EditRefineryRequestDto,
+  ): Promise<void> => {
+    await editMutateAsync(dto, {
+      onSuccess: async (data): Promise<void> => {
+        toast.success(data.message);
+        await queryClient.invalidateQueries({ queryKey: refineryKeys.find });
       },
-    );
+      onError: (error): void => {
+        toast.error(error.message);
+      },
+    });
   };
 
-  const handleSetName = (e: ChangeEvent<HTMLInputElement>): void => {
-    name.current = e.target.value;
-  };
   return (
-    <Box className={styles["name-box"]}>
+    <form
+      className={styles["name-box"]}
+      onSubmit={form.onSubmit(handleFormSubmit)}
+    >
       <TextInput
-        label={t("refineryName")}
-        defaultValue={title}
-        onChange={handleSetName}
+        withAsterisk
         className={styles.input}
+        label={tCommon("title")}
+        {...form.getInputProps("title")}
       />
-      <Button onClick={handleButtonClick}>تغییر نام پالایشگاه</Button>
-    </Box>
+      <SubmitButtonComponent />
+    </form>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 import { ReactNode } from "react";
 
-import { Box } from "@mantine/core";
+import { Box, Text } from "@mantine/core";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -18,7 +18,7 @@ import SiteManagementComponent from "@/admin/(general)/components/refinery-form/
 import styles from "./refinery-form.module.css";
 
 export default function RefineryGeneralFormComponent(): ReactNode {
-  const { isPending, data } = useQuery({
+  const { isPending, isError, error, data } = useQuery({
     queryKey: refineryKeys.find,
     queryFn: findRefineryApi,
   });
@@ -27,11 +27,15 @@ export default function RefineryGeneralFormComponent(): ReactNode {
     return <LoadingComponent />;
   }
 
+  if (isError) {
+    return <Text c="red">{error.message}</Text>;
+  }
+
   return (
     <Box className={styles["refinery-form"]}>
       <Box className={styles.header}>
-        <LogoUploaderComponent picture={data?.picture} />
-        <NameBoxComponent title={data?.title} />
+        <LogoUploaderComponent picture={data.picture} />
+        <NameBoxComponent title={data.title} />
       </Box>
       <SiteManagementComponent />
     </Box>

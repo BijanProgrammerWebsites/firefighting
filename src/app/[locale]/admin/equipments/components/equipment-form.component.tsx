@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
-import { Button, Select, Stack, Text, TextInput } from "@mantine/core";
+import { Select, Stack, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -27,6 +27,7 @@ import { findAllTemplatesApi } from "@/api/templates/find-all-templates.api";
 import { findOneZoneApi } from "@/api/zones/find-one-zone.api";
 
 import LoadingComponent from "@/components/loading.component";
+import SubmitButtonComponent from "@/components/submit-button.component";
 
 import {
   equipmentKeys,
@@ -88,13 +89,13 @@ export default function EquipmentFormComponent({
   });
 
   const selectedSiteQuery = useQuery({
-    queryKey: siteKeys.one(form.getValues().siteId),
-    queryFn: () => findOneSiteApi(form.getValues().siteId),
+    queryKey: siteKeys.one(form.values.siteId),
+    queryFn: () => findOneSiteApi(form.values.siteId),
   });
 
   const selectedZoneQuery = useQuery({
-    queryKey: zoneKeys.one(form.getValues().zoneId),
-    queryFn: () => findOneZoneApi(form.getValues().zoneId),
+    queryKey: zoneKeys.one(form.values.zoneId),
+    queryFn: () => findOneZoneApi(form.values.zoneId),
   });
 
   const handleFormSubmit = async (
@@ -104,9 +105,11 @@ export default function EquipmentFormComponent({
       await editMutateAsync(
         { id, ...dto },
         {
-          onSuccess: (data): void => {
+          onSuccess: async (data): Promise<void> => {
             toast.success(data.message);
-            queryClient.removeQueries({ queryKey: equipmentKeys.all });
+            await queryClient.invalidateQueries({
+              queryKey: equipmentKeys.all,
+            });
           },
           onError: (error): void => {
             toast.error(error.message);
@@ -115,9 +118,9 @@ export default function EquipmentFormComponent({
       );
     } else {
       await createMutateAsync(dto, {
-        onSuccess: (data): void => {
+        onSuccess: async (data): Promise<void> => {
           toast.success(data.message);
-          queryClient.removeQueries({ queryKey: equipmentKeys.all });
+          await queryClient.invalidateQueries({ queryKey: equipmentKeys.all });
           router.push("/admin/equipments");
         },
         onError: (error): void => {
@@ -213,7 +216,7 @@ export default function EquipmentFormComponent({
           withAlignedLabels
           label={tCommon("zone")}
           data={zones}
-          disabled={!form.getValues().siteId}
+          disabled={!form.values.siteId}
           {...form.getInputProps("zoneId")}
         />
         <Select
@@ -222,12 +225,10 @@ export default function EquipmentFormComponent({
           withAlignedLabels
           label={tCommon("unit")}
           data={units}
-          disabled={!form.getValues().zoneId}
+          disabled={!form.values.zoneId}
           {...form.getInputProps("unitId")}
         />
-        <Button type="submit" w="max-content">
-          {t("submit")}
-        </Button>
+        <SubmitButtonComponent />
       </Stack>
     </form>
   );

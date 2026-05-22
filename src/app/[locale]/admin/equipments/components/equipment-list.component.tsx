@@ -87,8 +87,8 @@ export default function EquipmentListComponent(): ReactNode {
       toast.error(error.message);
     },
     onSuccess: async (result) => {
-      queryClient.removeQueries({ queryKey: equipmentKeys.all });
       toast.success(result.message);
+      await queryClient.invalidateQueries({ queryKey: equipmentKeys.all });
     },
   });
 

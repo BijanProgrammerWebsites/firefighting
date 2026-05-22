@@ -39,10 +39,10 @@ export default function ZoneListBoxComponent(): ReactNode {
   const { mutateAsync: createZone } = useMutation({
     mutationKey: zoneKeys.create,
     mutationFn: createZoneApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedSiteId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: siteKeys.one(selectedSiteId),
         });
       }
@@ -55,10 +55,10 @@ export default function ZoneListBoxComponent(): ReactNode {
   const { mutateAsync: editZone } = useMutation({
     mutationKey: zoneKeys.edit,
     mutationFn: editZoneApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedSiteId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: siteKeys.one(selectedSiteId),
         });
       }
@@ -71,10 +71,10 @@ export default function ZoneListBoxComponent(): ReactNode {
   const { mutateAsync: deleteZone } = useMutation({
     mutationKey: zoneKeys.remove,
     mutationFn: removeZoneApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedSiteId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: siteKeys.one(selectedSiteId),
         });
       }

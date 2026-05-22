@@ -38,10 +38,10 @@ export default function UnitListBoxComponent(): ReactNode {
   const { mutateAsync: createUnit } = useMutation({
     mutationKey: unitKeys.create,
     mutationFn: createUnitApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedZoneId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: zoneKeys.one(selectedZoneId),
         });
       }
@@ -54,10 +54,10 @@ export default function UnitListBoxComponent(): ReactNode {
   const { mutateAsync: editUnit } = useMutation({
     mutationKey: unitKeys.edit,
     mutationFn: editUnitApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedZoneId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: zoneKeys.one(selectedZoneId),
         });
       }
@@ -70,10 +70,10 @@ export default function UnitListBoxComponent(): ReactNode {
   const { mutateAsync: deleteUnit } = useMutation({
     mutationKey: unitKeys.remove,
     mutationFn: removeUnitApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedZoneId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: zoneKeys.one(selectedZoneId),
         });
       }

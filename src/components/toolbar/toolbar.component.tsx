@@ -8,6 +8,8 @@ import { Box, Button, Title } from "@mantine/core";
 
 import clsx from "clsx";
 
+import IconComponent from "@/components/icon/icon.component";
+
 import { Link } from "@/i18n/navigation";
 
 import styles from "./toolbar.module.css";
@@ -35,12 +37,21 @@ export default function ToolbarComponent({
         <Title order={2}>{title}</Title>
         <Box className={styles.actions}>
           {createHref && (
-            <Button component={Link} href={createHref}>
+            <Button
+              component={Link}
+              href={createHref}
+              leftSection={<IconComponent collection="tabler" name="plus" />}
+            >
               {tCommon("create")}
             </Button>
           )}
           {parentHref && (
-            <Button component={Link} href={parentHref} variant="default">
+            <Button
+              component={Link}
+              href={parentHref}
+              variant="default"
+              leftSection={<IconComponent name="arrow-right-linear" />}
+            >
               {tCommon("return")}
             </Button>
           )}

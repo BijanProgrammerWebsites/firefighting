@@ -32,9 +32,9 @@ export default function SiteListBoxComponent(): ReactNode {
   const { mutateAsync: createSite } = useMutation({
     mutationKey: siteKeys.create,
     mutationFn: createSiteApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: siteKeys.all });
+      await queryClient.invalidateQueries({ queryKey: siteKeys.all });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -43,9 +43,9 @@ export default function SiteListBoxComponent(): ReactNode {
   const { mutateAsync: editSite } = useMutation({
     mutationKey: siteKeys.edit,
     mutationFn: editSiteApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: siteKeys.all });
+      await queryClient.invalidateQueries({ queryKey: siteKeys.all });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -54,9 +54,9 @@ export default function SiteListBoxComponent(): ReactNode {
   const { mutateAsync: deleteSite } = useMutation({
     mutationKey: siteKeys.remove,
     mutationFn: removeSiteApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: siteKeys.all });
+      await queryClient.invalidateQueries({ queryKey: siteKeys.all });
     },
     onError: (error) => {
       toast.error(error.message);
