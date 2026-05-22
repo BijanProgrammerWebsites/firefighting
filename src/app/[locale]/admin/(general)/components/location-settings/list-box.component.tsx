@@ -1,14 +1,21 @@
 import { ReactNode, useState } from "react";
 
-import { ActionIcon, Box, Divider, List, Loader, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Card,
+  Center,
+  Divider,
+  Group,
+  Loader,
+  Stack,
+  Text,
+} from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
-import ListItemComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/list-item/list-item.component";
-import TextFormComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/text-form/text-form.component";
+import ListItemComponent from "@/admin/(general)/components/location-settings/list-item.component";
+import TextFormComponent from "@/admin/(general)/components/location-settings/text-form.component";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
-
-import styles from "./list-box.module.css";
 
 type Props = {
   items: ListItemType[];
@@ -41,9 +48,8 @@ export function ListBoxComponent({
     onAdd(value);
   };
 
-  const messageBox = <Box className={styles["message"]}>{messages}</Box>;
   const detailBox = (
-    <List className={styles["detail"]}>
+    <Stack gap={4}>
       {isAdding && (
         <TextFormComponent
           onSubmit={handleAddItem}
@@ -60,30 +66,38 @@ export function ListBoxComponent({
           selected={item.id === selectedItemId}
         />
       ))}
-    </List>
+    </Stack>
   );
 
   return (
-    <Box className={styles["list-box"]}>
-      <Box className={styles.header}>
-        <Text>{title}</Text>
-        <ActionIcon
-          variant="outline"
-          size="xs"
-          disabled={addIconDisable}
-          onClick={() => setIsAdding(true)}
-        >
-          <IconComponent collection="tabler" name="plus" />
-        </ActionIcon>
-      </Box>
-      <Divider />
-      {isLoading ? (
-        <Box className={styles["loading"]}>
-          <Loader size="sm" />
-        </Box>
-      ) : (
-        <>{!!messages && !isAdding ? messageBox : detailBox}</>
-      )}
-    </Box>
+    <Card withBorder radius="md">
+      <Stack gap="md" h="20rem">
+        <Group justify="space-between">
+          <Text>{title}</Text>
+          <ActionIcon
+            variant="outline"
+            size="xs"
+            disabled={addIconDisable}
+            onClick={() => setIsAdding(true)}
+          >
+            <IconComponent collection="tabler" name="plus" />
+          </ActionIcon>
+        </Group>
+        <Divider />
+        {isLoading ? (
+          <Center>
+            <Loader size="sm" />
+          </Center>
+        ) : (
+          <>
+            {!!messages && !isAdding ? (
+              <Center h="100%">{messages}</Center>
+            ) : (
+              detailBox
+            )}
+          </>
+        )}
+      </Stack>
+    </Card>
   );
 }

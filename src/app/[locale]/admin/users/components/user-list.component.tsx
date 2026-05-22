@@ -61,7 +61,7 @@ export default function UserListComponent(): ReactNode {
       toast.error(error.message);
     },
     onSuccess: async (result) => {
-      queryClient.removeQueries({ queryKey: userKeys.all });
+      await queryClient.invalidateQueries({ queryKey: userKeys.all });
       toast.success(result.message);
     },
   });

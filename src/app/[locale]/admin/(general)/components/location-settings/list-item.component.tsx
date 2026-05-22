@@ -2,17 +2,14 @@ import { ReactNode, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { ActionIcon, Box, Text } from "@mantine/core";
+import { ActionIcon, Group, Text } from "@mantine/core";
+import { useHover } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
-
-import clsx from "clsx";
 
 import IconComponent from "@/components/icon/icon.component";
 
-import TextFormComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/text-form/text-form.component";
+import TextFormComponent from "@/admin/(general)/components/location-settings/text-form.component";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
-
-import styles from "./list-item.module.css";
 
 type Props = {
   item: ListItemType;
@@ -31,6 +28,8 @@ export default function ListItemComponent({
   const tCommon = useTranslations("Common");
 
   const [mode, setMode] = useState<"edit" | "none">("none");
+
+  const { ref, hovered } = useHover();
 
   const handleRemoveMode = (): void => {
     modals.openConfirmModal({
@@ -63,8 +62,13 @@ export default function ListItemComponent({
   };
 
   return (
-    <Box
-      className={clsx(styles["list-item"], selected && styles.selected)}
+    <Group
+      ref={ref}
+      align="center"
+      justify="space-between"
+      bg={selected ? "gray.1" : hovered ? "gray.1" : undefined}
+      p={8}
+      style={{ borderRadius: 8, cursor: "pointer" }}
       onClick={handleSelectItem}
     >
       {mode !== "edit" && item.name}
@@ -76,24 +80,25 @@ export default function ListItemComponent({
         />
       )}
       {mode === "none" && (
-        <Box className={styles["buttons"]}>
+        <Group gap={0}>
           <ActionIcon
-            variant="outline"
+            variant="subtle"
+            color="gray"
             size="sm"
             onClick={() => setMode("edit")}
           >
-            <IconComponent collection="tabler" name="edit" />
+            <IconComponent name="pen-linear" />
           </ActionIcon>
           <ActionIcon
-            color="red"
-            variant="outline"
+            variant="subtle"
+            color="gray"
             size="sm"
             onClick={handleRemoveMode}
           >
-            <IconComponent collection="tabler" name="trash" />
+            <IconComponent name="trash-bin-trash-linear" />
           </ActionIcon>
-        </Box>
+        </Group>
       )}
-    </Box>
+    </Group>
   );
 }

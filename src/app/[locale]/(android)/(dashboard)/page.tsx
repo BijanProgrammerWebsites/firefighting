@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
-import { Stack, useMantineTheme } from "@mantine/core";
+import { Stack } from "@mantine/core";
 
-import ToolbarComponent from "@/components/toolbar/toolbar.component";
+import ToolbarComponent from "@/components/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 

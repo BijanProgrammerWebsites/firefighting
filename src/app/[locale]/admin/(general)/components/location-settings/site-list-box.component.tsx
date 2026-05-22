@@ -15,7 +15,7 @@ import { removeSiteApi } from "@/api/sites/remove-site.api";
 
 import { siteKeys } from "@/queries/keys";
 
-import { ListBoxComponent } from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/list-box.component";
+import { ListBoxComponent } from "@/admin/(general)/components/location-settings/list-box.component";
 import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
 
@@ -32,9 +32,9 @@ export default function SiteListBoxComponent(): ReactNode {
   const { mutateAsync: createSite } = useMutation({
     mutationKey: siteKeys.create,
     mutationFn: createSiteApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: siteKeys.all });
+      await queryClient.invalidateQueries({ queryKey: siteKeys.all });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -43,9 +43,9 @@ export default function SiteListBoxComponent(): ReactNode {
   const { mutateAsync: editSite } = useMutation({
     mutationKey: siteKeys.edit,
     mutationFn: editSiteApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: siteKeys.all });
+      await queryClient.invalidateQueries({ queryKey: siteKeys.all });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -54,9 +54,9 @@ export default function SiteListBoxComponent(): ReactNode {
   const { mutateAsync: deleteSite } = useMutation({
     mutationKey: siteKeys.remove,
     mutationFn: removeSiteApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
-      queryClient.invalidateQueries({ queryKey: siteKeys.all });
+      await queryClient.invalidateQueries({ queryKey: siteKeys.all });
     },
     onError: (error) => {
       toast.error(error.message);

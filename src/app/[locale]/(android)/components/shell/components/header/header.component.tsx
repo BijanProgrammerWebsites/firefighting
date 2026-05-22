@@ -2,13 +2,12 @@
 
 import type { ReactNode } from "react";
 
-import { useTranslations } from "next-intl";
-
 import { ActionIcon, Box } from "@mantine/core";
 
 import clsx from "clsx";
 
 import IconComponent from "@/components/icon/icon.component";
+import LogoTypeComponent from "@/components/logo-type.component";
 import SignOutButtonComponent from "@/components/sign-out-button.component";
 import ToggleLocaleComponent from "@/components/toggle-locale.component";
 
@@ -21,13 +20,9 @@ type Props = {
 };
 
 export default function HeaderComponent({ className }: Props): ReactNode {
-  const t = useTranslations("App");
-
   return (
     <header className={clsx(styles.header, className)}>
-      <Link className={styles.name} href="/">
-        {t("name")}
-      </Link>
+      <LogoTypeComponent href="/" />
       <Box className={styles.actions}>
         <ActionIcon
           component={Link}

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
-import { Button, PasswordInput, Select, Stack, TextInput } from "@mantine/core";
+import { PasswordInput, Select, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -23,6 +23,7 @@ import {
 import { editUserApi } from "@/api/users/edit-user.api";
 
 import IconComponent from "@/components/icon/icon.component";
+import SubmitButtonComponent from "@/components/submit-button.component";
 
 import { RoleEnum } from "@/enums/role.enum";
 
@@ -72,9 +73,9 @@ export default function UserFormComponent({
       await editMutateAsync(
         { id, ...dto },
         {
-          onSuccess: (data): void => {
+          onSuccess: async (data): Promise<void> => {
             toast.success(data.message);
-            queryClient.removeQueries({ queryKey: userKeys.all });
+            await queryClient.invalidateQueries({ queryKey: userKeys.all });
           },
           onError: (error): void => {
             toast.error(error.message);
@@ -83,9 +84,9 @@ export default function UserFormComponent({
       );
     } else {
       await createMutateAsync(dto, {
-        onSuccess: (data): void => {
+        onSuccess: async (data): Promise<void> => {
           toast.success(data.message);
-          queryClient.removeQueries({ queryKey: userKeys.all });
+          await queryClient.invalidateQueries({ queryKey: userKeys.all });
           router.push("/admin/users");
         },
         onError: (error): void => {
@@ -129,9 +130,7 @@ export default function UserFormComponent({
           data={roles}
           {...form.getInputProps("role")}
         />
-        <Button type="submit" w="max-content">
-          {t("submit")}
-        </Button>
+        <SubmitButtonComponent />
       </Stack>
     </form>
   );

@@ -12,6 +12,7 @@
     "confirm": "تایید",
     "cancel": "بازگشت",
     "return": "بازگشت",
+    "submit": "تایید",
     "fieldIsRequired": "پر کردن {field} الزامی است.",
     "days": "روز",
     "status": "وضعیت",
@@ -38,10 +39,11 @@
     "template": "قالب",
     "locatedIn": "واقع در",
     "site": "سایت",
-    "zone": "زون",
+    "zone": "ناحیه",
     "unit": "واحد",
     "createdAt": "ایجادشده در",
     "updatedAt": "ویرایش‌شده در",
+    "logoAlt": "تصویر پالایشگاه",
     "comma": "،"
   },
   "App": {
@@ -68,19 +70,22 @@
     "subtitle": "لطفاً اطلاعات خود را وارد کنید.",
     "username": "نام کاربری",
     "password": "کلمه عبور",
-    "submit": "ورود"
+    "signIn": "ورود"
   },
   "AdminGeneralPage": {
     "title": "تنظیمات عمومی",
+    "subtitle": "مشخصات پالایشگاه از قبیل تصویر و نام را مدیریت کنید.",
+    "logo": "تصویر پالایشگاه",
+    "logoHint": "تصویر مورد نظر را با فرمت PNG یا JPG انتخاب کنید.",
     "refineryName": "نام پالایشگاه",
     "sites": "سایت‌ها",
-    "zones": "زون‌ها",
+    "zones": "ناحیه‌ها",
     "units": "واحد‌ها",
-    "selectSite": "لطفاً یک سایت انتخاب کنید.",
-    "selectZone": "لطفاً یک زون انتخاب کنید.",
-    "noZones": "هیچ زونی وجود ندارد.",
+    "selectSite": "لطفاً یک سایت را انتخاب کنید.",
+    "selectZone": "لطفاً یک ناحیه را انتخاب کنید.",
+    "noZones": "هیچ ناحیه‌ای وجود ندارد.",
     "noUnits": "هیچ واحدی وجود ندارد.",
-    "uploadLogo": "بارگذاری لوگو",
+    "uploadLogo": "انتخاب تصویر",
     "reset": "بازنشانی"
   },
   "AdminUsersPage": {
@@ -92,8 +97,7 @@
     "role": "سطح دسترسی",
     "admin": "مدیر",
     "inspector": "بازرس",
-    "viewer": "عادی",
-    "submit": "تایید"
+    "viewer": "عادی"
   },
   "AdminStandardsPage": {
     "title": "تنظیمات استانداردها",
@@ -103,8 +107,7 @@
     "description": "توضیحات",
     "questions": "سوالات",
     "question": "سوال {n}",
-    "addMore": "سوال جدید",
-    "submit": "تایید"
+    "addMore": "سوال جدید"
   },
   "AdminTemplatesPage": {
     "title": "تنظیمات قالب‌ها",
@@ -113,14 +116,12 @@
     "titleField": "عنوان",
     "description": "استاندارد ساخت",
     "inspectionStandard": "استاندارد بازرسی",
-    "inspectionPeriod": "دوره بازرسی",
-    "submit": "تایید"
+    "inspectionPeriod": "دوره بازرسی"
   },
   "AdminEquipmentsPage": {
     "title": "تنظیمات تجهیزات",
     "create": "ساخت تجهیز جدید",
-    "edit": "ویرایش تجهیز",
-    "submit": "تایید"
+    "edit": "ویرایش تجهیز"
   },
   "AdminLogsPage": {
     "title": "لاگ‌ها"
@@ -128,7 +129,7 @@
   "DashboardPage": {
     "title": "داشبورد",
     "allSites": "تمام سایت‌ها",
-    "allZones": "تمام زون‌ها",
+    "allZones": "تمام ناحیه‌ها",
     "allUnits": "تمام واحدها",
     "totalEquipments": "تمام تجهیزات",
     "outOfServiceEquipments": "تجهیزات خارج از سرویس",
@@ -152,8 +153,7 @@
   },
   "DefectsPage": {
     "title": "نواقص",
-    "edit": "ویرایش نقص",
-    "submit": "تایید"
+    "edit": "ویرایش نقص"
   },
   "InspectionsPage": {
     "title": "بازرسی",
@@ -166,8 +166,7 @@
     "lastInspection": "آخرین بازرسی",
     "nextInspection": "بازرسی بعدی",
     "overallStatus": "وضعیت کلی",
-    "question": "سوال {n}",
-    "submit": "تایید"
+    "question": "سوال {n}"
   },
   "NotificationsPage": {
     "title": "اعلانات"

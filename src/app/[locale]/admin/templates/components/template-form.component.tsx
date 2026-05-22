@@ -6,14 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
-import {
-  Button,
-  NumberInput,
-  Select,
-  Stack,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { NumberInput, Select, Stack, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -31,6 +24,7 @@ import {
 import { editTemplateApi } from "@/api/templates/edit-template.api";
 
 import LoadingComponent from "@/components/loading.component";
+import SubmitButtonComponent from "@/components/submit-button.component";
 
 import { standardKeys, templateKeys } from "@/queries/keys";
 
@@ -87,9 +81,9 @@ export default function TemplateFormComponent({
       await editMutateAsync(
         { id, ...dto },
         {
-          onSuccess: (data): void => {
+          onSuccess: async (data): Promise<void> => {
             toast.success(data.message);
-            queryClient.removeQueries({ queryKey: templateKeys.all });
+            await queryClient.invalidateQueries({ queryKey: templateKeys.all });
           },
           onError: (error): void => {
             toast.error(error.message);
@@ -98,9 +92,9 @@ export default function TemplateFormComponent({
       );
     } else {
       await createMutateAsync(dto, {
-        onSuccess: (data): void => {
+        onSuccess: async (data): Promise<void> => {
           toast.success(data.message);
-          queryClient.removeQueries({ queryKey: templateKeys.all });
+          await queryClient.invalidateQueries({ queryKey: templateKeys.all });
           router.push("/admin/templates");
         },
         onError: (error): void => {
@@ -156,9 +150,7 @@ export default function TemplateFormComponent({
           suffix={" " + tCommon("days")}
           {...form.getInputProps("inspectionPeriod")}
         />
-        <Button type="submit" w="max-content">
-          {t("submit")}
-        </Button>
+        <SubmitButtonComponent />
       </Stack>
     </form>
   );

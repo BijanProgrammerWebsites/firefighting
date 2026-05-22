@@ -6,13 +6,15 @@ import { richFetch } from "@/utils/fetch.utils";
 
 export const CreateStandardSchema = z.object({
   title: z.string().nonempty(),
-  questions: z.array(
-    z.object({
-      id: z.string(),
-      title: z.string().nonempty(),
-      description: z.string(),
-    }),
-  ),
+  questions: z
+    .array(
+      z.object({
+        id: z.string(),
+        title: z.string().nonempty(),
+        description: z.string(),
+      }),
+    )
+    .min(1),
 });
 
 export type CreateStandardRequestDto = z.infer<typeof CreateStandardSchema>;

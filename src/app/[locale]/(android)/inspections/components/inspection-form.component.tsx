@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import {
-  Button,
   Fieldset,
   SegmentedControl,
   Select,
@@ -28,6 +27,8 @@ import {
   CreateInspectionRequestDto,
   createInspectionApi,
 } from "@/api/inspections/create-inspection.api";
+
+import SubmitButtonComponent from "@/components/submit-button.component";
 
 import { DefectSeverityEnum } from "@/enums/defect-severity.enum";
 import { EquipmentStatusEnum } from "@/enums/equipment-status.enum";
@@ -99,9 +100,9 @@ export default function InspectionFormComponent({
     };
 
     await createMutateAsync(dto, {
-      onSuccess: (data): void => {
+      onSuccess: async (data): Promise<void> => {
         toast.success(data.message);
-        queryClient.removeQueries({ queryKey: inspectionKeys.all });
+        await queryClient.invalidateQueries({ queryKey: inspectionKeys.all });
         router.push("/inspections");
       },
       onError: (error): void => {
@@ -177,9 +178,7 @@ export default function InspectionFormComponent({
             />
           </Fieldset>
         ))}
-        <Button type="submit" w="max-content">
-          {t("submit")}
-        </Button>
+        <SubmitButtonComponent />
       </Stack>
     </form>
   );

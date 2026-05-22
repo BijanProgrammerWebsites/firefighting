@@ -11,6 +11,7 @@ import {
   Button,
   Fieldset,
   Group,
+  Text,
   TextInput,
   Textarea,
   Tooltip,
@@ -33,6 +34,7 @@ import {
 import { editStandardApi } from "@/api/standards/edit-standard.api";
 
 import IconComponent from "@/components/icon/icon.component";
+import SubmitButtonComponent from "@/components/submit-button.component";
 
 import { standardKeys } from "@/queries/keys";
 
@@ -70,7 +72,13 @@ export default function StandardFormComponent({
   const form = useForm<CreateStandardRequestDto>({
     initialValues: initialValues ?? {
       title: "",
-      questions: [],
+      questions: [
+        {
+          id: uuid(),
+          title: "",
+          description: "",
+        },
+      ],
     },
     validate: zod4Resolver(CreateStandardSchema),
   });
@@ -90,9 +98,9 @@ export default function StandardFormComponent({
       await editMutateAsync(
         { id, ...dto },
         {
-          onSuccess: (data): void => {
+          onSuccess: async (data): Promise<void> => {
             toast.success(data.message);
-            queryClient.removeQueries({ queryKey: standardKeys.all });
+            await queryClient.invalidateQueries({ queryKey: standardKeys.all });
           },
           onError: (error): void => {
             toast.error(error.message);
@@ -101,9 +109,9 @@ export default function StandardFormComponent({
       );
     } else {
       await createMutateAsync(dto, {
-        onSuccess: (data): void => {
+        onSuccess: async (data): Promise<void> => {
           toast.success(data.message);
-          queryClient.removeQueries({ queryKey: standardKeys.all });
+          await queryClient.invalidateQueries({ queryKey: standardKeys.all });
           router.push("/admin/standards");
         },
         onError: (error): void => {
@@ -123,21 +131,23 @@ export default function StandardFormComponent({
         label={t("titleField")}
         {...form.getInputProps("title")}
       />
-      {form.getValues().questions.map((question, index) => (
+      {form.values.questions.map((question, index) => (
         <Fieldset
           key={question.id}
           legend={
             <Group gap="xs">
-              <Tooltip label={tCommon("remove")}>
-                <ActionIcon
-                  variant="subtle"
-                  color="gray"
-                  aria-label={tCommon("remove")}
-                  onClick={() => form.removeListItem("questions", index)}
-                >
-                  <IconComponent name="trash-bin-trash-linear" />
-                </ActionIcon>
-              </Tooltip>
+              {form.values.questions.length > 1 && (
+                <Tooltip label={tCommon("remove")}>
+                  <ActionIcon
+                    variant="subtle"
+                    color="gray"
+                    aria-label={tCommon("remove")}
+                    onClick={() => form.removeListItem("questions", index)}
+                  >
+                    <IconComponent name="trash-bin-trash-linear" />
+                  </ActionIcon>
+                </Tooltip>
+              )}
               {t("question", { n: index + 1 })}
             </Group>
           }
@@ -156,11 +166,20 @@ export default function StandardFormComponent({
         </Fieldset>
       ))}
       <Group gap="xs" mt="md">
-        <Button variant="default" onClick={handleAddMoreButtonClick}>
+        <Button
+          variant="default"
+          leftSection={<IconComponent collection="tabler" name="plus" />}
+          onClick={handleAddMoreButtonClick}
+        >
           {t("addMore")}
         </Button>
-        <Button type="submit">{t("submit")}</Button>
+        <SubmitButtonComponent />
       </Group>
+      {form.errors.questions && (
+        <Text c="red" mt="md">
+          {form.errors.questions}
+        </Text>
+      )}
     </form>
   );
 }

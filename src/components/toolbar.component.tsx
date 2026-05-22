@@ -4,13 +4,11 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Box, Button, Title } from "@mantine/core";
+import { Box, Button, Group, Text, Title } from "@mantine/core";
 
-import clsx from "clsx";
+import IconComponent from "@/components/icon/icon.component";
 
 import { Link } from "@/i18n/navigation";
-
-import styles from "./toolbar.module.css";
 
 type Props = {
   title: string;
@@ -30,23 +28,32 @@ export default function ToolbarComponent({
   const tCommon = useTranslations("Common");
 
   return (
-    <Box className={clsx(styles.toolbar, noMargin && styles["no-margin"])}>
-      <Box className={styles.top}>
+    <Box mb={noMargin ? 0 : "md"}>
+      <Group>
         <Title order={2}>{title}</Title>
-        <Box className={styles.actions}>
+        <Box style={{ marginInlineStart: "auto" }}>
           {createHref && (
-            <Button component={Link} href={createHref}>
+            <Button
+              component={Link}
+              href={createHref}
+              leftSection={<IconComponent collection="tabler" name="plus" />}
+            >
               {tCommon("create")}
             </Button>
           )}
           {parentHref && (
-            <Button component={Link} href={parentHref} variant="default">
+            <Button
+              component={Link}
+              href={parentHref}
+              variant="default"
+              leftSection={<IconComponent name="arrow-right-linear" />}
+            >
               {tCommon("return")}
             </Button>
           )}
         </Box>
-      </Box>
-      {subtitle && <Box className={styles.bottom}>{subtitle}</Box>}
+      </Group>
+      {subtitle && <Text c="dimmed">{subtitle}</Text>}
     </Box>
   );
 }

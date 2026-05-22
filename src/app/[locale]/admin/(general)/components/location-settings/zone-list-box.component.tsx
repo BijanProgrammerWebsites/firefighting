@@ -9,7 +9,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import { findOneSiteApi } from "@/api/sites/find-one-site.api";
-// دریافت سایت با زون‌هایش
+// دریافت سایت با ناحیه‌هایش
 import { createZoneApi } from "@/api/zones/create-zone.api";
 import { editZoneApi } from "@/api/zones/edit-zone.api";
 import { removeZoneApi } from "@/api/zones/remove-zone.api";
@@ -17,7 +17,7 @@ import { removeZoneApi } from "@/api/zones/remove-zone.api";
 import { siteKeys, zoneKeys } from "@/queries/keys";
 
 // siteKeys.one تعریف شده است
-import { ListBoxComponent } from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/list-box.component";
+import { ListBoxComponent } from "@/admin/(general)/components/location-settings/list-box.component";
 import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
 
@@ -39,10 +39,10 @@ export default function ZoneListBoxComponent(): ReactNode {
   const { mutateAsync: createZone } = useMutation({
     mutationKey: zoneKeys.create,
     mutationFn: createZoneApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedSiteId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: siteKeys.one(selectedSiteId),
         });
       }
@@ -55,10 +55,10 @@ export default function ZoneListBoxComponent(): ReactNode {
   const { mutateAsync: editZone } = useMutation({
     mutationKey: zoneKeys.edit,
     mutationFn: editZoneApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedSiteId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: siteKeys.one(selectedSiteId),
         });
       }
@@ -71,10 +71,10 @@ export default function ZoneListBoxComponent(): ReactNode {
   const { mutateAsync: deleteZone } = useMutation({
     mutationKey: zoneKeys.remove,
     mutationFn: removeZoneApi,
-    onSuccess: (data) => {
+    onSuccess: async (data): Promise<void> => {
       toast.success(data.message);
       if (selectedSiteId) {
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: siteKeys.one(selectedSiteId),
         });
       }

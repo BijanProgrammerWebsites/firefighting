@@ -1,11 +1,9 @@
 import type { ReactNode } from "react";
 
-import { ActionIcon, TextInput } from "@mantine/core";
+import { ActionIcon, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import IconComponent from "@/components/icon/icon.component";
-
-import styles from "./text-form.module.css";
 
 type Props = {
   defaultValue?: string;
@@ -37,17 +35,26 @@ export default function TextFormComponent({
 
   return (
     <form
-      className={styles["text-form"]}
+      style={{ width: "100%" }}
       onSubmit={form.onSubmit(handleSubmit)}
       onReset={handleCancel}
     >
-      <TextInput key={form.key("name")} {...form.getInputProps("name")} />
-      <ActionIcon type="submit" variant="filled" color="green" size="xs">
-        <IconComponent collection="tabler" name="check" />
-      </ActionIcon>
-      <ActionIcon type="reset" variant="filled" color="red" size="xs">
-        <IconComponent collection="tabler" name="x" />
-      </ActionIcon>
+      <Group>
+        <TextInput
+          size="xs"
+          flex={1}
+          key={form.key("name")}
+          {...form.getInputProps("name")}
+        />
+        <Group gap={0}>
+          <ActionIcon type="submit" variant="subtle" color="gray" size="sm">
+            <IconComponent collection="tabler" name="check" />
+          </ActionIcon>
+          <ActionIcon type="reset" variant="subtle" color="gray" size="sm">
+            <IconComponent collection="tabler" name="x" />
+          </ActionIcon>
+        </Group>
+      </Group>
     </form>
   );
 }

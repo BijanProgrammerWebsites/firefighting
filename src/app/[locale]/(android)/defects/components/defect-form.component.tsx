@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Button, Select, Stack, TextInput, Textarea } from "@mantine/core";
+import { Select, Stack, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -18,6 +18,8 @@ import {
   CreateDefectSchema,
   editDefectApi,
 } from "@/api/defects/edit-defect.api";
+
+import SubmitButtonComponent from "@/components/submit-button.component";
 
 import { DefectSeverityEnum } from "@/enums/defect-severity.enum";
 import { DefectStatusEnum } from "@/enums/defect-status.enum";
@@ -55,9 +57,9 @@ export default function DefectFormComponent({
     await editMutateAsync(
       { id, ...dto },
       {
-        onSuccess: (data): void => {
+        onSuccess: async (data): Promise<void> => {
           toast.success(data.message);
-          queryClient.removeQueries({ queryKey: defectKeys.all });
+          await queryClient.invalidateQueries({ queryKey: defectKeys.all });
         },
         onError: (error): void => {
           toast.error(error.message);
@@ -128,9 +130,7 @@ export default function DefectFormComponent({
           data={maintenanceStatuses}
           {...form.getInputProps("maintenanceStatus")}
         />
-        <Button type="submit" w="max-content">
-          {t("submit")}
-        </Button>
+        <SubmitButtonComponent />
       </Stack>
     </form>
   );
