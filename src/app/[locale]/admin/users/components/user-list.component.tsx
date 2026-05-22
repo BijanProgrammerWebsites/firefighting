@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Select, Text, TextInput } from "@mantine/core";
+import { Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -13,7 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { DataTable } from "mantine-datatable";
+import { ListViewTable } from "@gfazioli/mantine-list-view-table";
 
 import { findAllUsersApi } from "@/api/users/find-all-users.api";
 import { removeUserApi } from "@/api/users/remove-user.api";
@@ -30,10 +30,6 @@ import { z } from "@/lib/zod";
 
 import { userKeys } from "@/queries/keys";
 
-import {
-  SELECT_FILTER_PROPS,
-  TEXT_FILTER_PROPS,
-} from "@/utils/component.utils";
 import { filterByText } from "@/utils/filter.utils";
 
 export const UserListFiltersSchema = z.object({
@@ -92,41 +88,51 @@ export default function UserListComponent(): ReactNode {
   );
 
   return (
-    <DataTable
+    <ListViewTable
+      striped
       highlightOnHover
-      records={filteredData}
+      enableColumnResizing
+      enableColumnVisibilityToggle
+      withColumnBorders={true}
+      withRowBorders={false}
+      data={filteredData}
+      rowKey="id"
       columns={[
         {
-          accessor: "id",
+          key: "id",
           title: tCommon("row"),
+          sortable: true,
           width: TableConstants.ROW_COLUMN_WIDTH,
-          render: (_, index) => index + 1,
+          renderCell: (_, index) => index + 1,
         },
         {
-          accessor: "username",
+          key: "username",
           title: t("username"),
-          filter: (
-            <TextInput
-              {...TEXT_FILTER_PROPS}
-              {...form.getInputProps("username")}
-            />
-          ),
+          sortable: true,
+          // filter: (
+          //   <TextInput
+          //     {...TEXT_FILTER_PROPS}
+          //     {...form.getInputProps("username")}
+          //   />
+          // ),
         },
         {
-          accessor: "role",
+          key: "role",
           title: t("role"),
-          filter: (
-            <Select
-              data={roles}
-              {...SELECT_FILTER_PROPS}
-              {...form.getInputProps("role")}
-            />
-          ),
+          sortable: true,
+          // filter: (
+          //   <Select
+          //     data={roles}
+          //     {...SELECT_FILTER_PROPS}
+          //     {...form.getInputProps("role")}
+          //   />
+          // ),
         },
         {
-          accessor: "",
+          key: "",
           width: TableConstants.ACTIONS_COLUMN_WIDTH(3),
-          render: (item) => (
+          textAlign: "center",
+          renderCell: (item) => (
             <>
               <EditButtonComponent href={`/admin/users/${item.id}`} />
               <RemoveButtonComponent
