@@ -2,6 +2,8 @@ import { ReactNode, use } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { Box } from "@mantine/core";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
@@ -16,8 +18,6 @@ import { siteKeys } from "@/queries/keys";
 import { ListBoxComponent } from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/list-box.component";
 import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
-
-import styles from "./site-list-box.module.css";
 
 export default function SiteListBoxComponent(): ReactNode {
   const t = useTranslations("AdminGeneralPage");
@@ -74,7 +74,7 @@ export default function SiteListBoxComponent(): ReactNode {
     data?.map((item) => ({ id: item.id, name: item.title })) ?? [];
 
   return (
-    <div className={styles["site-list-box"]}>
+    <Box>
       <ListBoxComponent
         items={sites}
         isLoading={isPending}
@@ -87,6 +87,6 @@ export default function SiteListBoxComponent(): ReactNode {
         onSelect={(id) => setSelectedSiteId(id)}
         selectedItemId={selectedSiteId}
       />
-    </div>
+    </Box>
   );
 }

@@ -1,3 +1,5 @@
+import { ScopeType } from "@/android/(dashboard)/types/scope.type";
+
 export const authKeys = {
   all: ["auth"] as const,
   verify: () => ["auth", "verify"] as const,
@@ -29,6 +31,7 @@ export const templateKeys = {
 
 export const refineryKeys = {
   find: ["refinery"] as const,
+  detailed: ["refinery", "detailed"] as const,
   edit: ["refinery", "edit"] as const,
   picture: {
     edit: ["refinery", "picture", "edit"] as const,
@@ -66,7 +69,7 @@ export const equipmentKeys = {
   create: ["equipment", "create"] as const,
   edit: ["equipment", "edit"] as const,
   remove: ["equipment", "remove"] as const,
-  buckets: ["buckets"] as const,
+  buckets: withScope(["buckets"]),
 };
 
 export const inspectionKeys = {
@@ -77,8 +80,29 @@ export const inspectionKeys = {
   remove: ["inspection", "remove"] as const,
 };
 
+export const defectKeys = {
+  all: ["defect"] as const,
+  one: (defectId: string) => ["defect", defectId] as const,
+  create: ["defect", "create"] as const,
+  edit: ["defect", "edit"] as const,
+  remove: ["defect", "remove"] as const,
+};
+
+export const dashboardKeys = {
+  kpi: withScope(["kpi"]),
+  overdue: withScope(["overdue"]),
+  defectsBySeverity: withScope(["defectsBySeverity"]),
+  defectsAging: withScope(["defectsAging"]),
+  equipmentsByStatus: withScope(["equipmentsByStatus"]),
+  criticalEquipments: withScope(["criticalEquipments"]),
+};
+
 export const mutationKeys = {
   signIn: () => ["auth", "sign-in"] as const,
-  signUp: () => ["auth", "sign-up"] as const,
   signOut: () => ["auth", "sign-out"] as const,
 };
+
+function withScope(keys: string[]) {
+  return (scope: ScopeType) =>
+    [...keys, scope.site?.id, scope.zone?.id, scope.unit?.id] as const;
+}

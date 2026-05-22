@@ -1,14 +1,12 @@
 import { Answer } from "@/entities/answer";
 import { Equipment } from "@/entities/equipment";
 
-import { StatusEnum } from "@/enums/status.enum";
+import { EquipmentStatusEnum } from "@/enums/equipment-status.enum";
 
 export type Inspection = {
   id: string;
-  status: StatusEnum;
-  score: number;
+  status: EquipmentStatusEnum;
   createdDate: string;
-  updatedDate: string;
   equipment: Equipment;
   answers: Answer[];
 };

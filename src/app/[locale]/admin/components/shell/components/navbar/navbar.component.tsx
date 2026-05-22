@@ -2,11 +2,11 @@ import { type ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { Box } from "@mantine/core";
+
 import IconComponent from "@/components/icon/icon.component";
 
 import NavLinkComponent from "@/admin/components/nav-link/nav-link.component";
-
-import styles from "./navbar.module.css";
 
 type Item = {
   href: string;
@@ -53,7 +53,7 @@ export default function NavbarComponent(): ReactNode {
   ];
 
   return (
-    <div className={styles.navbar}>
+    <Box>
       {items
         .filter((item) => !item.disabled)
         .map((item) => (
@@ -66,6 +66,6 @@ export default function NavbarComponent(): ReactNode {
             />
           </li>
         ))}
-    </div>
+    </Box>
   );
 }

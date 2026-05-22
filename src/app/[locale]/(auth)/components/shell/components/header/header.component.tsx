@@ -4,9 +4,11 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { Box } from "@mantine/core";
+
 import clsx from "clsx";
 
-import ToggleLocaleComponent from "@/components/toggle-locale/toggle-locale.component";
+import ToggleLocaleComponent from "@/components/toggle-locale.component";
 
 import { Link } from "@/i18n/navigation";
 
@@ -24,9 +26,9 @@ export default function HeaderComponent({ className }: Props): ReactNode {
       <Link className={styles.name} href="/">
         {t("name")}
       </Link>
-      <div className={styles.actions}>
+      <Box className={styles.actions}>
         <ToggleLocaleComponent />
-      </div>
+      </Box>
     </header>
   );
 }

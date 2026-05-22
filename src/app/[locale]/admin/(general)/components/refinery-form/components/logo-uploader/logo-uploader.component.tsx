@@ -3,7 +3,7 @@ import { ReactNode, useRef } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Avatar, Button, FileButton } from "@mantine/core";
+import { Avatar, Box, Button, FileButton } from "@mantine/core";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -66,8 +66,8 @@ export default function LogoUploaderComponent({ picture }: Props): ReactNode {
   };
 
   return (
-    <div className={styles["logo-uploader"]}>
-      <div className={styles.preview}>
+    <Box className={styles["logo-uploader"]}>
+      <Box className={styles.preview}>
         <Avatar
           variant="filled"
           radius="md"
@@ -75,8 +75,8 @@ export default function LogoUploaderComponent({ picture }: Props): ReactNode {
           src={process.env.NEXT_PUBLIC_API_BASE_URL + "/pictures/" + picture}
           alt="Logo preview"
         />
-      </div>
-      <div className={styles["upload-buttons"]}>
+      </Box>
+      <Box className={styles["upload-buttons"]}>
         <FileButton
           resetRef={resetRef}
           onChange={handleSetFile}
@@ -87,7 +87,7 @@ export default function LogoUploaderComponent({ picture }: Props): ReactNode {
         <Button disabled={!picture} color="red" onClick={clearFile}>
           {t("reset")}
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

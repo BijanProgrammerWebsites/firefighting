@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 
 import { Box, Burger } from "@mantine/core";
 
-import SignOutButtonComponent from "@/components/sign-out-button/sign-out-button.component";
-import ToggleLocaleComponent from "@/components/toggle-locale/toggle-locale.component";
+import SignOutButtonComponent from "@/components/sign-out-button.component";
+import ToggleLocaleComponent from "@/components/toggle-locale.component";
 
 import { Link } from "@/i18n/navigation";
 
@@ -25,10 +25,10 @@ export default function HeaderComponent({ opened, toggle }: Props): ReactNode {
       <Link className={styles.name} href="/admin">
         {t("name")}
       </Link>
-      <div className={styles.actions}>
+      <Box className={styles.actions}>
         <ToggleLocaleComponent />
         <SignOutButtonComponent />
-      </div>
+      </Box>
     </Box>
   );
 }

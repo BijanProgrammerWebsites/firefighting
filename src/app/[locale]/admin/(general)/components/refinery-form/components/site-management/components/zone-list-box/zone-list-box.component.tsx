@@ -2,6 +2,8 @@ import { ReactNode, use } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { Box } from "@mantine/core";
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
@@ -18,8 +20,6 @@ import { siteKeys, zoneKeys } from "@/queries/keys";
 import { ListBoxComponent } from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/list-box.component";
 import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
-
-import styles from "./zone-list-box.module.css";
 
 export default function ZoneListBoxComponent(): ReactNode {
   const t = useTranslations("AdminGeneralPage");
@@ -108,7 +108,7 @@ export default function ZoneListBoxComponent(): ReactNode {
       : undefined;
 
   return (
-    <div className={styles["zone-list-box"]}>
+    <Box>
       <ListBoxComponent
         items={zoneItems}
         isLoading={isLoading}
@@ -123,6 +123,6 @@ export default function ZoneListBoxComponent(): ReactNode {
         onSelect={(id) => setSelectedZoneId(id)}
         selectedItemId={selectedZoneId}
       />
-    </div>
+    </Box>
   );
 }

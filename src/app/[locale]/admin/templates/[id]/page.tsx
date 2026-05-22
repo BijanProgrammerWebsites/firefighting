@@ -2,13 +2,13 @@ import { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
+import { Box } from "@mantine/core";
+
 import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import TemplateEditComponent from "@/admin/templates/components/template-edit/template-edit.component";
-
-import styles from "./page.module.css";
+import TemplateEditComponent from "@/admin/templates/components/template-edit.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminTemplatesPage");
 
@@ -24,9 +24,9 @@ export default async function EditTemplatePage({
   const t = await getTranslations("AdminTemplatesPage");
 
   return (
-    <div className={styles["edit-template"]}>
+    <Box>
       <ToolbarComponent title={t("edit")} parentHref="/admin/templates" />
       <TemplateEditComponent id={id} />
-    </div>
+    </Box>
   );
 }

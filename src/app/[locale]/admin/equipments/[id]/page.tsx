@@ -2,13 +2,13 @@ import { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
+import { Box } from "@mantine/core";
+
 import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import EquipmentEditComponent from "@/admin/equipments/components/equipment-edit/equipment-edit.component";
-
-import styles from "./page.module.css";
+import EquipmentEditComponent from "@/admin/equipments/components/equipment-edit.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminEquipmentsPage");
 
@@ -24,9 +24,9 @@ export default async function EditEquipmentPage({
   const t = await getTranslations("AdminEquipmentsPage");
 
   return (
-    <div className={styles["edit-equipment"]}>
+    <Box>
       <ToolbarComponent title={t("edit")} parentHref="/admin/equipments" />
       <EquipmentEditComponent id={id} />
-    </div>
+    </Box>
   );
 }

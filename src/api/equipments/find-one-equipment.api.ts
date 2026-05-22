@@ -2,7 +2,10 @@ import { Equipment } from "@/entities/equipment";
 
 import { richFetch } from "@/utils/fetch.utils";
 
-export type FindOneEquipmentResponseDto = Omit<Equipment, "inspections">;
+export type FindOneEquipmentResponseDto = Omit<
+  Equipment,
+  "inspections" | "defects"
+>;
 
 export async function findOneEquipmentApi(
   id: string,

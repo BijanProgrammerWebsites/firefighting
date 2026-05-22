@@ -2,13 +2,13 @@ import { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
+import { Box } from "@mantine/core";
+
 import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import InspectionCreateComponent from "@/android/inspections/components/inspection-create/inspection-create.component";
-
-import styles from "./page.module.css";
+import InspectionCreateComponent from "@/android/inspections/components/inspection-create.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminTemplatesPage");
 
@@ -24,9 +24,9 @@ export default async function CreateInspectionPage({
   const t = await getTranslations("InspectionsPage");
 
   return (
-    <div className={styles["create-inspection"]}>
+    <Box>
       <ToolbarComponent title={t("create")} parentHref="/inspections" />
       <InspectionCreateComponent equipmentId={equipmentId} />
-    </div>
+    </Box>
   );
 }

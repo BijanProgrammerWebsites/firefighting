@@ -1,24 +1,20 @@
 import { ResponseDto } from "@/dto/response.dto";
 
-import { StatusEnum } from "@/enums/status.enum";
-
-import { z } from "@/lib/zod";
+import { DefectSeverityEnum } from "@/enums/defect-severity.enum";
+import { EquipmentStatusEnum } from "@/enums/equipment-status.enum";
 
 import { richFetch } from "@/utils/fetch.utils";
 
-export const CreateInspectionSchema = z.object({
-  equipmentId: z.uuid(),
-  answers: z.array(
-    z.object({
-      questionId: z.uuid(),
-      status: z.enum(StatusEnum),
-      text: z.string().nonempty(),
-      picture: z.string().nullable().optional(),
-    }),
-  ),
-});
-
-export type CreateInspectionRequestDto = z.infer<typeof CreateInspectionSchema>;
+export type CreateInspectionRequestDto = {
+  equipmentId: string;
+  status: EquipmentStatusEnum;
+  answers: {
+    questionId: string;
+    severity: DefectSeverityEnum | null;
+    text: string | null;
+    picture: string | null;
+  }[];
+};
 
 export async function createInspectionApi(
   dto: CreateInspectionRequestDto,

@@ -2,7 +2,7 @@ import { ChangeEvent, ReactNode, useRef } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Button, TextInput } from "@mantine/core";
+import { Box, Button, TextInput } from "@mantine/core";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -48,7 +48,7 @@ export default function NameBoxComponent({ title }: Props): ReactNode {
     name.current = e.target.value;
   };
   return (
-    <div className={styles["name-box"]}>
+    <Box className={styles["name-box"]}>
       <TextInput
         label={t("refineryName")}
         defaultValue={title}
@@ -56,6 +56,6 @@ export default function NameBoxComponent({ title }: Props): ReactNode {
         className={styles.input}
       />
       <Button onClick={handleButtonClick}>تغییر نام پالایشگاه</Button>
-    </div>
+    </Box>
   );
 }
