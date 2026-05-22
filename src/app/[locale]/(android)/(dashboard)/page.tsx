@@ -24,7 +24,7 @@ export default async function DashboardPage(): Promise<ReactNode> {
 
   return (
     <DashboardProvider>
-      <Stack>
+      <Stack gap="xl">
         <ToolbarComponent
           noMargin
           title={t("title")}
