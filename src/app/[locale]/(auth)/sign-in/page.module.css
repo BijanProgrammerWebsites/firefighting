@@ -1,9 +1,0 @@
-.sign-in {
-  margin-block-start: 4rem;
-
-  .writings {
-    display: grid;
-    justify-items: center;
-    gap: 0.5rem;
-  }
-}
