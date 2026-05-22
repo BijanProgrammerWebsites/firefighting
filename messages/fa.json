@@ -15,7 +15,7 @@
     "fieldIsRequired": "پر کردن {field} الزامی است.",
     "days": "روز",
     "status": "وضعیت",
-    "inService": "در حال کار",
+    "inService": "مناسب",
     "needsRepair": "نیازمند تعمیر",
     "outOfService": "خارج از سرویس",
     "severity": "شدت نقص",
@@ -146,7 +146,8 @@
     "defectsBySeverity": "نقص‌ها بر اساس شدت",
     "defectsAging": "عمر نقص‌ها",
     "averageDaysOpen": "میانگین عمر نقص‌ها",
-    "oldestDaysOpen": "عمر قدیمی‌ترین نقص"
+    "oldestDaysOpen": "عمر قدیمی‌ترین نقص",
+    "equipmentsByStatus": "نجهیزات بر اساس وضعیت"
   },
   "DefectsPage": {
     "title": "نواقص",

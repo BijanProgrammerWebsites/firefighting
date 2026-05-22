@@ -93,6 +93,7 @@ export const dashboardKeys = {
   overdue: withScope(["overdue"]),
   defectsBySeverity: withScope(["defectsBySeverity"]),
   defectsAging: withScope(["defectsAging"]),
+  equipmentsByStatus: withScope(["equipmentsByStatus"]),
 };
 
 export const mutationKeys = {
