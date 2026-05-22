@@ -8,8 +8,6 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import TemplateEditComponent from "@/admin/templates/components/template-edit/template-edit.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("AdminTemplatesPage");
 
 type Props = {
@@ -24,7 +22,7 @@ export default async function EditTemplatePage({
   const t = await getTranslations("AdminTemplatesPage");
 
   return (
-    <div className={styles["edit-template"]}>
+    <div>
       <ToolbarComponent title={t("edit")} parentHref="/admin/templates" />
       <TemplateEditComponent id={id} />
     </div>

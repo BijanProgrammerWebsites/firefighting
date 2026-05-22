@@ -8,15 +8,13 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import TemplateListComponent from "@/admin/templates/components/template-list/template-list.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("AdminTemplatesPage");
 
 export default async function TemplatesPage(): Promise<ReactNode> {
   const t = await getTranslations("AdminTemplatesPage");
 
   return (
-    <div className={styles.templates}>
+    <div>
       <ToolbarComponent
         title={t("title")}
         createHref="/admin/templates/create"

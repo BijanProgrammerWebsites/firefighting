@@ -8,8 +8,6 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import UserEditComponent from "@/admin/users/components/user-edit/user-edit.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("AdminUsersPage");
 
 type Props = {
@@ -24,7 +22,7 @@ export default async function EditUserPage({
   const t = await getTranslations("AdminUsersPage");
 
   return (
-    <div className={styles["edit-user"]}>
+    <div>
       <ToolbarComponent title={t("edit")} parentHref="/admin/users" />
       <UserEditComponent id={id} />
     </div>

@@ -8,8 +8,6 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import InspectionCreateComponent from "@/android/inspections/components/inspection-create/inspection-create.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("AdminTemplatesPage");
 
 type Props = {
@@ -24,7 +22,7 @@ export default async function CreateInspectionPage({
   const t = await getTranslations("InspectionsPage");
 
   return (
-    <div className={styles["create-inspection"]}>
+    <div>
       <ToolbarComponent title={t("create")} parentHref="/inspections" />
       <InspectionCreateComponent equipmentId={equipmentId} />
     </div>

@@ -8,15 +8,13 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import DefectListComponent from "@/android/defects/components/defect-list/defect-list.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("DefectsPage");
 
 export default async function DefectsPage(): Promise<ReactNode> {
   const t = await getTranslations("DefectsPage");
 
   return (
-    <div className={styles.defects}>
+    <div>
       <ToolbarComponent title={t("title")} />
       <DefectListComponent />
     </div>

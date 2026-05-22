@@ -8,15 +8,13 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import UserListComponent from "@/admin/users/components/user-list/user-list.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("AdminUsersPage");
 
 export default async function UsersPage(): Promise<ReactNode> {
   const t = await getTranslations("AdminUsersPage");
 
   return (
-    <div className={styles.users}>
+    <div>
       <ToolbarComponent title={t("title")} createHref="/admin/users/create" />
       <UserListComponent />
     </div>

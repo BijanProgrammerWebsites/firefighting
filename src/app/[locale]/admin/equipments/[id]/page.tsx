@@ -8,8 +8,6 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import EquipmentEditComponent from "@/admin/equipments/components/equipment-edit/equipment-edit.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("AdminEquipmentsPage");
 
 type Props = {
@@ -24,7 +22,7 @@ export default async function EditEquipmentPage({
   const t = await getTranslations("AdminEquipmentsPage");
 
   return (
-    <div className={styles["edit-equipment"]}>
+    <div>
       <ToolbarComponent title={t("edit")} parentHref="/admin/equipments" />
       <EquipmentEditComponent id={id} />
     </div>

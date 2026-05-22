@@ -8,8 +8,6 @@ import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
 import DefectEditComponent from "@/android/defects/components/defect-edit/defect-edit.component";
 
-import styles from "./page.module.css";
-
 export const generateMetadata = generateDynamicMetadata("DefectsPage");
 
 type Props = {
@@ -24,7 +22,7 @@ export default async function EditDefectPage({
   const t = await getTranslations("DefectsPage");
 
   return (
-    <div className={styles["edit-defect"]}>
+    <div>
       <ToolbarComponent title={t("edit")} parentHref="/defects" />
       <DefectEditComponent id={id} />
     </div>
