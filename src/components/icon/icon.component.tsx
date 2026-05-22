@@ -2,12 +2,8 @@ import { ReactElement } from "react";
 
 import { Icon, IconProps } from "@iconify/react";
 
-import clsx from "clsx";
-
 import { useIconHook } from "@/components/icon/hooks/use-icon.hook";
 import { IconCollection } from "@/components/icon/types/icon-collection.type";
-
-import styles from "./icon.module.css";
 
 type Props = Omit<IconProps, "icon" | "ssr" | "color"> & {
   collection?: IconCollection;
@@ -20,7 +16,6 @@ export default function IconComponent({
   name,
   size = "inherit",
   inline = true,
-  className,
   ...otherProps
 }: Props): ReactElement {
   const iconData = useIconHook(collection, name);
@@ -42,8 +37,8 @@ export default function IconComponent({
     <Icon
       ssr
       icon={iconData}
-      className={clsx(styles.icon, styles[size], className)}
       inline={inline}
+      fontSize={size === "lg" ? "1.5em" : undefined}
       {...otherProps}
     />
   );

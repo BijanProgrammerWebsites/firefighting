@@ -36,8 +36,6 @@ import { z } from "@/lib/zod";
 
 import { inspectionKeys } from "@/queries/keys";
 
-import styles from "./inspection-form.module.css";
-
 const FormSchema = z.object({
   equipmentId: z.uuid(),
   status: z.enum(EquipmentStatusEnum),
@@ -121,7 +119,7 @@ export default function InspectionFormComponent({
 
   return (
     <form
-      className={styles["inspection-form"]}
+      style={{ maxWidth: "30rem" }}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
       <Stack>

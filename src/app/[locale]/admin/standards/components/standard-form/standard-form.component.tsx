@@ -36,8 +36,6 @@ import IconComponent from "@/components/icon/icon.component";
 
 import { standardKeys } from "@/queries/keys";
 
-import styles from "./standard-form.module.css";
-
 type Props =
   | {
       id?: never;
@@ -117,7 +115,7 @@ export default function StandardFormComponent({
 
   return (
     <form
-      className={styles["standard-form"]}
+      style={{ maxWidth: "30rem" }}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
       <TextInput

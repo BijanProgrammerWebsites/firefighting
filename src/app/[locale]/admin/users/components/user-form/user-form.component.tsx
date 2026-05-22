@@ -28,8 +28,6 @@ import { RoleEnum } from "@/enums/role.enum";
 
 import { userKeys } from "@/queries/keys";
 
-import styles from "./user-form.module.css";
-
 type Props =
   | {
       id?: never;
@@ -105,7 +103,7 @@ export default function UserFormComponent({
 
   return (
     <form
-      className={styles["user-form"]}
+      style={{ maxWidth: "30rem" }}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
       <Stack>

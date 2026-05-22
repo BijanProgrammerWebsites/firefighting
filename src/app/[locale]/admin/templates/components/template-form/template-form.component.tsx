@@ -34,8 +34,6 @@ import LoadingComponent from "@/components/loading/loading.component";
 
 import { standardKeys, templateKeys } from "@/queries/keys";
 
-import styles from "./template-form.module.css";
-
 type Props =
   | {
       id?: never;
@@ -127,7 +125,7 @@ export default function TemplateFormComponent({
 
   return (
     <form
-      className={styles["template-form"]}
+      style={{ maxWidth: "30rem" }}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
       <Stack>

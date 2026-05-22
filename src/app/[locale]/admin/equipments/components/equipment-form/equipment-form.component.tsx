@@ -35,8 +35,6 @@ import {
   zoneKeys,
 } from "@/queries/keys";
 
-import styles from "./equipment-form.module.css";
-
 type Props =
   | {
       id?: never;
@@ -184,7 +182,7 @@ export default function EquipmentFormComponent({
 
   return (
     <form
-      className={styles["equipment-form"]}
+      style={{ maxWidth: "30rem" }}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
       <Stack>
