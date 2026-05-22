@@ -1,6 +1,15 @@
 import { ReactNode, useState } from "react";
 
-import { ActionIcon, Box, Divider, List, Loader, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Card,
+  Center,
+  Divider,
+  Group,
+  Loader,
+  Stack,
+  Text,
+} from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -39,9 +48,8 @@ export function ListBoxComponent({
     onAdd(value);
   };
 
-  const messageBox = <Box>{messages}</Box>;
   const detailBox = (
-    <List>
+    <Stack gap={4}>
       {isAdding && (
         <TextFormComponent
           onSubmit={handleAddItem}
@@ -58,30 +66,38 @@ export function ListBoxComponent({
           selected={item.id === selectedItemId}
         />
       ))}
-    </List>
+    </Stack>
   );
 
   return (
-    <Box>
-      <Box>
-        <Text>{title}</Text>
-        <ActionIcon
-          variant="outline"
-          size="xs"
-          disabled={addIconDisable}
-          onClick={() => setIsAdding(true)}
-        >
-          <IconComponent collection="tabler" name="plus" />
-        </ActionIcon>
-      </Box>
-      <Divider />
-      {isLoading ? (
-        <Box>
-          <Loader size="sm" />
-        </Box>
-      ) : (
-        <>{!!messages && !isAdding ? messageBox : detailBox}</>
-      )}
-    </Box>
+    <Card withBorder radius="md">
+      <Stack gap="md" h="20rem">
+        <Group justify="space-between">
+          <Text>{title}</Text>
+          <ActionIcon
+            variant="outline"
+            size="xs"
+            disabled={addIconDisable}
+            onClick={() => setIsAdding(true)}
+          >
+            <IconComponent collection="tabler" name="plus" />
+          </ActionIcon>
+        </Group>
+        <Divider />
+        {isLoading ? (
+          <Center>
+            <Loader size="sm" />
+          </Center>
+        ) : (
+          <>
+            {!!messages && !isAdding ? (
+              <Center h="100%">{messages}</Center>
+            ) : (
+              detailBox
+            )}
+          </>
+        )}
+      </Stack>
+    </Card>
   );
 }

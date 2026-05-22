@@ -9,7 +9,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import { findOneSiteApi } from "@/api/sites/find-one-site.api";
-// دریافت سایت با زون‌هایش
+// دریافت سایت با ناحیه‌هایش
 import { createZoneApi } from "@/api/zones/create-zone.api";
 import { editZoneApi } from "@/api/zones/edit-zone.api";
 import { removeZoneApi } from "@/api/zones/remove-zone.api";

@@ -2,7 +2,8 @@ import { ReactNode, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { ActionIcon, Box, Text } from "@mantine/core";
+import { ActionIcon, Group, Text } from "@mantine/core";
+import { useHover } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 
 import IconComponent from "@/components/icon/icon.component";
@@ -27,6 +28,8 @@ export default function ListItemComponent({
   const tCommon = useTranslations("Common");
 
   const [mode, setMode] = useState<"edit" | "none">("none");
+
+  const { ref, hovered } = useHover();
 
   const handleRemoveMode = (): void => {
     modals.openConfirmModal({
@@ -59,7 +62,15 @@ export default function ListItemComponent({
   };
 
   return (
-    <Box onClick={handleSelectItem}>
+    <Group
+      ref={ref}
+      align="center"
+      justify="space-between"
+      bg={selected ? "gray.1" : hovered ? "gray.1" : undefined}
+      p={8}
+      style={{ borderRadius: 8, cursor: "pointer" }}
+      onClick={handleSelectItem}
+    >
       {mode !== "edit" && item.name}
       {mode === "edit" && (
         <TextFormComponent
@@ -69,24 +80,25 @@ export default function ListItemComponent({
         />
       )}
       {mode === "none" && (
-        <Box>
+        <Group gap={0}>
           <ActionIcon
-            variant="outline"
+            variant="subtle"
+            color="gray"
             size="sm"
             onClick={() => setMode("edit")}
           >
-            <IconComponent collection="tabler" name="edit" />
+            <IconComponent name="pen-linear" />
           </ActionIcon>
           <ActionIcon
-            color="red"
-            variant="outline"
+            variant="subtle"
+            color="gray"
             size="sm"
             onClick={handleRemoveMode}
           >
-            <IconComponent collection="tabler" name="trash" />
+            <IconComponent name="trash-bin-trash-linear" />
           </ActionIcon>
-        </Box>
+        </Group>
       )}
-    </Box>
+    </Group>
   );
 }

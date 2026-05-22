@@ -68,7 +68,7 @@ export default function RefineryTitleInputComponent({
           flex={1}
           {...form.getInputProps("title")}
         />
-        <SubmitButtonComponent />
+        <SubmitButtonComponent disabled={!form.isDirty("title")} />
       </Group>
     </form>
   );
