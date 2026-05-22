@@ -67,15 +67,14 @@ export default function LogoUploaderComponent({ picture }: Props): ReactNode {
 
   return (
     <Box className={styles["logo-uploader"]}>
-      <Box className={styles.preview}>
-        <Avatar
-          variant="filled"
-          radius="md"
-          size="xl"
-          src={process.env.NEXT_PUBLIC_API_BASE_URL + "/pictures/" + picture}
-          alt="Logo preview"
-        />
-      </Box>
+      <Avatar
+        className={styles.avatar}
+        variant="filled"
+        radius="md"
+        size="xl"
+        src={process.env.NEXT_PUBLIC_API_BASE_URL + "/pictures/" + picture}
+        alt=""
+      />
       <Box className={styles["upload-buttons"]}>
         <FileButton
           resetRef={resetRef}

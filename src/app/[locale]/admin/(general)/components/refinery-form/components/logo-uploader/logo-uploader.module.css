@@ -3,6 +3,12 @@
   place-items: center;
   gap: 0.5rem;
 
+  .avatar {
+    img {
+      object-fit: contain;
+    }
+  }
+
   .upload-buttons {
     display: flex;
     gap: 0.5rem;
