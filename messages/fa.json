@@ -143,7 +143,10 @@
     "next30Days": "30 روز آینده",
     "lastInspectionAt": "آخرین بازرسی در",
     "daysArePassedSinceDeadline": "روز از موعد بازرسی گذشته است.",
-    "defectsBySeverity": "نقص‌ها بر اساس شدت"
+    "defectsBySeverity": "نقص‌ها بر اساس شدت",
+    "defectsAging": "عمر نقص‌ها",
+    "averageDaysOpen": "میانگین عمر نقص‌ها",
+    "oldestDaysOpen": "عمر قدیمی‌ترین نقص"
   },
   "DefectsPage": {
     "title": "نواقص",

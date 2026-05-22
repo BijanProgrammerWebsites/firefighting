@@ -36,7 +36,7 @@ export default function KpiComponent(): ReactNode {
       <KpiChart
         title={t("totalEquipments")}
         value={data?.totalEquipments}
-        color={"dark"}
+        color="dark"
         isLoading={isPending}
         icon={<IconComponent name="box-minimalistic-linear" />}
       />

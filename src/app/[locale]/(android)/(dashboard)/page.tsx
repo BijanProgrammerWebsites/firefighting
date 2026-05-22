@@ -8,6 +8,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
+import DefectsAgingComponent from "@/android/(dashboard)/components/defects-aging.component";
 import DefectsBySeverityComponent from "@/android/(dashboard)/components/defects-by-severity.component";
 import InspectionsOverviewComponent from "@/android/(dashboard)/components/inspections-overview.component";
 import KpiComponent from "@/android/(dashboard)/components/kpi.component";
@@ -32,6 +33,7 @@ export default async function DashboardPage(): Promise<ReactNode> {
         <InspectionsOverviewComponent />
         <OverdueInspectionListComponent />
         <DefectsBySeverityComponent />
+        <DefectsAgingComponent />
       </Stack>
     </DashboardProvider>
   );

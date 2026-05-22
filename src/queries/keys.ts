@@ -69,8 +69,7 @@ export const equipmentKeys = {
   create: ["equipment", "create"] as const,
   edit: ["equipment", "edit"] as const,
   remove: ["equipment", "remove"] as const,
-  buckets: (scope: ScopeType) =>
-    ["buckets", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,
+  buckets: withScope(["buckets"]),
 };
 
 export const inspectionKeys = {
@@ -90,21 +89,18 @@ export const defectKeys = {
 };
 
 export const dashboardKeys = {
-  kpi: (scope: ScopeType) =>
-    ["kpi", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,
-  overdue: (scope: ScopeType) =>
-    ["overdue", scope.site?.id, scope.zone?.id, scope.unit?.id] as const,
-  defectsBySeverity: (scope: ScopeType) =>
-    [
-      "defectsBySeverity",
-      scope.site?.id,
-      scope.zone?.id,
-      scope.unit?.id,
-    ] as const,
+  kpi: withScope(["kpi"]),
+  overdue: withScope(["overdue"]),
+  defectsBySeverity: withScope(["defectsBySeverity"]),
+  defectsAging: withScope(["defectsAging"]),
 };
 
 export const mutationKeys = {
   signIn: () => ["auth", "sign-in"] as const,
-  signUp: () => ["auth", "sign-up"] as const,
   signOut: () => ["auth", "sign-out"] as const,
 };
+
+function withScope(keys: string[]) {
+  return (scope: ScopeType) =>
+    [...keys, scope.site?.id, scope.zone?.id, scope.unit?.id] as const;
+}
