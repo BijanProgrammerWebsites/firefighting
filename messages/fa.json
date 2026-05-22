@@ -18,7 +18,7 @@
     "inService": "مناسب",
     "needsRepair": "نیازمند تعمیر",
     "outOfService": "خارج از سرویس",
-    "severity": "شدت نقص",
+    "severity": "درجه‌بندی نقص",
     "noSeverity": "بدون نقص",
     "hasSeverity": "دارای نقص",
     "low": "کم",
@@ -143,11 +143,11 @@
     "next30Days": "30 روز آینده",
     "lastInspectionAt": "آخرین بازرسی در",
     "daysArePassedSinceDeadline": "روز از موعد بازرسی گذشته است.",
-    "defectsBySeverity": "نقص‌ها بر اساس شدت",
+    "defectsBySeverity": "درجه‌بندی نقص‌ها",
     "defectsAging": "عمر نقص‌ها",
     "averageDaysOpen": "میانگین عمر نقص‌ها",
     "oldestDaysOpen": "عمر قدیمی‌ترین نقص",
-    "equipmentsByStatus": "نجهیزات بر اساس وضعیت"
+    "equipmentsByStatus": "وضعیت تجهیزات"
   },
   "DefectsPage": {
     "title": "نواقص",
