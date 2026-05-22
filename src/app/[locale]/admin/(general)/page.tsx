@@ -8,8 +8,8 @@ import ToolbarComponent from "@/components/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import RefineryFormComponent from "@/admin/(general)/components/refinery-form.component";
-import SiteManagementComponent from "@/admin/(general)/components/site-management.component";
+import LocationSettingsComponent from "@/admin/(general)/components/location-settings/location-settings.component";
+import RefineryFormComponent from "@/admin/(general)/components/refinery-form/refinery-form.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminGeneralPage");
 
@@ -21,7 +21,7 @@ export default async function GeneralPage(): Promise<ReactNode> {
       <ToolbarComponent title={t("title")} subtitle={t("subtitle")} />
       <Stack gap="xl">
         <RefineryFormComponent />
-        <SiteManagementComponent />
+        <LocationSettingsComponent />
       </Stack>
     </Stack>
   );

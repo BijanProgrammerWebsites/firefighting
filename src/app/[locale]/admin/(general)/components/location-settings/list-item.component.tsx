@@ -7,7 +7,7 @@ import { modals } from "@mantine/modals";
 
 import IconComponent from "@/components/icon/icon.component";
 
-import TextFormComponent from "@/admin/(general)/components/text-form.component";
+import TextFormComponent from "@/admin/(general)/components/location-settings/text-form.component";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
 
 type Props = {

@@ -17,7 +17,7 @@ import { removeZoneApi } from "@/api/zones/remove-zone.api";
 import { siteKeys, zoneKeys } from "@/queries/keys";
 
 // siteKeys.one تعریف شده است
-import { ListBoxComponent } from "@/admin/(general)/components/list-box.component";
+import { ListBoxComponent } from "@/admin/(general)/components/location-settings/list-box.component";
 import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
 

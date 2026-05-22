@@ -11,8 +11,8 @@ import LoadingComponent from "@/components/loading.component";
 
 import { refineryKeys } from "@/queries/keys";
 
-import RefineryLogoInputComponent from "@/admin/(general)/components/refinery-logo-input.component";
-import RefineryTitleInputComponent from "@/admin/(general)/components/refinery-title-input.component";
+import RefineryLogoInputComponent from "@/admin/(general)/components/refinery-form/refinery-logo-input.component";
+import RefineryTitleInputComponent from "@/admin/(general)/components/refinery-form/refinery-title-input.component";
 
 export default function RefineryFormComponent(): ReactNode {
   const { isPending, isError, error, data } = useQuery({
