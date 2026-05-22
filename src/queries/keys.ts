@@ -94,6 +94,7 @@ export const dashboardKeys = {
   defectsBySeverity: withScope(["defectsBySeverity"]),
   defectsAging: withScope(["defectsAging"]),
   equipmentsByStatus: withScope(["equipmentsByStatus"]),
+  criticalEquipments: withScope(["criticalEquipments"]),
 };
 
 export const mutationKeys = {

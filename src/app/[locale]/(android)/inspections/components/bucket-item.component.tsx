@@ -37,7 +37,7 @@ export default function BucketItemComponent({ item }: Props): ReactNode {
         <Text c={color} size="md" fw={500}>
           {item.inspection.equipment.title}
         </Text>
-        <Badge variant="light" color={EquipmentStatusToColor[status]}>
+        <Badge variant="light" color={color}>
           {tCommon(status)}
         </Badge>
       </Group>

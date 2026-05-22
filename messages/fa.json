@@ -147,7 +147,8 @@
     "defectsAging": "عمر نقص‌ها",
     "averageDaysOpen": "میانگین عمر نقص‌ها",
     "oldestDaysOpen": "عمر قدیمی‌ترین نقص",
-    "equipmentsByStatus": "وضعیت تجهیزات"
+    "equipmentsByStatus": "وضعیت تجهیزات",
+    "criticalEquipments": "تجهیزات بحرانی"
   },
   "DefectsPage": {
     "title": "نواقص",
