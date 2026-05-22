@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { findRefineryApi } from "@/api/refinery/find-refinery.api";
 
-import LoadingComponent from "@/components/loading/loading.component";
+import LoadingComponent from "@/components/loading.component";
 
 import { refineryKeys } from "@/queries/keys";
 

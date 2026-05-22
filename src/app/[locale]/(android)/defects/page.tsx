@@ -6,7 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import DefectListComponent from "@/android/defects/components/defect-list/defect-list.component";
+import DefectListComponent from "@/android/defects/components/defect-list.component";
 
 export const generateMetadata = generateDynamicMetadata("DefectsPage");
 

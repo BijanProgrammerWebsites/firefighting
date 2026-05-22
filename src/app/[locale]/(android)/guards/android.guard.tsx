@@ -4,7 +4,7 @@ import type { PropsWithChildren, ReactNode } from "react";
 
 import { useLocale } from "next-intl";
 
-import LoadingComponent from "@/components/loading/loading.component";
+import LoadingComponent from "@/components/loading.component";
 
 import { redirect } from "@/i18n/navigation";
 

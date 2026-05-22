@@ -9,8 +9,8 @@ import { ActionIcon } from "@mantine/core";
 import clsx from "clsx";
 
 import IconComponent from "@/components/icon/icon.component";
-import SignOutButtonComponent from "@/components/sign-out-button/sign-out-button.component";
-import ToggleLocaleComponent from "@/components/toggle-locale/toggle-locale.component";
+import SignOutButtonComponent from "@/components/sign-out-button.component";
+import ToggleLocaleComponent from "@/components/toggle-locale.component";
 
 import { Link } from "@/i18n/navigation";
 

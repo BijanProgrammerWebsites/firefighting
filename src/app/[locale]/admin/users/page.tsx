@@ -6,7 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import UserListComponent from "@/admin/users/components/user-list/user-list.component";
+import UserListComponent from "@/admin/users/components/user-list.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminUsersPage");
 

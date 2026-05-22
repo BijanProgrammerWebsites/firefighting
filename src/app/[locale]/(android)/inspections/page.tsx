@@ -6,7 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import BucketsComponent from "@/android/inspections/components/buckets/buckets.component";
+import BucketsComponent from "@/android/inspections/components/buckets.component";
 
 export const generateMetadata = generateDynamicMetadata("InspectionsPage");
 

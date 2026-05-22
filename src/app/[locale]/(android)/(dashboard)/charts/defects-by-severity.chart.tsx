@@ -10,7 +10,7 @@ import { EChartsOption } from "echarts";
 
 import { defectsBySeverityDto } from "@/api/dashboard/defects-by-severity.api";
 
-import ChartComponent from "@/components/chart/chart.component";
+import ChartComponent from "@/components/chart.component";
 
 type Props = {
   data: defectsBySeverityDto;

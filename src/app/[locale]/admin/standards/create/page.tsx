@@ -6,7 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import StandardFormComponent from "@/admin/standards/components/standard-form/standard-form.component";
+import StandardFormComponent from "@/admin/standards/components/standard-form.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminStandardsPage");
 

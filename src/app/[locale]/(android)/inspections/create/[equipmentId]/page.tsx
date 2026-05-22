@@ -6,7 +6,7 @@ import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 
-import InspectionCreateComponent from "@/android/inspections/components/inspection-create/inspection-create.component";
+import InspectionCreateComponent from "@/android/inspections/components/inspection-create.component";
 
 export const generateMetadata = generateDynamicMetadata("AdminTemplatesPage");
 

@@ -10,7 +10,7 @@ import { EChartsOption } from "echarts";
 
 import { FindAllBucketsDto } from "@/api/equipments/find-all-buckets.api";
 
-import ChartComponent from "@/components/chart/chart.component";
+import ChartComponent from "@/components/chart.component";
 
 type Props = {
   data: FindAllBucketsDto;

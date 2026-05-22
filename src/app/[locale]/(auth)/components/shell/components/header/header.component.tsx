@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 
 import clsx from "clsx";
 
-import ToggleLocaleComponent from "@/components/toggle-locale/toggle-locale.component";
+import ToggleLocaleComponent from "@/components/toggle-locale.component";
 
 import { Link } from "@/i18n/navigation";
 

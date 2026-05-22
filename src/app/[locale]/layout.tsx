@@ -15,7 +15,7 @@ import {
 } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 
-import ToastComponent from "@/components/toast/toast.component";
+import ToastComponent from "@/components/toast.component";
 
 import QueryProvider from "@/providers/query.provider";
 
