@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
-import { Stack } from "@mantine/core";
+import { Stack, useMantineTheme } from "@mantine/core";
 
 import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
@@ -25,19 +25,21 @@ export default async function DashboardPage(): Promise<ReactNode> {
 
   return (
     <DashboardProvider>
-      <Stack gap="xl">
+      <Stack gap="sm">
         <ToolbarComponent
           noMargin
           title={t("title")}
           subtitle={<ScopeFilterComponent />}
         />
-        <KpiComponent />
-        <InspectionsOverviewComponent />
-        <OverdueInspectionListComponent />
-        <DefectsBySeverityComponent />
-        <DefectsAgingComponent />
-        <EquipmentsByStatusComponent />
-        <CriticalEquipmentsComponent />
+        <Stack gap={64}>
+          <KpiComponent />
+          <InspectionsOverviewComponent />
+          <OverdueInspectionListComponent />
+          <DefectsBySeverityComponent />
+          <DefectsAgingComponent />
+          <EquipmentsByStatusComponent />
+          <CriticalEquipmentsComponent />
+        </Stack>
       </Stack>
     </DashboardProvider>
   );
