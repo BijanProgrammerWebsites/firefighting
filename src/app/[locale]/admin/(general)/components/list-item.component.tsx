@@ -5,14 +5,10 @@ import { useTranslations } from "next-intl";
 import { ActionIcon, Box, Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 
-import clsx from "clsx";
-
 import IconComponent from "@/components/icon/icon.component";
 
-import TextFormComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/text-form/text-form.component";
+import TextFormComponent from "@/admin/(general)/components/text-form.component";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
-
-import styles from "./list-item.module.css";
 
 type Props = {
   item: ListItemType;
@@ -63,10 +59,7 @@ export default function ListItemComponent({
   };
 
   return (
-    <Box
-      className={clsx(styles["list-item"], selected && styles.selected)}
-      onClick={handleSelectItem}
-    >
+    <Box onClick={handleSelectItem}>
       {mode !== "edit" && item.name}
       {mode === "edit" && (
         <TextFormComponent
@@ -76,7 +69,7 @@ export default function ListItemComponent({
         />
       )}
       {mode === "none" && (
-        <Box className={styles["buttons"]}>
+        <Box>
           <ActionIcon
             variant="outline"
             size="sm"

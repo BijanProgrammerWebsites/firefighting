@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 import { Box } from "@mantine/core";
 
-import ToolbarComponent from "@/components/toolbar/toolbar.component";
+import ToolbarComponent from "@/components/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
 

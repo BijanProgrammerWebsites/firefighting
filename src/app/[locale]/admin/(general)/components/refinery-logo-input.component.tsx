@@ -3,7 +3,7 @@ import { ReactNode, useRef } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Avatar, Box, Button, FileButton } from "@mantine/core";
+import { Avatar, Button, FileButton, Group, Stack, Text } from "@mantine/core";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -18,19 +18,20 @@ import { refineryKeys } from "@/queries/keys";
 
 import { picturePath } from "@/utils/path.utils";
 
-import styles from "./logo-uploader.module.css";
-
 type Props = {
   picture: string | null;
 };
 
-export default function LogoUploaderComponent({ picture }: Props): ReactNode {
+export default function RefineryLogoInputComponent({
+  picture,
+}: Props): ReactNode {
   const tCommon = useTranslations("Common");
   const t = useTranslations("AdminGeneralPage");
 
   const resetRef = useRef<() => void>(null);
 
   const queryClient = useQueryClient();
+
   const { mutateAsync: deleteMutateAsync } = useMutation({
     mutationKey: refineryKeys.picture.delete,
     mutationFn: deleteRefineryPictureApi,
@@ -53,6 +54,7 @@ export default function LogoUploaderComponent({ picture }: Props): ReactNode {
     });
     resetRef.current?.();
   };
+
   const handleSetFile = async (payload: File | null): Promise<void> => {
     if (!payload) {
       return;
@@ -73,39 +75,50 @@ export default function LogoUploaderComponent({ picture }: Props): ReactNode {
   };
 
   return (
-    <Box className={styles["logo-uploader"]}>
-      <Avatar
-        className={styles.avatar}
-        variant="light"
-        radius="md"
-        size="xl"
-        src={picturePath(picture)}
-        alt=""
-      />
-      <Box className={styles["upload-buttons"]}>
-        <FileButton
-          resetRef={resetRef}
-          onChange={handleSetFile}
-          accept="image/png,image/jpeg"
-        >
-          {(props) => (
-            <Button
-              leftSection={<IconComponent collection="tabler" name="upload" />}
-              {...props}
+    <Stack gap="xs">
+      <Group gap="xs">
+        <Avatar
+          variant="light"
+          radius="md"
+          size={80}
+          src={picturePath(picture)}
+          alt={tCommon("logoAlt")}
+        />
+        <Stack gap="xs">
+          <Text size="lg" fw={500}>
+            {t("logo")}
+          </Text>
+          <Group gap="xs">
+            <FileButton
+              resetRef={resetRef}
+              onChange={handleSetFile}
+              accept="image/png,image/jpeg"
             >
-              {t("uploadLogo")}
-            </Button>
-          )}
-        </FileButton>
-        <Button
-          disabled={!picture}
-          color="red"
-          leftSection={<IconComponent collection="tabler" name="trash" />}
-          onClick={clearFile}
-        >
-          {tCommon("remove")}
-        </Button>
-      </Box>
-    </Box>
+              {(props) => (
+                <Button
+                  leftSection={
+                    <IconComponent collection="tabler" name="upload" />
+                  }
+                  {...props}
+                >
+                  {t("uploadLogo")}
+                </Button>
+              )}
+            </FileButton>
+            {picture && (
+              <Button
+                variant="outline"
+                color="gray"
+                leftSection={<IconComponent collection="tabler" name="trash" />}
+                onClick={clearFile}
+              >
+                {tCommon("remove")}
+              </Button>
+            )}
+          </Group>
+        </Stack>
+      </Group>
+      <Text c="dimmed">{t("logoHint")}</Text>
+    </Stack>
   );
 }

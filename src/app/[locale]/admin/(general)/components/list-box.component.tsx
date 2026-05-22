@@ -4,11 +4,9 @@ import { ActionIcon, Box, Divider, List, Loader, Text } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
-import ListItemComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/list-item/list-item.component";
-import TextFormComponent from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/components/text-form/text-form.component";
+import ListItemComponent from "@/admin/(general)/components/list-item.component";
+import TextFormComponent from "@/admin/(general)/components/text-form.component";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
-
-import styles from "./list-box.module.css";
 
 type Props = {
   items: ListItemType[];
@@ -41,9 +39,9 @@ export function ListBoxComponent({
     onAdd(value);
   };
 
-  const messageBox = <Box className={styles["message"]}>{messages}</Box>;
+  const messageBox = <Box>{messages}</Box>;
   const detailBox = (
-    <List className={styles["detail"]}>
+    <List>
       {isAdding && (
         <TextFormComponent
           onSubmit={handleAddItem}
@@ -64,8 +62,8 @@ export function ListBoxComponent({
   );
 
   return (
-    <Box className={styles["list-box"]}>
-      <Box className={styles.header}>
+    <Box>
+      <Box>
         <Text>{title}</Text>
         <ActionIcon
           variant="outline"
@@ -78,7 +76,7 @@ export function ListBoxComponent({
       </Box>
       <Divider />
       {isLoading ? (
-        <Box className={styles["loading"]}>
+        <Box>
           <Loader size="sm" />
         </Box>
       ) : (

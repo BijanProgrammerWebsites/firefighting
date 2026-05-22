@@ -15,7 +15,7 @@ import { removeSiteApi } from "@/api/sites/remove-site.api";
 
 import { siteKeys } from "@/queries/keys";
 
-import { ListBoxComponent } from "@/admin/(general)/components/refinery-form/components/site-management/components/list-box/list-box.component";
+import { ListBoxComponent } from "@/admin/(general)/components/list-box.component";
 import { RefineryGeneralFormContext } from "@/admin/(general)/contexts/refinery-general-form-context";
 import { ListItemType } from "@/admin/(general)/types/list-item.type";
 

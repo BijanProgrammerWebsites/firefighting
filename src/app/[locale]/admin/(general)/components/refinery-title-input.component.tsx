@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { TextInput } from "@mantine/core";
+import { Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import { zod4Resolver } from "mantine-form-zod-resolver";
@@ -21,13 +21,13 @@ import SubmitButtonComponent from "@/components/submit-button.component";
 
 import { refineryKeys } from "@/queries/keys";
 
-import styles from "./name-box.module.css";
-
 export type Props = {
   title: string;
 };
 
-export default function NameBoxComponent({ title }: Props): ReactNode {
+export default function RefineryTitleInputComponent({
+  title,
+}: Props): ReactNode {
   const tCommon = useTranslations("Common");
 
   const queryClient = useQueryClient();
@@ -58,16 +58,18 @@ export default function NameBoxComponent({ title }: Props): ReactNode {
 
   return (
     <form
-      className={styles["name-box"]}
+      style={{ maxWidth: "20rem" }}
       onSubmit={form.onSubmit(handleFormSubmit)}
     >
-      <TextInput
-        withAsterisk
-        className={styles.input}
-        label={tCommon("title")}
-        {...form.getInputProps("title")}
-      />
-      <SubmitButtonComponent />
+      <Group gap="xs" align="end">
+        <TextInput
+          withAsterisk
+          label={tCommon("title")}
+          flex={1}
+          {...form.getInputProps("title")}
+        />
+        <SubmitButtonComponent />
+      </Group>
     </form>
   );
 }
