@@ -25,10 +25,10 @@ export default function HeaderComponent({ opened, toggle }: Props): ReactNode {
       <Link className={styles.name} href="/admin">
         {t("name")}
       </Link>
-      <div className={styles.actions}>
+      <Box className={styles.actions}>
         <ToggleLocaleComponent />
         <SignOutButtonComponent />
-      </div>
+      </Box>
     </Box>
   );
 }

@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
+import { Box } from "@mantine/core";
+
 import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
@@ -14,9 +16,9 @@ export default async function CreateTemplatePage(): Promise<ReactNode> {
   const t = await getTranslations("AdminTemplatesPage");
 
   return (
-    <div>
+    <Box>
       <ToolbarComponent title={t("create")} parentHref="/admin/templates" />
       <TemplateFormComponent />
-    </div>
+    </Box>
   );
 }

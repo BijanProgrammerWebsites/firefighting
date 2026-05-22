@@ -4,7 +4,7 @@ import { ReactNode, use } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Text, Title } from "@mantine/core";
+import { Box, Text, Title } from "@mantine/core";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -40,13 +40,13 @@ export default function OverdueInspectionListComponent(): ReactNode {
   }
 
   return (
-    <div>
+    <Box>
       <Title order={3} mb={8}>
         {t("overdueInspections")}
       </Title>
       {data.map((item) => (
         <OverdueInspectionCardComponent key={item.inspection.id} item={item} />
       ))}
-    </div>
+    </Box>
   );
 }

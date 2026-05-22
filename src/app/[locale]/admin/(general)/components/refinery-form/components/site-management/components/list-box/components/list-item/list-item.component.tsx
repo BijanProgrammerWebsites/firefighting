@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { ActionIcon, Text } from "@mantine/core";
+import { ActionIcon, Box, Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 
 import clsx from "clsx";
@@ -63,7 +63,7 @@ export default function ListItemComponent({
   };
 
   return (
-    <div
+    <Box
       className={clsx(styles["list-item"], selected && styles.selected)}
       onClick={handleSelectItem}
     >
@@ -76,7 +76,7 @@ export default function ListItemComponent({
         />
       )}
       {mode === "none" && (
-        <div className={styles["buttons"]}>
+        <Box className={styles["buttons"]}>
           <ActionIcon
             variant="outline"
             size="sm"
@@ -92,8 +92,8 @@ export default function ListItemComponent({
           >
             <IconComponent collection="tabler" name="trash" />
           </ActionIcon>
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 }

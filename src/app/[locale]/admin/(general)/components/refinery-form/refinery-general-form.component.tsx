@@ -1,6 +1,8 @@
 "use client";
 import { ReactNode } from "react";
 
+import { Box } from "@mantine/core";
+
 import { useQuery } from "@tanstack/react-query";
 
 import { findRefineryApi } from "@/api/refinery/find-refinery.api";
@@ -26,12 +28,12 @@ export default function RefineryGeneralFormComponent(): ReactNode {
   }
 
   return (
-    <div className={styles["refinery-form"]}>
-      <div className={styles.header}>
+    <Box className={styles["refinery-form"]}>
+      <Box className={styles.header}>
         <LogoUploaderComponent picture={data?.picture} />
         <NameBoxComponent title={data?.title} />
-      </div>
+      </Box>
       <SiteManagementComponent />
-    </div>
+    </Box>
   );
 }

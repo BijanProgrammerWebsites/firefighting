@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Box } from "@mantine/core";
 
 import clsx from "clsx";
 
@@ -28,7 +28,7 @@ export default function HeaderComponent({ className }: Props): ReactNode {
       <Link className={styles.name} href="/">
         {t("name")}
       </Link>
-      <div className={styles.actions}>
+      <Box className={styles.actions}>
         <ActionIcon
           component={Link}
           href="/notifications"
@@ -41,7 +41,7 @@ export default function HeaderComponent({ className }: Props): ReactNode {
         </ActionIcon>
         <ToggleLocaleComponent />
         <SignOutButtonComponent />
-      </div>
+      </Box>
     </header>
   );
 }

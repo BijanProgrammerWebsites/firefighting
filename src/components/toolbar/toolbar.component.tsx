@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Button, Title } from "@mantine/core";
+import { Box, Button, Title } from "@mantine/core";
 
 import clsx from "clsx";
 
@@ -30,10 +30,10 @@ export default function ToolbarComponent({
   const tCommon = useTranslations("Common");
 
   return (
-    <div className={clsx(styles.toolbar, noMargin && styles["no-margin"])}>
-      <div className={styles.top}>
+    <Box className={clsx(styles.toolbar, noMargin && styles["no-margin"])}>
+      <Box className={styles.top}>
         <Title order={2}>{title}</Title>
-        <div className={styles.actions}>
+        <Box className={styles.actions}>
           {createHref && (
             <Button component={Link} href={createHref}>
               {tCommon("create")}
@@ -44,9 +44,9 @@ export default function ToolbarComponent({
               {tCommon("return")}
             </Button>
           )}
-        </div>
-      </div>
-      {subtitle && <div className={styles.bottom}>{subtitle}</div>}
-    </div>
+        </Box>
+      </Box>
+      {subtitle && <Box className={styles.bottom}>{subtitle}</Box>}
+    </Box>
   );
 }

@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Text } from "@mantine/core";
+import { Box, Text } from "@mantine/core";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -33,11 +33,11 @@ export default function BucketsComponent(): ReactNode {
   }
 
   return (
-    <div>
+    <Box>
       <BucketComponent title={t("overdue")} items={data.overdue} />
       <BucketComponent title={t("today")} items={data.today} />
       <BucketComponent title={t("next7Days")} items={data.next7Days} />
       <BucketComponent title={t("next30Days")} items={data.next30Days} />
-    </div>
+    </Box>
   );
 }

@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 
 import { getTranslations } from "next-intl/server";
 
+import { Box } from "@mantine/core";
+
 import ToolbarComponent from "@/components/toolbar/toolbar.component";
 
 import { generateDynamicMetadata } from "@/utils/metadata.utils";
@@ -22,9 +24,9 @@ export default async function EditUserPage({
   const t = await getTranslations("AdminUsersPage");
 
   return (
-    <div>
+    <Box>
       <ToolbarComponent title={t("edit")} parentHref="/admin/users" />
       <UserEditComponent id={id} />
-    </div>
+    </Box>
   );
 }

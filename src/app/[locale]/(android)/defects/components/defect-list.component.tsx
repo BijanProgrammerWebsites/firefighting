@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Text } from "@mantine/core";
+import { Box, Text } from "@mantine/core";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -33,10 +33,10 @@ export default function DefectListComponent(): ReactNode {
   }
 
   return (
-    <div>
+    <Box>
       {data.map((defect) => (
         <DefectCardComponent key={defect.id} defect={defect} />
       ))}
-    </div>
+    </Box>
   );
 }

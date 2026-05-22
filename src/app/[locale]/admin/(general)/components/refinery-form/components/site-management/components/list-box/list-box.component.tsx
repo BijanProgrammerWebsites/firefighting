@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 
-import { ActionIcon, Divider, List, Loader, Text } from "@mantine/core";
+import { ActionIcon, Box, Divider, List, Loader, Text } from "@mantine/core";
 
 import IconComponent from "@/components/icon/icon.component";
 
@@ -41,7 +41,7 @@ export function ListBoxComponent({
     onAdd(value);
   };
 
-  const messageBox = <div className={styles["message"]}>{messages}</div>;
+  const messageBox = <Box className={styles["message"]}>{messages}</Box>;
   const detailBox = (
     <List className={styles["detail"]}>
       {isAdding && (
@@ -64,8 +64,8 @@ export function ListBoxComponent({
   );
 
   return (
-    <div className={styles["list-box"]}>
-      <div className={styles.header}>
+    <Box className={styles["list-box"]}>
+      <Box className={styles.header}>
         <Text>{title}</Text>
         <ActionIcon
           variant="outline"
@@ -75,15 +75,15 @@ export function ListBoxComponent({
         >
           <IconComponent collection="tabler" name="plus" />
         </ActionIcon>
-      </div>
+      </Box>
       <Divider />
       {isLoading ? (
-        <div className={styles["loading"]}>
+        <Box className={styles["loading"]}>
           <Loader size="sm" />
-        </div>
+        </Box>
       ) : (
         <>{!!messages && !isAdding ? messageBox : detailBox}</>
       )}
-    </div>
+    </Box>
   );
 }

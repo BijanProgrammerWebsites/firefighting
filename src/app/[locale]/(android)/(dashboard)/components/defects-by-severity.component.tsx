@@ -4,7 +4,7 @@ import { ReactNode, use } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { Text, Title } from "@mantine/core";
+import { Box, Text, Title } from "@mantine/core";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -36,11 +36,11 @@ export default function DefectsBySeverityComponent(): ReactNode {
   }
 
   return (
-    <div>
+    <Box>
       <Title order={3} mb={8}>
         {t("defectsBySeverity")}
       </Title>
       <DefectsBySeverityChart data={data} />
-    </div>
+    </Box>
   );
 }
